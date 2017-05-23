@@ -33,19 +33,19 @@ Run `npm run dist` to create a zipped, production-ready extension for each brows
 Some screenshots from the interface from the tool.
 
 ### The setup
-![screenshot of the tool](./readme/screenshot 1.jpg)
+![screenshot of the tool](./readme/screenshot_1.jpg)
 
 
 ### The interface of the tool
-![screenshot of the tool](./readme/screenshot 2.jpg)
+![screenshot of the tool](./readme/screenshot_2.jpg)
 
 
 ### Creating a ticket
-![screenshot of the tool](./readme/screenshot 3.jpg)
+![screenshot of the tool](./readme/screenshot_3.jpg)
 
 
 ### Editing a ticket
-![screenshot of the tool](./readme/screenshot 4.jpg)
+![screenshot of the tool](./readme/screenshot_4.jpg)
 
 
 ## TODO
