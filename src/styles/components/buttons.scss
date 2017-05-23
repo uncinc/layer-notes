@@ -1,0 +1,94 @@
+.ln-root {
+  //the button wrapper
+  .ln-button--wrapper {
+    align-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 15px 0;
+  }
+
+  a,
+  button,
+  input,
+  label {
+    //the base button
+    &.ln-btn {
+      background-image: none;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      cursor: pointer;
+      display: inline-block;
+      font-family: 'Museo Sans', 'Helvetica', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 13px;
+      // margin: auto;
+      min-width: 0;
+      padding: $padding-small;
+      text-align: center;
+      text-decoration: none;
+      text-shadow: none;
+      text-transform: uppercase;
+      width: inherit;
+      z-index: 1;
+
+      &:hover {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      &::after,
+      &::before {
+        background-image: none;
+        display: none;
+      }
+    }
+
+    &.ln-btn-primary {
+      background-color: $primary-color;
+      color: $font-color;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $primary-color-dark;
+      }
+    }
+
+    &.ln-btn-small {
+      padding: 0;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $color-transparant;
+      }
+    }
+
+    &.ln-btn-transparant {
+      background-color: $color-transparant;
+      border: 0;
+      color: $font-color;
+    }
+
+    &.ln-btn-icon {
+      padding: .75rem 1rem;
+    }
+
+    &.ln-btn-secondary {
+      background-color: $font-color;
+      color: $font-color-dark;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $font-color-hover;
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+.ln-root {
+  //the user toor
+  .ln-user-tour-box {
+    background-color: $font-color;
+    // box-shadow: 0 9px 16px 0 rgba(0, 0, 0, .11);
+    box-shadow: 0 11px 64px 0 rgba(0, 0, 0, 0.20);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 250px;
+    padding: $padding-medium;
+    pointer-events: all;
+    position: relative;
+    width: 300px;
+    z-index: 9999;
+
+    .ln-user-tour--content {
+      flex-grow: 1;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.1em;
+    }
+  }
+  //the colse button of the box
+  .ln-user-tour-close {
+    background-color: $font-color;
+    border: 0;
+    margin: $padding-smallest;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  // the arrow on the box
+  .ln-user-tour--arrow {
+    position: relative;
+
+    &::before {
+      content: '';
+      height: 0;
+      position: absolute;
+      width: 0;
+    }
+  }
+  //the arrow is now on the left of the element
+  .ln-user-tour--arrow-right {
+    &::before {
+      border-bottom: 15px solid transparent;
+      border-right: 15px solid $font-color;
+      border-top: 15px solid transparent;
+      left: -15px;
+    }
+  }
+  //the arrow is now on the right of the element
+  .ln-user-tour--arrow-left {
+    &::before {
+      border-bottom: 15px solid transparent;
+      border-left: 15px solid $font-color;
+      border-top: 15px solid transparent;
+      right: -15px;
+    }
+  }
+  //the arrow is now on the bottom of the element
+  .ln-user-tour--arrow-top {
+    margin-top: 15px; //add a margin, another it wil dissapear when the box is positioned on top: 0
+
+    &::before {
+      border-bottom: 15px solid $font-color;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      top: -15px;
+    }
+  }
+  //the arrow is now on the top of the element
+  .ln-user-tour--arrow-down {
+    &::before {
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid $font-color;
+      bottom: -15px;
+    }
+  }
+}

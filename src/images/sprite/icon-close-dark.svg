@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-close-dark</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0.190997857,1.11811315 C-0.0657627351,1.38150916 -0.061759786,1.79860174 0.190997857,2.05789135 L17.4357025,19.7505947 C17.6901757,20.0110575 18.0990484,20.0098843 18.351806,19.750008 L19.2513259,18.827242 C19.5086583,18.563846 19.5046554,18.1467535 19.2518977,17.8874638 L2.00719304,0.194760527 C1.88024237,0.0645290903 1.71497776,0 1.54971315,0 C1.38387669,0 1.21746837,0.0651157184 1.09108955,0.195347155 L0.190997857,1.11811315 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-close-dark">
+            <g id="Group-22">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-21"></g>
+            </g>
+            <path d="M2,2.10526316 L18,17.8947368" id="Stroke-23" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path>
+            <path d="M18,2.10526316 L2,17.8947368" id="Stroke-25" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path>
+        </g>
+    </g>
+</svg>

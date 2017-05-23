@@ -1,0 +1,99 @@
+.ln-root {
+  //the wrapper that contains the whole site with tickets
+  .ln-tickets-on-page--wrapper {
+    height: 100%;
+    pointer-events: none;
+    position: relative;
+    width: 100%;
+  }
+  //the whole block of the ticket the size is done by JS, form the database
+  .ln-tickets-on-page--ticket {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+  }
+  //the araa arount a ticket
+  .ln-tickets-on-page--area {
+    border: 2px dashed $primary-color;
+    height: 100%;
+    opacity: 0;
+    transform: scale(.5);
+    transition: all .55s cubic-bezier(.19, 1, .22, 1);
+    width: 100%;
+  }
+  //the text from a ticket
+  .ln-tickets-on-page--text {
+    background: $primary-color;
+    color: $font-color;
+    font-size: 10px;
+    left: 50%;
+    min-height: 30px;
+    min-width: 40px;
+    opacity: 0; //this is animated to 1
+    padding: 10px;
+    pointer-events: none;
+    position: absolute;
+    text-align: left;
+    text-transform: lowercase;
+    top: 50%; //posiotion in the center
+    transform: translate(-50%, -50%) scale(0); //this will be scaled to 1
+    transition: all .6s cubic-bezier(.19, 1, .22, 1);
+    width: 100%;
+
+    &::before {
+      border-left: 0 solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid $primary-color;
+      bottom: -14px;
+      content: '';
+      height: 0;
+      position: absolute;
+      right: 10px;
+      width: 0;
+    }
+  }
+
+  button.ln-tickets-on-page--button {
+    animation: ticket .55s;
+    left: 50%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%); //position in the center;
+    width: 75px;
+
+    &.active,
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.2); //the ticket icon scale biggger
+      //the text on hover
+      & .ln-tickets-on-page--text {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      //the doted area
+      & + .ln-tickets-on-page--area {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+  //the ticekt incommint anition
+  @keyframes ticket {
+    0% {
+      transform: translate(-50%, -50%) scale(.5);
+    }
+
+    30% {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    80% {
+      transform: translate(-50%, -50%) scale(.8);
+    }
+
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}

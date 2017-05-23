@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Layer Notes",
+    "description": "Easy submit your tickets to Mantis"
+  },
+  "appDescription": {
+    "message": "Easy submit your tickets to Mantis",
+    "description": "Easy submit your tickets to Mantis"
+  },
+  "btnTooltip": {
+    "message": "Start a Ticket",
+    "description": "Start a Ticket"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "extension": "chrome",
+  "cssFilePath": "chrome-extension://__MSG_@@extension_id__/"
+}

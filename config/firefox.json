@@ -1,0 +1,4 @@
+{
+  "extension": "firefox",
+  "cssFilePath": "moz-extension://__MSG_@@extension_id__/"
+}

@@ -1,0 +1,92 @@
+.ln-root {
+  button {
+    pointer-events: all;
+  }
+  //the canvas where you can draw
+  .ln-canvas {
+    height: 100%;
+    width: 100%;
+  }
+  //the bacouground element
+  .ln-rectangle--background {
+    background: rgba(48, 47, 47, .68);
+    pointer-events: all;
+    position: absolute;
+  }
+  //this is a helper with abackground
+  .ln-canvas--helper {
+    background: $font-color;
+    box-shadow: 0 9px 16px 0 rgba(0, 0, 0, .11);
+    color: $font-color-dark;
+    display: block;
+    font-size: 13px;
+    margin: 7.5px;
+    min-width: 100px;
+    padding: $padding-smallest $padding-small;
+    pointer-events: all;
+    position: absolute;
+  }
+  //the bleu rectangle, when you have drawn a ticket
+  .ln-rectangle {
+    border: 2px solid $primary-color;
+    display: block;
+    position: absolute;
+  }
+  //the area in middle of the rectangle
+  .ln-rectangle--draggingarea {
+    bottom: 0;
+    cursor: move;
+    display: block;
+    left: 0;
+    pointer-events: all;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+  }
+
+  //elements you can rezise the element;
+  .ln-rectangle-left-bottom,
+  .ln-rectangle-left-top,
+  .ln-rectangle-right-bottom,
+  .ln-rectangle-right-top {
+    border: .5rem solid $primary-color;
+    height: 1.5rem;
+    pointer-events: all;
+    position: absolute;
+    width: 1.5rem;
+    z-index: 11;
+  }
+
+  .ln-rectangle-left-top {
+    border-bottom: 0;
+    border-right: 0;
+    cursor: nwse-resize; //add a specific cursor so the user knows how the rectangle will resize;
+    left: 0;
+    top: 0;
+  }
+
+  .ln-rectangle-left-bottom {
+    border-right: 0;
+    border-top: 0;
+    bottom: 0;
+    cursor: nesw-resize;
+    left: 0;
+  }
+
+  .ln-rectangle-right-top {
+    border-bottom: 0;
+    border-left: 0;
+    cursor: nesw-resize;
+    right: 0;
+    top: 0;
+  }
+
+  .ln-rectangle-right-bottom {
+    border-left: 0;
+    border-top: 0;
+    bottom: 0;
+    cursor: nwse-resize;
+    right: 0;
+  }
+}

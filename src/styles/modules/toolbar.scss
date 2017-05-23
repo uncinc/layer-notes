@@ -1,0 +1,63 @@
+.ln-root {
+  .ln-toolbar {
+    box-shadow: 0 9px 16px 0 rgba(0, 0, 0, .11);
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+    pointer-events: all;
+    position: fixed;
+    right: -7em; //position outside the window, so it can be animated by JS.
+    // position the left edge of the element at the middle of the parent
+    top: 50%;
+    transform: translateX(0) translateY(-50%);
+    width: 80px;
+    z-index: 100;
+
+    .ln-toolbar--text {
+      font-size: 11px;
+    }
+
+    .ln-icon {
+      padding-bottom: $padding-smallest;
+    }
+
+    //a button in the toolabar
+    .ln-toolbar-btn {
+      background-color: $primary-color;
+      color: $font-color;
+      display: block;
+      height: 77px;
+      letter-spacing: .7px;
+      line-height: 1.36;
+      margin: 0;
+      max-width: inherit;
+      min-width: inherit;
+      padding: 0;
+      width: 100%;
+
+      &:hover {
+        background-color: $primary-color-dark;
+      }
+
+      & + .ln-toolbar-btn {
+        border-top: 1px solid $font-color-semitransparant; //ad a line after the first button;
+      }
+    }
+
+
+    //the numbers of the tickets
+    .ln-toolbar-amouttickets {
+      background-color: $primary-color;
+      border-top: 1px solid $font-color-semitransparant;
+      color: $font-color;
+      letter-spacing: .7px;
+      line-height: 1.36;
+      padding: 1em;
+      text-align: center;
+    }
+
+    span {
+      display: block;
+    }
+  }
+}

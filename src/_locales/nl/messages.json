@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Layer Notes",
+    "description": "Makelijke manier om tickets in Mantis te submitten."
+  },
+  "appDescription": {
+    "message": "Makelijke manier om tickets in Mantis te submitten.",
+    "description": "Makelijke manier om tickets in Mantis te submitten."
+  },
+  "btnTooltip": {
+    "message": "Start een Ticket",
+    "description": "Start een Ticket"
+  }
+}

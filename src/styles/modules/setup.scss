@@ -1,0 +1,169 @@
+.ln-root {
+  //the background of the setup
+  .ln-setup--background {
+    align-content: center;
+    align-items: center;
+    background-color: $font-color-dark-semitransparant;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    left: 0;
+    pointer-events: all;
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
+
+  .ln-setup--formelement {
+    position: relative;
+  }
+
+  //the setup form
+  .ln-setup {
+    align-content: stretch;
+    align-items: stretch;
+    background-color: $font-color;
+    color: $font-color-dark;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 14px;
+    justify-content: flex-start;
+    max-height: 100vh;
+    max-width: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    pointer-events: all;
+    position: fixed;
+    width: 60vw;
+
+    p {
+      line-height: 1.5em;
+    }
+
+    h1 {
+      font-size: 18px;
+      line-height: 1.5em;
+    }
+
+    .ln-button--wrapper {
+      // a wrapper arount the buttons to add some space
+      margin: 15px 0 0;
+    }
+
+    //The content > this is the real form;
+    .ln-setup-content {
+      margin: $padding-medium $padding-big $padding-big;
+      max-width: inherit;
+      min-width: inherit;
+      padding: 0;
+
+      //the succes icon on the end of the flow
+      .ln-icon-succes {
+        font-size: 75px;
+        margin: 25px 25px 10px;
+        text-align: center;
+      }
+
+      //center the contend;
+      .ln-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+          text-align: center;
+        }
+      }
+    }
+
+    form {
+      //overwrite site widht;
+      width: inherit;
+    }
+
+    aside {
+      // the bar on top with the steps;
+      background-color: $primary-color;
+      margin: 0;
+      padding: $padding-medium;
+    }
+
+    //the sep indicator
+    .ln-setup-aside--numbers {
+      align-content: stretch;
+      align-items: stretch;
+      color: $font-color;
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      position: relative;
+      width: 100%;
+
+      &::after {
+        background-color: $font-color;
+        content: '';
+        height: 2px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 100%;
+      }
+    }
+
+    //the circle number
+    .ln-setup-aside--number {
+      background-color: $primary-color;
+      color: $primary-color;
+      font-size: 0;
+      position: relative;
+      // margin: 20px;
+      z-index: 10;
+
+      &.ln-active {
+        color: $primary-color;
+
+        &::before {
+          background: $font-color;
+          color: $primary-color;
+          transition: all .5s ease-in;
+        }
+      }
+
+      &::before {
+        border: 3px solid $font-color;
+        border-radius: 100%;
+        color: $font-color;
+        content: attr(data-count); //add a number form the alt artibute
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 0;
+        padding: 20px 15px;
+        z-index: 10000;
+      }
+    }
+
+    //the form element padding
+    .ln-setup--formelement {
+      margin-bottom: $padding-smallest;
+      margin-top: 10px;
+    }
+
+    //when a error uccors the a borderd field will shown
+    .ln-setup-error {
+      border: 2px solid $secondary-color;
+      margin: $padding-big $padding-big 0;
+      max-width: inherit;
+      padding: $padding-small;
+
+      p {
+        color: $secondary-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+
+// 'Museo Sans';
+@font-face {
+  font-family: 'Museo Sans';
+  src: url($file-path + 'fonts/museosans/MuseoSans_900-webfont.eot');
+  src: local('Museo Sans'),
+       url($file-path + 'fonts/museosans/MuseoSans_900-webfont.eot?#iefix') format('embedded-opentype'),
+       url($file-path + 'fonts/museosans/MuseoSans_900-webfont.woff') format('woff'),
+       url($file-path + 'fonts/museosans/MuseoSans_900-webfont.ttf') format('truetype'),
+       url($file-path + 'fonts/museosans/MuseoSans_900-webfont.svg#museo_sans') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}

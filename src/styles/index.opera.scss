@@ -1,0 +1,28 @@
+//file path
+$file-path: 'chrome-extension://__MSG_@@extension_id__/';
+
+@import './vars';
+@import './reset';
+
+//fonts
+@import './fonts';
+@import './typograpy';
+
+//main
+@import './main';
+
+//import generated sprites style;
+@import './modules/_sprites';
+
+//components
+@import './components/buttons';
+@import './components/form';
+@import './components/loader';
+
+//modules
+@import './modules/setup';
+@import './modules/userToor';
+@import './modules/selector';
+@import './modules/toolbar';
+@import './modules/CommentBox';
+@import './modules/ticketsOnPage';

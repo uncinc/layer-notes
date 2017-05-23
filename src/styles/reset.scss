@@ -1,0 +1,35 @@
+//make html of website reletive so the tool will be positioned on the right place;
+
+html {
+  // overflow-x: hidden;
+  position: relative;
+}
+
+.ln-root {
+  article,
+  aside,
+  dd,
+  div,
+  dl,
+  dt,
+  fieldset,
+  form,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  li,
+  nav,
+  ol,
+  p,
+  small,
+  span,
+  ul {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}

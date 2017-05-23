@@ -1,0 +1,316 @@
+.ln-root {
+  //the info icon on top and when the user hovers there will be a popup
+  .ln-input-helper {
+    display: inline-block;
+    margin-bottom: $padding-smallest;
+    margin-left: $padding-small;
+    position: relative;
+
+    .ln-icon-info {
+      &::before {
+        font-size: 14px;
+      }
+    }
+
+    &:hover {
+      .ln-input-helper--popup {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+  //the popup it self
+  .ln-input-helper--popup {
+    background-color: $font-color-dark;
+    bottom: 24px;
+    color: $font-color;
+    left: -7.5px;
+    line-height: 1em;
+    min-width: 120px;
+    opacity: 0;
+    padding: $padding-small;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(.5);
+    transition: all .55s cubic-bezier(.19, 1, .22, 1);
+    width: auto;
+
+    &::after {
+      border-left: 7.5px solid transparent;
+      border-right: 7.5px solid transparent;
+      border-top: 7.5px solid $font-color-dark;
+      bottom: -7.5px;
+      content: '';
+      left: 7.5px;
+      position: absolute;
+    }
+  }
+  // generals styles
+  //
+  //when a error occurs
+  .ln-form-error {
+    color: $secondary-color;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  label {
+    color: $font-color-dark;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  option {
+    color: $font-color-dark;
+    font-family: 'Museo Sans', 'Helvetica', sans-serif;
+  }
+
+  select {
+    padding: $padding-small 2.4em $padding-small $padding-small;
+  }
+
+  input,
+  select {
+    font-family: 'Museo Sans', 'Helvetica', sans-serif;
+
+    &::-webkit-input-placeholder {
+      // WebKit, Blink, Edge
+      color: $font-color-dark-semitransparant;
+    }
+
+    &:-moz-placeholder {
+      // Mozilla Firefox 4 to 18
+      color: $font-color-dark-semitransparant;
+      opacity: 1;
+    }
+
+    &::-moz-placeholder {
+      // Mozilla Firefox 19+
+      color: $font-color-dark-semitransparant;
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      // Internet Explorer 10-11
+      color: $font-color-dark-semitransparant;
+    }
+  }
+
+  input[type='color'],
+  input[type='date'],
+  input[type='email'],
+  input[type='number'],
+  input[type='password'],
+  input[type='text'],
+  input[type='url'],
+  legend,
+  select,
+  textarea {
+    appearance: none;
+    background: $font-color;
+    border-radius: 0;
+    box-shadow: none;
+    color: $font-color-dark;
+    display: block;
+    height: inherit;
+    line-height: 1.1em;
+    min-height: 2em;
+    width: 100%;
+    //when there is a error
+    &.error,
+    &:invalid {
+      border-color: $secondary-color !important; //overwrite all other styles
+    }
+  }
+
+  input[type='color'],
+  input[type='date'],
+  input[type='email'],
+  input[type='number'],
+  input[type='password'],
+  input[type='text'],
+  input[type='url'],
+  select,
+  textarea {
+    border: .0625em solid rgb(207, 217, 219);
+    display: block;
+    // background-color: var(--background-color-light);
+    font-size: 1.1em;
+    padding: $padding-small $padding-smallest;
+    width: 100%;
+  }
+
+  input[type='color'],
+  input[type='date'],
+  input[type='email'],
+  input[type='number'],
+  input[type='password'],
+  input[type='text'],
+  input[type='url'],
+  select,
+  textarea {
+    &:focus {
+      background: $font-color;
+      outline: none;
+    }
+
+    &:hover {
+      background: $font-color;
+      color: $font-color-dark;
+    }
+  }
+
+  input[type='color'] {
+    min-height: 2em;
+  }
+  // a wrapper acourn the radio element
+  .ln-radio--wrapper {
+    margin-top: 10px;
+
+    li {
+      display: block;
+    }
+  }
+
+  .ln-checkbox--wrapper,
+  .ln-select--wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  .ln-select--wrapper {
+    margin-top: 15px;
+    width: 100%;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 1em;
+      pointer-events: none;
+      position: absolute;
+      right: $padding-small;
+      top: 50%;
+      transform: translateY(-36%);
+      z-index: 1;
+    }
+  }
+  // a checkbox;
+  .ln-checkbox,
+  .ln-radio {
+    left: -9999em;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    user-select: none;
+
+    & + label {
+      &::after,
+      &::before {
+        content: '';
+        height: 1.25em;
+        left: 0;
+        position: absolute;
+        top: 0;
+        vertical-align: middle;
+        width: .3125em;
+      }
+    }
+  }
+  ///*radio and checkbox*/
+  .ln-radio + label {
+    cursor: pointer;
+    display: block;
+    line-height: 1.1em;
+    padding: 10px 20px 10px 30px; //TODO: add a normal padding;
+    position: relative;
+
+    &:active,
+    &:hover {
+      font-weight: 900; //fix font wight for some sites
+    }
+  }
+
+  //chekcbox label
+  .ln-checkbox {
+    & + label {
+      cursor: pointer;
+      display: block;
+      // margin-right: 30px;
+      padding: 10px 20px;
+
+      &:active,
+      &:hover {
+        background-color: $primary-color-dark;
+      }
+    }
+  }
+
+  .ln-radio + label::before {
+    border: 2px solid $font-color-dark;
+    border-radius: 100%;
+    height: 15px;
+    left: 10px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+  }
+
+  .ln-radio + label::after {
+    background-color: $font-color-dark;
+    border-radius: 100%;
+    display: none;
+    height: 7px;
+    left: 10px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 7px;
+  }
+
+  .ln-radio:checked+ label::after {
+    display: inline-block;
+  }
+
+  .ln-checkbox+ label::after {
+
+    display: none;
+    left: 50%;
+    position: absolute;
+    top: -50%;
+  }
+
+  .ln-checkbox:checked+ label {
+    display: inline-block;
+
+    span::before {
+      background-position: 0 -9.1875em;
+    }
+  }
+
+  #ln-field-file:active+ label,
+  #ln-field-file:focus+ label,
+  .ln-checkbox:focus+ label {
+    background-color: $primary-color-dark;
+  }
+  /*file upload */
+  #ln-field-file {
+    cursor: pointer;
+    left: -9999em;
+    position: absolute;
+  }
+
+  .ln-file-input {
+    display: inline-block;
+
+    label {
+      padding: .8rem 1rem;
+    }
+  }
+}
