@@ -6,7 +6,7 @@ v0.4 (beta)
 Layer Notes is a tool that you can use to easily create Tickets for the Bugtracker Mantis.
 
 ## Installation
-1. Clone the repository `git clone git@github.com:mat1th/layer-notes.git`
+1. Clone the repository `git clone git@github.com:uncinc/layer-notes.git`
 2. Run `npm install`
 3. Run `npm run build`
 
