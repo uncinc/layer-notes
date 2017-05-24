@@ -4,8 +4,8 @@
 
 Improvements:
 - Add abilaty to submit ticket to Mantis
-- Take a screenshot of the screen and sumbit it to Mantis
+- Take a screenshot of the screen and submit it to Mantis
 
 Bug fixes:
 - Fix layout issues
-- Fix isseu in sumbitting a ticket to Mantis
+- Fix issue in submitting a ticket to Mantis

@@ -1,31 +1,32 @@
 import routerHelper from '../components/router/routerHelper';
+import {translate} from '../utils/helpers'
 
 //the steps of the app
 const tourSteps = [{
   step: 1,
   selector: '.ln-root', // the roout elemet, so it will be on top of the page
-  title: 'Welcome!',
-  body: 'This tutorial will explain how this tool works.',
+  title: translate('userTourStepOneTitle'),
+  body: translate('userTourStepOneBody'),
   onStart: () => {}
 }, {
   step: 2,
   selector: '.ln-toolbar',
-  title: 'Sidebar',
-  body: "This is the sidebar of the app. With the 'New Item' button you can create a new note. Press on 'Next', to create a new note.",
+  title: translate('userTourStepTwoTitle'),
+  body: translate('userTourStepTwoBody'),
   onStart: () => {}
 }, {
   step: 3,
   selector: '.ln-root', // the roout elemet, so it will be on top of the page
-  title: 'Create new note',
-  body: 'Select the area of your note, and add a comment. When you submit a note, there is a screenshot automaticaly added.',
+  title: translate('userTourStepTreeTitle'),
+  body: translate('userTourStepTreeBody'),
   onStart: () => {
     routerHelper.setStateApp('startIssue');
   },
 }, {
   step: 4,
   selector: '.ln-tickets-on-page--ticket', // a ticket
-  title: 'Nice!',
-  body: ' You have created your first note! Click on the icon to view your note. You now know how to create a note. Happy testing!',
+  title: translate('userTourStepFourTitle'),
+  body: translate('userTourStepFourBody'),
   onStart: () => {
     //go to the home screen
     routerHelper.setStateApp('home');

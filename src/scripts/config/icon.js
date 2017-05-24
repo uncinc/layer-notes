@@ -5,6 +5,9 @@ import ext from '../utils/ext';
 // config
 import generalConfig from '../config/general';
 
+//helpers
+import {translate} from '../utils/helpers';
+
 /* Component ==================================================================== */
 let iconConfig = (() => {
   let opendTabNumer = null;
@@ -14,10 +17,9 @@ let iconConfig = (() => {
       icon: '/icons/icon-128.png',
       // badgeText  : 'On',
       // badgeColor : 'green',
-      title: 'Turn Layernotes Off',
+      title: translate('toolOff'),
       action: function (tab) {
         stopApp(tab);
-
       },
       nextState: 'off'
     },
@@ -25,7 +27,7 @@ let iconConfig = (() => {
       icon: '/icons/icon_black-128.png',
       // badgeText  : 'Off',
       // badgeColor : 'red',
-      title: 'Turn Layernotes On',
+      title: translate('toolOn'),
       action: function (tab) {
 
         if (opendTabNumer === null)

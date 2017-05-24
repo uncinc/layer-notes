@@ -14,6 +14,7 @@ import ToolBar from '../../components/toolbar/toolbar';
 import CommentBox from '../../components/commentbox/commentBox';
 
 //helpers
+import {translate} from '../../utils/helpers';
 import generalConfig from '../../config/general';
 import message from '../../utils/message';
 
@@ -27,7 +28,7 @@ class TicketsOnPage extends Component {
       selectedTicket: {},
       showCommentbox: false,
       isLoading: false,
-      loadingText: 'Loading...',
+      loadingText: translate('loadingText'),
       total: 0,
       filtertTotal: 0
     }
@@ -76,7 +77,7 @@ class TicketsOnPage extends Component {
   //sumbit the comment box
   _onCommentBoxSubmit = () => {
     let _this = this;
-    _this.setState({isLoading: true, loadingText: 'Updating your ticket in the bugtracker...'})
+    _this.setState({isLoading: true, loadingText: translate('ticketsOnPageUpdating')})
 
     //send to the backend script
     message.send('updateTicket', {
@@ -138,7 +139,6 @@ class TicketsOnPage extends Component {
         </div>
         <ToolBar filtertTotal={this.state.filtertTotal} total={this.state.total}/>
       </div>
-
     );
   }
 };

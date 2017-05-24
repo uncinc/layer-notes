@@ -30,7 +30,7 @@ The following tasks can be used when you want to start developing the extension 
 Run `npm run dist` to create a zipped, production-ready extension for each browser. You can then upload that to the appstore.
 
 ## Screenshots
-Some screenshots from the interface from the tool.
+Some screenshots from the interface of the tool.
 
 ### The setup
 ![screenshot of the tool](./readme/screenshot_1.jpg)
@@ -50,14 +50,24 @@ Some screenshots from the interface from the tool.
 ## TODO
 - [ ] Make Github integration work
 - [ ] Make background script API calls puggable
+- [ ] Create documentation how to integrate a new bugtracker
 - [ ] Fix number of bugs
 - [ ] Add support for Safari
 - [ ] Add support for Edge
 - [ ] Add support for IE
 
+## Contributions
+You can contribute to Layer Notes in several ways:
+
+### Contributing to the code
+You can add new features and create a pull request to the tool to make it better.
+
+### Translating the tool
+In the folder `./src/_locales` you can find locales. With can use the english main file to translate it to your language. 
+
 ## Contributors
 
 - [mat1th](https://github.com/mat1th)
 
-## LICENCE
-The code is licenced under the GNU GENERAL PUBLIC LICENSE Version 3
+## Licence
+The code is licenced under the `GNU GENERAL PUBLIC LICENSE Version 3`
