@@ -15,7 +15,7 @@ import routerHelper from '../router/routerHelper'
 //components
 import SelectorBackground from './SelectorBackground'
 import CommentBox from './../commentbox/commentBox';
-import helpers from '../../utils/helpers';
+import helpers, {translate} from '../../utils/helpers';
 import message from '../../utils/message';
 
 /* Component ==================================================================== */
@@ -69,7 +69,7 @@ class Selector extends Component {
 
   }
   componentWillMount() {
-    this._takeScreenshot('Screenshot-from-page.jpeg');
+    this._takeScreenshot(translate('selectorScreenshotName'));
   }
 
   componentDidMount(props) {
@@ -210,9 +210,9 @@ class Selector extends Component {
 
   _onCommentBoxSubmit = () => {
     let _this = this;
-    _this.setState({isLoading: true, loadingText: 'Sumbitting to bugtracker...'})
+    _this.setState({isLoading: true, loadingText: translate('selectorLoadingText')})
     //take a screenshot of the selected item
-    this._takeScreenshot('Screenshot-after-selection.jpeg').then(function() {
+    this._takeScreenshot(translate('selectorScreenshotNameAfter')).then(function() {
       message.send('submitNewTicket', {
         ticket: _this.state.ticket,
         hostname: generalConfig.hostname,
@@ -277,7 +277,7 @@ class Selector extends Component {
           left: this.state.x + 'px',
           top: this.state.y + 'px'
         }}>
-          You can select your issue. (Press ESC to cancel)
+        {translate('selectorHelper')}
         </span>
       );
     }

@@ -5,7 +5,8 @@
 //imports
 import React, {Component} from 'react';
 
-import validate from '../../utils/validate.js';
+import validate from '../../utils/validate';
+import {translate} from '../../utils/helpers';
 
 /* Component ==================================================================== */
 class Input extends Component {
@@ -14,7 +15,7 @@ class Input extends Component {
     name: '',
     value: '',
     type: 'text',
-    helperText: 'This is the url',
+    helperText: translate('inputTextHelperText'),
     placeholder: '',
     onchange: () => {}
   };
@@ -43,7 +44,7 @@ class Input extends Component {
 
   _validate = (e) => { // validatg the input
     if (!validate[this.props.type](e.target.value)) {
-      this.setState({isError: true, error: `The ${this.props.type} is spelled wrong`});
+      this.setState({isError: true, error: translate('inputTextError', this.props.type)});
     } else {
       this.setState({isError: false, error: ''});
     }

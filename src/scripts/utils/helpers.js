@@ -1,5 +1,7 @@
 'use-strict';
 
+import ext from './ext';
+
 /* Component ==================================================================== */
 const helpers = (() => {
   /**
@@ -194,9 +196,11 @@ const helpers = (() => {
         html.clientHeight, html.scrollHeight, html.offsetHeight);
     },
     isPrommise = function (obj) {
-
-      return (typeof obj.then === 'function')
+      return (typeof obj.then === 'function');
       // return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+    },
+    translate = function (message, value) {
+      return ext.i18n.getMessage(message, value);
     };
   /**
    * Creates a POST XMLHttpRequest you can use it by    DP.helper.postData('path', 'params');
@@ -223,7 +227,8 @@ const helpers = (() => {
     cut,
     setNewState,
     pageHeight,
-    isPrommise
+    isPrommise,
+    translate
     // postData
   };
 })();

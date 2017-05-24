@@ -20,7 +20,6 @@ class Button extends Component {
     super(props);
 
   }
-
   /**
    * RENDER
    */

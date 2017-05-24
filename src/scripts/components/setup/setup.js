@@ -9,7 +9,7 @@ import Loader from '../loader/loader';
 
 //general funcions
 import ext from '../../utils/ext';
-import helpers from '../../utils/helpers'
+import helpers, {translate} from '../../utils/helpers'
 import generalData from '../../config/general';
 
 //helpers
@@ -32,7 +32,7 @@ class Setup extends Component {
           value: 'github',
         },
         {
-          name: 'Add to a existing project',
+          name: translate('setupExistingProject'),
           value: 'existing'
         }
       ],
@@ -45,7 +45,7 @@ class Setup extends Component {
 
       //loading states
       isLoading: false,
-      loadingText: 'Loading...',
+      loadingText: translate('loadingText'),
 
       //new values
       websiteUrl: window.location.hostname || 'localhost',
@@ -101,11 +101,11 @@ class Setup extends Component {
   _checkCredetionals = () => {
     let _this = this;
     if (this.state.accountUserName.length < 2 && this.state.accountPassword.length < 2 && this.state.toolUrl.length < 2) {
-      this._setError('Not all the fields are filled.');
+      this._setError(translate('setupMissingFieldsError'));
       //not everu field is filed in.
     } else {
       //set a loading element
-      this._setLoading(`Checking you credentials, and logging in at ${this.state.toolName}.`);
+      this._setLoading(translate('setupLogginText',this.state.toolName));
 
       //send to the background script
       message.send('checkLogin', {
@@ -145,7 +145,7 @@ class Setup extends Component {
   _selectBugtracker = (e) => {
     e.preventDefault();
     if (this.state.toolName.length < 1) {
-      this._setError('Please select a Bugtacker');
+      this._setError(translate('setupMissingBugtracker'));
 
     } else if (this.state.toolName === 'existing') { //check if the user chooses a existing login. If this happens go to the 3th step.
       this._nextStep(3);
@@ -157,7 +157,7 @@ class Setup extends Component {
   //the second step
   _setProject = (e) =>{
       let _this = this;
-      this._setLoading('Saving credentials.');
+      this._setLoading(translate('setupSaving'));
 
       setTimeout(function() {
         _this._nextStep(4);
@@ -270,7 +270,7 @@ class Setup extends Component {
       return (
          <div className="ln-select--wrapper ln-icon ln-icon-select">
             <select onChange={this._handleSavedProject} name={'savedProject'}>
-              <option value={null}>Choose project</option>
+              <option value={null}>{translate('setupChooseProject')}</option>
               {savedProjects}
             </select>
         </div>
@@ -287,7 +287,7 @@ class Setup extends Component {
     return (
       <div className="ln-select--wrapper ln-icon ln-icon-select">
         <select value={this.state.toolProjectId} name="toolProjectId" onChange={this._handleStateChange}>
-          <option value={null}>Choose project</option>
+          <option value={null}>{translate('setupChooseProject')}</option>
           {projectOptions}
         </select>
       </div>
@@ -305,8 +305,8 @@ class Setup extends Component {
       return (
         <form onSubmit={this._selectBugtracker.bind(this)}>
           <div>
-            <h1>Choose your bugtracker</h1>
-            <p>This is the first time that you open Layernotes on this webiste. Please connect this site to a bugtracker. Or add it to a existing project.</p>
+            <h1>{translate('setupStepOneTitle')}</h1>
+            <p>{translate('setupStepOneBody')}</p>
             <div>
               {this._renderTools()}
             </div>
@@ -314,7 +314,7 @@ class Setup extends Component {
           <div className="ln-button--wrapper">
             <div></div>
             <button className={'ln-btn ln-btn-primary'}>
-              Next step
+              {translate('nextStep')}
             </button>
           </div>
         </form>
@@ -322,20 +322,19 @@ class Setup extends Component {
     } else if (this.state.page === 2) {
       return (
         <form onSubmit={this._checkCredetionals.bind(this)}>
-
           <div>
-            <h1>Bugtracker settings</h1>
-            <p>Please fill in your bugtracker credentials, so Layernotes can connect with your account.</p>
-            <Input label={`${this.state.toolName} url`} helperText={'This is the url witch you use to access your bugtracker'} type="url" name="toolUrl" placeholder="https://bugtracker.uncinc.nl" value={this.state.toolUrl} onchange={this._handleStateChange}/>
-            <Input label={'Username'} type="text" helperText={'This is the user name you use to login in your bugtracker'} name="accountUserName" placeholder="info@uncinc.nl" value={this.state.accountUserName} onchange={this._handleStateChange}/>
-            <Input label={'Password'} type="password" helperText={'This is the password you use to login in your bugtracker'} name="accountPassword" placeholder="Password" value={this.state.accountPassword} onchange={this._handleStateChange}/>
+            <h1>{translate('setupStepTwoTitle')}</h1>
+            <p>{translate('setupStepTwoBody')}</p>
+            <Input label={`${this.state.toolName} url`} helperText={translate('setupHelperTextUrl')} type="url" name="toolUrl" placeholder="https://bugtracker.uncinc.nl" value={this.state.toolUrl} onchange={this._handleStateChange}/>
+            <Input label={'Username'} type="text" helperText={translate('setupHelperTextUserName')} name="accountUserName" placeholder="username" value={this.state.accountUserName} onchange={this._handleStateChange}/>
+            <Input label={'Password'} type="password" helperText={translate('setupHelperTextPassword')} name="accountPassword" placeholder="Password" value={this.state.accountPassword} onchange={this._handleStateChange}/>
           </div>
           <div className="ln-button--wrapper">
             <button className={'ln-btn ln-btn-secondary'} onClick={this._prevStep}>
-              Previous step
+              {translate('previousStep')}
             </button>
             <button className={'ln-btn ln-btn-primary'}>
-              Next step
+              {translate('nextStep')}
             </button>
           </div>
         </form>
@@ -344,15 +343,16 @@ class Setup extends Component {
       return (
         <form onSubmit={this._setProject.bind(this)}>
           <div>
-            <h1>Choose the project that this webiste belongs to.</h1>
+            <h1>{translate('setupStepTreeTitle')}</h1>
+            <p>{translate('setupStepTreeBody')}</p>
             {this._renderProjectSelect()}
           </div>
           <div className="ln-button--wrapper">
             <button className={'ln-btn ln-btn-secondary'} onClick={this._prevStep}>
-              Previous step
+              {translate('previousStep')}
             </button>
             <button className={'ln-btn ln-btn-primary'}>
-              Next step
+              {translate('nextStep')}
             </button>
           </div>
         </form>
@@ -361,17 +361,15 @@ class Setup extends Component {
       return (
         <div>
           <h1>
-            {this.state.websiteUrl}&#8203; is added to your project.
+            {translate('setupStepDoneTitle', this.state.websiteUrl)}
           </h1>
-          <p>
-            When this is your first time you can start a tutorial.
-          </p>
+          <p>{translate('setupStepDoneBody')}</p>
           <div className={'ln-center'}>
             <span className={'ln-icon ln-icon-succes'}></span>
           </div>
           <div className="ln-button--wrapper">
-            <button className={'ln-btn ln-btn-primary'} onClick={() => this._closeSetup(true)}>Start tutorial</button>
-            <button className={'ln-btn ln-btn-primary'} onClick={() => this._closeSetup(false)}>Finish</button>
+            <button className={'ln-btn ln-btn-primary'} onClick={() => this._closeSetup(true)}>{translate('setupStartTutorial')}</button>
+            <button className={'ln-btn ln-btn-primary'} onClick={() => this._closeSetup(false)}>{translate('setupDone')}</button>
           </div>
         </div>
       );
