@@ -33,7 +33,7 @@ class Router extends Component {
 
       //Tour vars;
       steps: tourSteps, //This are the steps of the tour;
-      isTourActive: true, //This is on true when the user clicks on start tour in the setup
+      isTourActive: false, //This is on true when the user clicks on start tour in the setup
       tourStep: 1 //set to the first step;
     };
   }

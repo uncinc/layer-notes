@@ -14,9 +14,9 @@ import FileItem from './fileItem'
 import Loader from '../loader/loader';
 
 //import helpers
-import helpers from '../../utils/helpers';
+import helpers, {translate} from '../../utils/helpers';
 import generalConfig from '../../config/general';
-// import data from '../../utils/data'
+// import data from '../../utils/data''Turn Layernotes On'
 import routerHelper from '../router/routerHelper'
 
 /* Component ==================================================================== */
@@ -48,7 +48,7 @@ class CommentBox extends Component {
     bugtrackerUrl: 'http://localhost:8989/view.php?id=', //TODO get this from database
     positionClass: 'ln-commentbox-left', //the default class
     isLoading: false,
-    loadingText: 'Loading...', //the
+    loadingText: translate('loadingText'), //the loading title
     inEditMode: false,
     onSubmit: () => {},
     onchange: () => {},
@@ -159,7 +159,7 @@ class CommentBox extends Component {
    */
   _prepareSumbit = (e) => {
     if (this.props.ticket.ticketText.length < 2) {
-      this.setState({isError: true, errorText: 'Please add a comment to your issue.'})
+      this.setState({isError: true, errorText: translate('commentBoxErrorText')})
     } else {
       this.props.onSubmit();
     }
@@ -211,10 +211,9 @@ class CommentBox extends Component {
         }
       });
 
-      return ( //render
-        <ul className = {'ln-file--list'}>
-          {listItems}
-        </ul>
+      //render
+      return (
+        <ul className={'ln-file--list'}> {listItems} </ul>
       );
     } else { //there are no files so do not show theim
       return '';
@@ -235,93 +234,93 @@ class CommentBox extends Component {
 
       //when the position of the box is on the right side posion the box on the right;
       if (this.props.ticket.position.x > (generalConfig.maxX(0) /2) - 100) {
-      position.style.left = this.props.ticket.position.x - 480 + this.props.ticket.position.width;
-      position.class = 'ln-commentbox-right';
+        position.style.left = this.props.ticket.position.x - 480 + this.props.ticket.position.width;
+        position.class = 'ln-commentbox-right';
+      }
+      position.style.top = this.props.ticket.position.height + this.props.ticket.position.y; //only add the top prop to the style when creating;
+    } else if (!this.props.inEditMode) { //when in eddit mode the elemt is abosultie postioned on the page. becouse the elemnt is reused for everery element
+      position.class = this.props.positionClass;
+      position.style.top = this.props.ticket.position.height;
     }
-    position.style.top = this.props.ticket.position.height + this.props.ticket.position.y; //only add the top prop to the style when creating;
-  } else if (!this.props.inEditMode) { //when in eddit mode the elemt is abosultie postioned on the page. becouse the elemnt is reused for everery element
-    position.class = this.props.positionClass;
-    position.style.top = this.props.ticket.position.height;
+    return position;
   }
-  return position;
-}
 
-//Render the pro buttn
-_renderPrioButton = () => {
-  return (
-    <div className="ln-checkbox--wrapper">
-      <input id="commentbox_prio" name="isImportant" checked={this.props.ticket.isImportant} onChange={this._checkboxStateChange} className={'ln-checkbox'} type="checkbox"/>
-      <label htmlFor="commentbox_prio" title="Select prio" className="ln-btn ln-btn-primary">
-        <span className="ln-icon ln-icon-important"></span>
-      </label>
-    </div>
-  );
-}
-//Render file upload button
-_renderFileUploadButton = () => {
-  return (
-    <div className="ln-file-input">
-      <input type="file" value="" name="upload" onChange={this._previewFiles.bind(this)} id="ln-field-file"/>
-      <label htmlFor="ln-field-file" className={'ln-btn ln-btn-primary ln-btn-icon'} title="Add a file">
-        <span className="ln-icon ln-icon-file"></span>
-        <span className="ln-attachment-text"></span>
-      </label>
-    </div>
-  );
-}
-
-//render the error;
-_renderError = () => {
-  if (this.state.isError) {
+  //Render the pro buttn
+  _renderPrioButton = () => {
     return (
-      <span className={'ln-commentbox-error'}>{this.state.errorText}</span>
-    );
-  } else {
-    return '';
-  }
-}
-
-// When the app is in edit mode show more context to the ticket
-_renderExtraInfo = () => {
-  if (this.props.inEditMode) {
-    return (
-      <div className={'ln-commentbox--info'}>
-        <div>
-          <span className={`ln-icon ln-icon-${this.props.ticket.data.browserData.browserName}`} title={`The browser that was used for this ticket was ${this.props.ticket.data.browserData.browserName}`}></span>
-          <button className="ln-btn-transparant" onClick={this._windowRezise.bind(this, this.props.ticket.data.screenresolution.width, this.props.ticket.data.screenresolution.height)} title="Click to resize your browser to this resolution">{this.props.ticket.data.screenresolution.width}
-            &nbsp;x&nbsp;{this.props.ticket.data.screenresolution.height}</button>
-        </div>
-        <div>
-          <button className="ln-btn-transparant" title="The ticket is 'not assigned'." onClick={this._goToBugtracker.bind(this)}>Not assigned</button>
-          <button className="ln-btn-transparant" onClick={this._goToBugtracker.bind(this)} title="Go to this issue in your bugtracker">#{this.props.ticket.id}</button>
-        </div>
+      <div className="ln-checkbox--wrapper">
+        <input id="commentbox_prio" name="isImportant" checked={this.props.ticket.isImportant} onChange={this._checkboxStateChange} className={'ln-checkbox'} type="checkbox"/>
+        <label htmlFor="commentbox_prio" title={translate('commentBoxPrioCheckboxTitle')} className="ln-btn ln-btn-primary">
+          <span className="ln-icon ln-icon-important"></span>
+        </label>
       </div>
     );
-  } else { //the app is not in eddit mode
-    return '';
   }
-}
+  //Render file upload button
+  _renderFileUploadButton = () => {
+    return (
+      <div className="ln-file-input">
+        <input type="file" value="" name="upload" onChange={this._previewFiles.bind(this)} id="ln-field-file"/>
+        <label htmlFor="ln-field-file" className={'ln-btn ln-btn-primary ln-btn-icon'} title="Add a file">
+          <span className="ln-icon ln-icon-file"></span>
+          <span className="ln-attachment-text"></span>
+        </label>
+      </div>
+    );
+  }
 
-_renderOverLay = () => { //show a overlay over the box
-  if (this.props.isLoading === true) { //show a loading overlay
-    return (
-      <div className={'ln-commentbox--loading'}>
-        <Loader color={'white'} loadingText={this.props.loadingText}></Loader>
-      </div>
-    )
-  } else if (this.props.isUploaded === true) { //show a confirm that the ticket is uploaded
-    return (
-      <div className={'ln-commentbox--done ln-center'}>
-        <div>
-          <span className={'ln-icon ln-icon-succes-white'}></span>
-        </div>
-        <p>Your ticket is uploaded</p>
-      </div>
-    )
-  } else { //do not render anything
-    return '';
+  //render the error;
+  _renderError = () => {
+    if (this.state.isError) {
+      return (
+        <span className={'ln-commentbox-error'}>{this.state.errorText}</span>
+      );
+    } else {
+      return '';
+    }
   }
-}
+
+  // When the app is in edit mode show more context to the ticket
+  _renderExtraInfo = () => {
+    if (this.props.inEditMode) {
+      return (
+        <div className={'ln-commentbox--info'}>
+          <div>
+            <span className={`ln-icon ln-icon-${this.props.ticket.data.browserData.browserName}`} title={translate('commentBoxAboutBrugtrackerTitle', this.props.ticket.data.browserData.browserName)}></span>
+            <button className="ln-btn-transparant" onClick={this._windowRezise.bind(this, this.props.ticket.data.screenresolution.width, this.props.ticket.data.screenresolution.height)} title={translate('commentBoxResize')}>{this.props.ticket.data.screenresolution.width}
+              &nbsp;x&nbsp;{this.props.ticket.data.screenresolution.height}</button>
+          </div>
+          <div>
+            <button className="ln-btn-transparant" title={translate('commentBoxStatusTitle', 'New')} onClick={this._goToBugtracker.bind(this)}>New</button>
+            <button className="ln-btn-transparant" onClick={this._goToBugtracker.bind(this)} title={translate('commentBoxBugtrackerTitle')}>#{this.props.ticket.id}</button>
+          </div>
+        </div>
+      );
+    } else { //the app is not in eddit mode
+      return '';
+    }
+  }
+
+  _renderOverLay = () => { //show a overlay over the box
+    if (this.props.isLoading === true) { //show a loading overlay
+      return (
+        <div className={'ln-commentbox--loading'}>
+          <Loader color={'white'} loadingText={this.props.loadingText}></Loader>
+        </div>
+      )
+    } else if (this.props.isUploaded === true) { //show a confirm that the ticket is uploaded
+      return (
+        <div className={'ln-commentbox--done ln-center'}>
+          <div>
+            <span className={'ln-icon ln-icon-succes-white'}></span>
+          </div>
+          <p>{ translate('commentBoxSucces')}</p>
+        </div>
+      )
+    } else { //do not render anything
+      return '';
+    }
+  }
 
   render = () => {
     return (
@@ -339,8 +338,8 @@ _renderOverLay = () => { //show a overlay over the box
               {this._renderFileUploadButton()}
             </div>
             <div className={'ln-commentbox--tools--right'}>
-              <Button class={'ln-btn-primary'} text="Cancel" onclick={this.props.onCancel} title="Cancel the ticket submit"></Button>
-              <input className="ln-btn ln-btn-secondary" type="submit" value="Save" title="Save the ticket"></input>
+              <Button class={'ln-btn-primary'} text={translate('commentBoxCancelValue')} onclick={this.props.onCancel} title={translate('commentBoxCancelTitle')}></Button>
+              <input className="ln-btn ln-btn-secondary" type="submit" value={translate('commentBoxSaveValue')} title={translate('commentBoxSaveTitle')}></input>
             </div>
           </div>
         </form>

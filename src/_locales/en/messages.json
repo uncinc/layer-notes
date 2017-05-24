@@ -7,8 +7,267 @@
     "message": "Easy submit your tickets to Mantis",
     "description": "Easy submit your tickets to Mantis"
   },
+  "toolOff": {
+    "message": "Turn Layernotes Off",
+    "description": "The title of the icon in the browser when the tool is on."
+  },
+  "toolOn": {
+    "message": "Turn Layernotes On",
+    "description": "THe title of the icon in the browser when the tool is off."
+  },
   "btnTooltip": {
     "message": "Start a Ticket",
     "description": "Start a Ticket"
+  },
+  "loadingText": {
+    "message": "Loading...",
+    "description": "Loading text for the app in the commentBox"
+  },
+  "commentBoxErrorText": {
+    "message": "Please add a comment to your issue.",
+    "description": "This is the warning when you submit a ticket without a discription."
+  },
+  "commentBoxPrioCheckboxTitle": {
+    "message": "Select prioroty",
+    "description": "The Prio button in the commentbox"
+  },
+  "commentBoxStatusTitle": {
+    "message": "The status of the ticket is '$STATUS$'",
+    "description": "Loading text for the app in the commentBox",
+    "placeholders": {
+      "status": {
+        "content": "$1",
+        "example": "New"
+      }
+    }
+  },
+  "commentBoxBugtrackerTitle": {
+    "message": "Go to this issue in your bugtracker $1",
+    "description": "The title form the to bugtracker text"
+  },
+  "commentBoxSucces": {
+    "message": "Your ticket is uploaded",
+    "description": "The succes text"
+  },
+  "commentBoxAboutBrugtrackerTitle": {
+    "message": "The browser that was used for this ticket was $BROWSER$",
+    "description": "The succes text",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Firefox"
+      }
+    }
+  },
+  "commentBoxResize": {
+    "message": "Click to resize your browser to this resolution",
+    "description": "The succes text"
+  },
+  "commentBoxCancelTitle": {
+    "message": "Cancel the ticket submit",
+    "description": "Title from the cancel button"
+  },
+  "commentBoxCancelValue": {
+    "message": "Cancel",
+    "description": "Text from the cancel button"
+  },
+  "commentBoxSaveTitle": {
+    "message": "Save the ticket",
+    "description": "Title from the save button"
+  },
+  "commentBoxSaveValue": {
+    "message": "Save",
+    "description": "Text from the save button"
+  },
+  "fileItemTitle": {
+    "message": "Remove $1",
+    "description": "The title of the delete item"
+  },
+  "fileItemFallbackName": {
+    "message": "Unknown",
+    "description": "The falback name of a unnamed item"
+  },
+  "inputTextHelperText": {
+    "message": "This is the url",
+    "description": "Title fallback helper popup."
+  },
+  "inputTextError": {
+    "message": "The $ERROR$ is spelled wrong",
+    "description": "The error that will be showed when the input is wrong.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "URL"
+      }
+    }
+  },
+  "selectorScreenshotName": {
+    "message": "Screenshot-from-page.jpeg",
+    "description": "The name of the screenshot that will be saved."
+  },
+  "selectorScreenshotNameAfter": {
+    "message": "Screenshot-after-selection.jpeg",
+    "description": "The name of the screenshot that will be saved. (afther selecting)"
+  },
+  "selectorLoadingText": {
+    "message": "Sumbitting to bugtracker...",
+    "description": "The text that will be showed when the ticket is uploading."
+  },
+  "selectorHelper": {
+    "message": "  You can select your issue. (Press ESC to cancel)",
+    "description": "The helper text."
+  },
+  "nextStep": {
+    "message": "Next step",
+    "description": "Next step indicator."
+  },
+  "previousStep": {
+    "message": "Previous step",
+    "description": "Previous step indicator."
+  },
+  "setupExistingProject": {
+    "message": "Add to a existing project",
+    "description": "The option that the user will see to add the website to a existing project."
+  },
+  "setupMissingFieldsError": {
+    "message": "Not all the fields are filled.",
+    "description": "This error will be showed if the user sumbit the form when not all fields are filed in."
+  },
+  "setupLogginText": {
+    "message": "Checking you credentials, and logging in at $TOOLNAME$.",
+    "description": "This is the loading text when logging in.",
+    "placeholders": {
+      "toolName": {
+        "content": "$1",
+        "example": "Mantis"
+      }
+    }
+  },
+  "setupMissingBugtracker": {
+    "message": "Please select a Bugtacker",
+    "description": "Shown when no bugtracker is selected"
+  },
+  "setupSaving": {
+    "message": "Saving credentials.",
+    "description": "The last step, when saving."
+  },
+  "setupChooseProject": {
+    "message": "Choose project",
+    "description": "The project dropdown placeholder."
+  },
+  "setupStepOneTitle": {
+    "message": "Choose your bugtracker",
+    "description": "The title of step one"
+  },
+  "setupStepOneBody": {
+    "message": "This is the first time that you open Layernotes on this webiste. Please connect this site to a bugtracker. Or add it to a existing project.",
+    "description": "The body of the first step"
+  },
+
+  "setupStepTwoBody": {
+    "message": "Please fill in your bugtracker credentials, so Layernotes can connect with your account.",
+    "description": "The body of the second step."
+  },
+  "setupStepTwoTitle": {
+    "message": "Bugtracker settings",
+    "description": "The title of the second step."
+  },
+  "setupHelperTextUrl": {
+    "message": "This is the url witch you use to access your bugtracker",
+    "description": "The helper text of the url."
+  },
+  "setupHelperTextUserName": {
+    "message": "This is the user name you use to login in your bugtracker",
+    "description": "The helper text of the user name"
+  },
+  "setupHelperTextPassword": {
+    "message": "This is the password you use to login in your bugtracker",
+    "description": "The helper text of the password"
+  },
+  "setupStepTreeTitle": {
+    "message": "Choose project",
+    "description": "The thirdt title"
+  },
+  "setupStepTreeBody": {
+    "message": "Choose the project that this webiste belongs to.",
+    "description": "The thirdt body tekst"
+  },
+  "setupStepDoneTitle": {
+    "message": "$URL$ is added to your project.",
+    "description": "The title of the done screen.",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "A Unknown website"
+      }
+    }
+  },
+  "setupStepDoneBody": {
+    "message": "When this is your first time you can start a tutorial.",
+    "description": ""
+  },
+  "setupStartTutorial": {
+    "message": "Start tutorial",
+    "description": "The call to action to start the tutorial."
+  },
+  "setupDone": {
+    "message": "Finish",
+    "description": "Finish the setup."
+  },
+  "ticketsOnPageUpdating": {
+    "message": "Updating your ticket in the bugtracker...",
+    "description": ""
+  },
+  "toolBarNewNoteText": {
+    "message": "New note",
+    "description": "The text of the new note button in the toolbar."
+  },
+  "toolBarNewNoteTitle": {
+    "message": "Create a new note",
+    "description": "The title of the new note button in the toolbar."
+  },
+  "toolBarSettingsText": {
+    "message": "Settings",
+    "description": "The text of the settings button in the toolbar."
+  },
+  "toolBarSettingsTitle": {
+    "message": "Go to the settings page",
+    "description": "The title of the settings button in the toolbar."
+  },
+  "toolBarAmoutTicketsTitle": {
+    "message": "Amount tickets on this page, and the total tickets on this site.",
+    "description": ""
+  },
+  "userTourStepOneTitle": {
+    "message": "Welcome!",
+    "description": ""
+  },
+  "userTourStepOneBody": {
+    "message": "This tutorial will explain how this tool works.",
+    "description": "T"
+  },
+  "userTourStepTwoTitle": {
+    "message": "The Sidebar",
+    "description": ""
+  },
+  "userTourStepTwoBody": {
+    "message": "This is the sidebar of the app. With the 'New Item' button you can create a new note. Press on 'Next', to create a new note.",
+    "description": ""
+  },
+  "userTourStepTreeTitle": {
+    "message": "Create new note",
+    "description": ""
+  },
+  "userTourStepTreeBody": {
+    "message": "Now select the area of your note, and add a comment. When you submit a note, there is a screenshot automaticaly added.",
+    "description": ""
+  },
+  "userTourStepFourTitle": {
+    "message": "Nice!",
+    "description": ""
+  },
+  "userTourStepFourBody": {
+    "message": " You have created your first note! Click on the icon to view your note. You now know how to create a note. Happy testing!",
+    "description": ""
   }
 }
