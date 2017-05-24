@@ -54,3 +54,10 @@ Some screenshots from the interface from the tool.
 - [ ] Add support for Safari
 - [ ] Add support for Edge
 - [ ] Add support for IE
+
+## Contributors
+
+- [mat1th](https://github.com/mat1th)
+
+## LICENCE
+The code is licenced under the GNU GENERAL PUBLIC LICENSE Version 3

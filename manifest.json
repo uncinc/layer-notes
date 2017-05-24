@@ -1,10 +1,10 @@
 {
   "name": "__MSG_appName__",
-  "version": "0.0.1",
+  "version": "0.4.0",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "shortName": "__MSG_appDescription__",
-  "homepage_url": "https://github.com/Mat1th",
+  "homepage_url": "https://github.com/uncinc/layer-notes",
   "default_locale": "en",
   "browser_action": {
     "default_icon": {

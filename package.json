@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mat1th/layer-notes"
+    "url": "https://github.com/uncinc/layer-notes"
   },
   "author": "https://github.com/mat1th",
   "bugs": {
-    "url": "https://github.com/mat1th/layer-notes/issues"
+    "url": "https://github.com/uncinc/layer-notes/issues"
   },
   "devDependencies": {
     "babel": "6.23.0",
