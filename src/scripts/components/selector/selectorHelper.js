@@ -120,7 +120,7 @@ class SelectorHelper extends Component {
 
         //the scale of the elemtn this is work in progress
       } else if (this.state.movement === 'scale') {
-        //TODO; make this
+        //TODO: make this
         // let directions = this.state.directions;
         // let proposedValue = {
         //   top: setMinMaxWidth(this.state.y, generalConfig.minY, generalConfig.maxY),

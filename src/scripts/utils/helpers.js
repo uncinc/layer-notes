@@ -3,6 +3,8 @@
 import ext from './ext';
 import generalData from '../config/general';
 
+import anime from "animejs";
+
 /* Component ==================================================================== */
 const helpers = (() => {
   /**
@@ -209,6 +211,23 @@ const helpers = (() => {
     },
     translate = function (message, value) {
       return ext.i18n.getMessage(message, value);
+    },
+    scrollTo = (left, top) => {
+      var scrollPositions = {
+        top: document.body.scrollTop,
+        left: document.body.scrollLeft
+      };
+      anime({
+        targets: scrollPositions,
+        top: top,
+        left: left,
+        duration: 500,
+        easing: 'easeInCubic',
+        round: 1,
+        update: function () {
+          window.scrollTo(scrollPositions.left, scrollPositions.top);
+        }
+      });
     };
 
   return {
@@ -229,7 +248,8 @@ const helpers = (() => {
     pageHeight,
     isPrommise,
     shortText,
-    translate
+    translate,
+    scrollTo
   };
 })();
 

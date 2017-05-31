@@ -1,9 +1,6 @@
-import scrollTo from "scroll-to";
+import helpers from '../../../utils/helpers';
 
 export default function scrollToPosition(el, position) {
-  scrollTo(0, position, {
-    ease: "out-sine",
-    duration: 500
-  });
+  helpers.scrollTo(0, position);
   return el.getBoundingClientRect();
 }
