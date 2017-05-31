@@ -104,8 +104,9 @@ class Setup extends Component {
 
 
   //check the credentials from the user
-  _checkCredetionals = () => {
+  _checkCredetionals = (e) => {
     let _this = this;
+    e.preventDefault();
     if (this.state.accountUserName.length < 2 && this.state.accountPassword.length < 2 && this.state.toolUrl.length < 2) {
       this._setError(translate('setupMissingFieldsError'));
       //not everu field is filed in.

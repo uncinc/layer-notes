@@ -6,7 +6,8 @@ import {
 /* Component ==================================================================== */
 let mantisApi = (() => {
   const INTERNAL_SERVER_ERR = 500;
-
+  const NODATA_ERR = 0;
+  const NOTFOUND_ERR = 404;
   /**
    * Returns urls that are used in the tool
    * @returns {Bool} The requested url
@@ -48,10 +49,9 @@ let mantisApi = (() => {
         SOAPClient.invoke(apiUrl, 'mc_login', pl, true, callBack);
 
         function callBack(res) {
-          const FATAL_ERR = INTERNAL_SERVER_ERR;
-          if (res.status === FATAL_ERR) {
+          if (res.status === INTERNAL_SERVER_ERR || res.status === NODATA_ERR || res.status === NOTFOUND_ERR) {
             reject({
-              status: FATAL_ERR,
+              status: INTERNAL_SERVER_ERR,
               message: 'Your credentials are wrong'
             });
           } else {
