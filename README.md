@@ -26,6 +26,14 @@ The following tasks can be used when you want to start developing the extension 
 - `npm run opera-watch`
 - `npm run firefox-watch`
 
+## Install packed extension
+
+### Chrome
+You can install the extension from the Chrome [extension store](https://chrome.google.com/webstore/detail/layer-notes/ccolfolecomkapjakcjpankaliaodnah?hl=nl)
+
+### Firefox
+You can install the firefox exention from the [releases page](https://github.com/uncinc/layer-notes/releases/tag/v0.4).
+
 ## Packaging
 Run `npm run dist` to create a zipped, production-ready extension for each browser. You can then upload that to the appstore.
 
@@ -56,6 +64,9 @@ Some screenshots from the interface of the tool.
 - [ ] Add support for Edge
 - [ ] Add support for IE
 
+## Release History
+See the [releases page](https://github.com/uncinc/layer-notes/releases) for a history of releases and highlights for each release.
+
 ## Contributions
 You can contribute to Layer Notes in several ways:
 
@@ -63,11 +74,11 @@ You can contribute to Layer Notes in several ways:
 You can add new features and create a pull request to the tool to make it better.
 
 ### Translating the tool
-In the folder `./src/_locales` you can find locales. With can use the english main file to translate it to your language. 
+In the folder `./src/_locales` you can find locales. With can use the english main file to translate it to your language.
 
 ## Contributors
 
 - [mat1th](https://github.com/mat1th)
 
 ## Licence
-The code is licenced under the `GNU GENERAL PUBLIC LICENSE Version 3`
+The code is licensed under the `GNU GENERAL PUBLIC LICENSE Version 3`
