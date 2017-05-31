@@ -250,7 +250,7 @@ const data = (() => {
           let newTicketObject = {
             data: findUserData.specificUserData(hostname, url, shortlink, ticket.data.screenresolution), //dataobject with all browser settings
             ticketText: ticket.ticketText,
-            ticketTitle: helpers.cut(ticket.ticketText.replace('/(issue\s)|(the\s)|(site\s)|(website\s)|(in\s)|(on\s)|(page\s)|(to\s)/g', ''), generalData.maxLetters) + '...',
+            ticketTitle: helpers.shortText(ticket.ticketText),
             isImportant: ticket.isImportant,
             assets: ticket.assets,
             position: ticket.position
