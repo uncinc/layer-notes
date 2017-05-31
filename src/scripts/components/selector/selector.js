@@ -52,12 +52,6 @@ class Selector extends Component {
           height: 0
         }
       },
-      //this is saved in the ticket
-
-      left: 0, //TODO: this should not be used anymore
-      top: 0,
-      width: 0,
-      height: 0,
 
       //this are helpers
       startX: -1,
@@ -88,7 +82,7 @@ class Selector extends Component {
 
   }
 
-//remove all the events
+  //remove all the events
   _removeMouseEvents() {
     document.removeEventListener('mousedown', this._onMouseDown, false);
     document.removeEventListener('mousemove', this._onMouseMove, false);
@@ -108,8 +102,10 @@ class Selector extends Component {
         startX: this.state.x, //x position
         startY: this.state.y, //y position
       });
+      this._onMouseMove(e);
     }
   }
+
   //listen to the esc key. Then go the home page;
   _onKeyDown = (e) => {
     if (e.keyCode === 27) { //27 === EXC key
@@ -117,6 +113,7 @@ class Selector extends Component {
       routerHelper.setStateApp('home');
     }
   }
+
   _takeScreenshot = (screenshotName) => {
     const _this = this;
     return new Promise(function(resolve, reject) {
@@ -159,7 +156,8 @@ class Selector extends Component {
       ? 'ln-commentbox-right'
       : 'ln-commentbox-left';
   }
-  // //for setting the new state in the ticket {object}
+
+  // for setting the new state in the ticket {Object}
   _handleStateChange = (newState) => {
     //set the new state to the selected ticket;
     this.setState({ticket: newState});
@@ -167,20 +165,22 @@ class Selector extends Component {
 
   _checkSelection = () => {
     let {width, height} = this.state.ticket.position;
-    if (width < generalConfig.minWidth) {
-      let position = {
-        width: generalConfig.minWidth,
-        height: this.state.ticket.height,
-        x: this.state.ticket.x,
-        y: this.state.ticket.y
-      };
-      let newStateTicket = helpers.setNewState(this.state.ticket, 'position', position);
+    let position = {
+      height: height,
+      width: width,
+      x: this.state.ticket.position.x,
+      y: this.state.ticket.position.y
+    };
 
-      this.setState({width: generalConfig.minWidth});
+    if (width < generalConfig.minWidth) {
+      position.width = generalConfig.minWidth;
     }
+
     if (height < generalConfig.minHeight) {
-      this.setState({height: generalConfig.minHeight});
+      position.height = generalConfig.minHeight;
     }
+    let newStateTicket = helpers.setNewState(this.state.ticket, 'position', position);
+    this.setState({ticket: newStateTicket});
     return true;
   }
 
@@ -229,7 +229,6 @@ class Selector extends Component {
         }, 2000);
       });
     });
-
   }
 
   _updateFramePosition = (left, top) => {
@@ -277,7 +276,7 @@ class Selector extends Component {
           left: this.state.x + 'px',
           top: this.state.y + 'px'
         }}>
-        {translate('selectorHelper')}
+          {translate('selectorHelper')}
         </span>
       );
     }
