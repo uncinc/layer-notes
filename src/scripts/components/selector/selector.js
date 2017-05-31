@@ -312,7 +312,7 @@ class Selector extends Component {
           height: this.state.ticket.position.height + 'px',
           width: this.state.ticket.position.width + 'px'
         }}>
-          <SelectorHelper width={this.state.ticket.position.width} left={this.state.ticket.position.x} showCommentbox={this.state.showCommentbox} updateFramePosition={this._updateFramePosition} updateFrameSize={this._updateFrameSize}></SelectorHelper>
+          <SelectorHelper width={this.state.ticket.position.width} height={this.state.ticket.position.height} left={this.state.ticket.position.x} showCommentbox={this.state.showCommentbox} updateFramePosition={this._updateFramePosition} updateFrameSize={this._updateFrameSize}></SelectorHelper>
           {this._renderCommentBox()}
         </div>
         <SelectorBackground width={this.state.ticket.position.width} height={this.state.ticket.position.height} left={this.state.ticket.position.x} top={this.state.ticket.position.y}></SelectorBackground>
