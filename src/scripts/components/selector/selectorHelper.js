@@ -77,7 +77,7 @@ class SelectorHelper extends Component {
 
   /**
      * When the mouse is down add other mouse events
-     * @param   {e}  e
+     * @param {e}  e
      */
   _onMouseDown = (e) => {
     let checkTransform = this._checkTransform(e.target.className);
@@ -110,7 +110,7 @@ class SelectorHelper extends Component {
 
         let proposedValue = {
           x: this.state.x - (this.props.width / 2),
-          y: this.state.y - (this.props.height / 2)
+          y: this.state.y - (this.props.height / 2) - window.scrollY
         };
 
         let newX = setMinMaxWidth(proposedValue.x, generalConfig.minX, generalConfig.maxX(this.props.width));

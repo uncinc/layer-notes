@@ -160,8 +160,11 @@ class Selector extends Component {
 
   _checkCommentBoxIsInView = () => {
     const positionY = this.state.ticket.position.y;
-    console.log('positionY', positionY);
-    helpers.scrollTo(0, positionY);
+    const pageHeight = helpers.pageHeight();
+
+    if (positionY < pageHeight) {
+      helpers.scrollTo(0, positionY);
+    }
   }
 
   // for setting the new state in the ticket {Object}
