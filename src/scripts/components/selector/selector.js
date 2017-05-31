@@ -147,6 +147,7 @@ class Selector extends Component {
     this._checkSelection();
     this.setState({isDrawing: false, cursorStyle: 'default', showCommentbox: true, positionClass: this._checkClassname()});
     this._removeMouseEvents();
+    this._checkCommentBoxIsInView();
   }
 
   //set the classname;
@@ -155,6 +156,12 @@ class Selector extends Component {
     return (this.state.ticket.position.x > (generalConfig.maxX(0) / 2) - 100)
       ? 'ln-commentbox-right'
       : 'ln-commentbox-left';
+  }
+
+  _checkCommentBoxIsInView = () => {
+    const positionY = this.state.ticket.position.y;
+    console.log('positionY', positionY);
+    helpers.scrollTo(0, positionY);
   }
 
   // for setting the new state in the ticket {Object}
