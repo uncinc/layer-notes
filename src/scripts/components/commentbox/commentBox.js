@@ -68,7 +68,7 @@ class CommentBox extends Component {
   componentWillUnmount() {
     this.setState({
       scale: [1, 0.3]
-    })
+    });
   }
 
   /**
@@ -272,7 +272,7 @@ class CommentBox extends Component {
     return (
       <div className="ln-file-input">
         <input type="file" value="" name="upload" onChange={this._previewFiles.bind(this)} id="ln-field-file"/>
-        <label htmlFor="ln-field-file" className={'ln-btn ln-btn-primary ln-btn-icon'} title="Add a file">
+        <label htmlFor="ln-field-file" className={'ln-btn ln-btn-primary ln-btn-icon'} title={translate('addFile')}>
           <span className="ln-icon ln-icon-file"></span>
           <span className="ln-attachment-text"></span>
         </label>
