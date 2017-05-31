@@ -45,7 +45,6 @@ class CommentBox extends Component {
         height: 0
       }
     },
-    bugtrackerUrl: 'http://localhost:8989/view.php?id=', //TODO get this from database
     positionClass: 'ln-commentbox-left', //the default class
     isLoading: false,
     loadingText: translate('loadingText'), //the loading title
@@ -186,10 +185,20 @@ class CommentBox extends Component {
    * @param  {e}  event from onclick
    */
   _goToBugtracker = (e) => {
-    const url = this.props.bugtrackerUrl + this.props.ticket.id;
-
-    //open a new window with the bugtracker ticket
-    message.send('open', {url: url});
+    const action = e.target.getAttribute('data-action');
+    message.send('getUrls', {
+      hostname: generalConfig.hostname,
+      ticketId: this.props.ticket.id
+    }).then(function(data) {
+      let url;
+      if (action === 'eddit') {
+        url = data.data.edditTicket;
+      } else {
+        url = data.data.viewTicket;
+      }
+      //open a new window with the bugtracker ticket
+      message.send('open', {url: url});
+    });
 
     //prefent submit
     e.preventDefault();
@@ -213,7 +222,9 @@ class CommentBox extends Component {
 
       //render
       return (
-        <ul className={'ln-file--list'}> {listItems} </ul>
+        <ul className={'ln-file--list'}>
+          {listItems}
+        </ul>
       );
     } else { //there are no files so do not show theim
       return '';
@@ -233,7 +244,7 @@ class CommentBox extends Component {
       position.style.left = this.props.ticket.position.x;
 
       //when the position of the box is on the right side posion the box on the right;
-      if (this.props.ticket.position.x > (generalConfig.maxX(0) /2) - 100) {
+      if (this.props.ticket.position.x > (generalConfig.maxX(0) / 2) - 100) {
         position.style.left = this.props.ticket.position.x - 480 + this.props.ticket.position.width;
         position.class = 'ln-commentbox-right';
       }
@@ -291,8 +302,8 @@ class CommentBox extends Component {
               &nbsp;x&nbsp;{this.props.ticket.data.screenresolution.height}</button>
           </div>
           <div>
-            <button className="ln-btn-transparant" title={translate('commentBoxStatusTitle', 'New')} onClick={this._goToBugtracker.bind(this)}>New</button>
-            <button className="ln-btn-transparant" onClick={this._goToBugtracker.bind(this)} title={translate('commentBoxBugtrackerTitle')}>#{this.props.ticket.id}</button>
+            <button className="ln-btn-transparant" title={translate('commentBoxStatusTitle', 'New')} data-action={'eddit'} onClick={this._goToBugtracker.bind(this)}>New</button>
+            <button className="ln-btn-transparant" onClick={this._goToBugtracker.bind(this)} data-action={'view'} title={translate('commentBoxBugtrackerTitle')}>#{this.props.ticket.id}</button>
           </div>
         </div>
       );
@@ -314,7 +325,7 @@ class CommentBox extends Component {
           <div>
             <span className={'ln-icon ln-icon-succes-white'}></span>
           </div>
-          <p>{ translate('commentBoxSucces')}</p>
+          <p>{translate('commentBoxSucces')}</p>
         </div>
       )
     } else { //do not render anything

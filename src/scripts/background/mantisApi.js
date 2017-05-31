@@ -5,7 +5,32 @@ import {
 
 /* Component ==================================================================== */
 let mantisApi = (() => {
-  const mantisSoapUrl = '/api/soap/mantisconnect.php'
+  const INTERNAL_SERVER_ERR = 500;
+
+  /**
+   * Returns urls that are used in the tool
+   * @returns {Bool} The requested url
+   */
+  const urls = {
+    soapApi: function (baseUrl) {
+      return baseUrl + '/api/soap/mantisconnect.php';
+    },
+
+    edditTicket: function (baseUrl, ticketId) {
+      return baseUrl + '/view.php?id=' + ticketId;
+    },
+
+    viewTicket: function (baseUrl, ticketId) {
+      return baseUrl + '/bug_update_page.php?bug_id=' + ticketId;
+    },
+    all: function (baseUrl, ticketId) {
+      return {
+        soapApi: this.soapApi(baseUrl),
+        edditTicket: this.edditTicket(baseUrl, ticketId),
+        viewTicket: this.viewTicket(baseUrl, ticketId)
+      };
+    }
+  };
 
   /**
    * checks if the user is able to log in the bugtracker This function is a prommise
@@ -19,11 +44,11 @@ let mantisApi = (() => {
         pl.add('username', userName);
         pl.add('password', password);
 
-        const apiUrl = url + mantisSoapUrl;
+        const apiUrl = urls.soapApi(url);
         SOAPClient.invoke(apiUrl, 'mc_login', pl, true, callBack);
 
         function callBack(res) {
-          const FATAL_ERR = 500;
+          const FATAL_ERR = INTERNAL_SERVER_ERR;
           if (res.status === FATAL_ERR) {
             reject({
               status: FATAL_ERR,
@@ -59,14 +84,14 @@ let mantisApi = (() => {
         pl.add('username', userName);
         pl.add('password', password);
 
-        const apiUrl = url + mantisSoapUrl;
+        const apiUrl = urls.soapApi(url);
         SOAPClient.invoke(apiUrl, 'mc_projects_get_user_accessible', pl, true, callBack);
 
         function callBack(res) {
 
-          if (res.status === 500) {
+          if (res.status === INTERNAL_SERVER_ERR) {
             reject({
-              status: 500,
+              status: INTERNAL_SERVER_ERR,
               message: 'Your credentials are wrong'
             });
           } else {
@@ -97,6 +122,9 @@ let mantisApi = (() => {
         pl.add('username', userName);
         pl.add('password', password);
 
+        const IMPORTANT_WEIGHT = 40;
+        const NOMAL_WEIGHT = 30;
+
         let ticket = {
           project: {
             id: projecId
@@ -107,7 +135,7 @@ let mantisApi = (() => {
           os: newTicketObject.data.browserData.os,
           os_build: newTicketObject.data.browserData.osversion,
           priority: {
-            id: (newTicketObject.isImportant === true) ? 40 : 30,
+            id: (newTicketObject.isImportant === true) ? IMPORTANT_WEIGHT : NOMAL_WEIGHT,
             name: (newTicketObject.isImportant === true) ? 'height' : 'normal',
           },
           steps_to_reproduce: JSON.stringify(newTicketObject.data),
@@ -118,14 +146,14 @@ let mantisApi = (() => {
         //Ticket data
         pl.add('issue', ticket);
 
-        const apiUrl = url + mantisSoapUrl;
+        const apiUrl = urls.soapApi(url);
         SOAPClient.invoke(apiUrl, 'mc_issue_add', pl, true, callBack);
 
         function callBack(ticketId) {
 
-          if (ticketId.status === 500) {
+          if (ticketId.status === INTERNAL_SERVER_ERR) {
             reject({
-              status: 500,
+              status: INTERNAL_SERVER_ERR,
               message: 'Your credentials are wrong'
             });
           } else {
@@ -185,6 +213,7 @@ let mantisApi = (() => {
   }
 
   return {
+    urls,
     login,
     getProjects,
     submitIssue
