@@ -2,16 +2,15 @@
 
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
-import Tour from '../../components/userTour/index';
+import Tour from '../../components/userTour';
 
 import ext from '../../utils/ext';
-import generalConfig from '../../config/general';
 
 // Components
-import ToolBar from '../toolbar/toolbar';
-import Selector from '../selector/selector';
-import Setup from '../setup/setup'
-import TicketsOnPage from '../ticketsOnPage/ticketsOnPage';
+import ToolBar from '../toolbar';
+import Selector from '../selector';
+import Setup from '../setup'
+import TicketsOnPage from '../ticketsOnPage';
 
 //data
 import tourSteps from '../../config/tourSteps';
@@ -19,7 +18,6 @@ import tourSteps from '../../config/tourSteps';
 //helpers
 import generalData from '../../config/general';
 import message from '../../utils/message.js';
-import helpers from '../../utils/helpers';
 import routerHelper from './routerHelper';
 
 /* Component ==================================================================== */
@@ -97,7 +95,7 @@ class Router extends Component {
   }
 
   //render the right part
-  _stateRoutingLogic = (state) => {
+  _stateRoutingLogic = () => {
     console.info(`>--------: Navigate to the ${this.state.lnState} page`);
     if (this.state.lnState === 'home') {
       return (
@@ -128,7 +126,7 @@ class Router extends Component {
       </div>
     );
   }
-};
+}
 
 //* Export Component ==================================================================== */
 export default Router;

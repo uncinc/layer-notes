@@ -35,6 +35,34 @@ const data = (() => {
     });
   }
 
+  //returns a list or the urls
+  function getUrls(params) {
+    const {
+      hostname,
+      ticketId
+    } = params;
+    return new Promise(function (resolve, reject) {
+      try {
+        getStorage('savedSites').then(function (data) {
+          //find out witch api this site uses;
+          var siteData = data.savedSites.filter(function (obj) {
+            if (obj.urls.indexOf(hostname) > -1) {
+              return obj;
+            }
+          });
+          //return the first object in the array
+          return siteData[0];
+        }).then(function (siteData) {
+          const urls = mantisApi.urls.all(siteData.tool.url, ticketId);
+          resolve(urls);
+        });
+      } catch (err) {
+        console.error(`>-------------------: Error ${err.message}`, err);
+        reject(err);
+      }
+    });
+  }
+
   //clean all tickets an user acount data;
   function cleanAll() {
     console.log('>-------- The app is cleaned');
@@ -237,7 +265,7 @@ const data = (() => {
       try {
         //Get the savedSites and check withs API this site uses;
         getStorage('savedSites').then(function (data) {
-          //find out witch api this sites uses;
+          //find out witch api this site uses;
           var siteData = data.savedSites.filter(function (obj) {
             if (obj.urls.indexOf(hostname) > -1) {
               return obj;
@@ -250,7 +278,7 @@ const data = (() => {
           let newTicketObject = {
             data: findUserData.specificUserData(hostname, url, shortlink, ticket.data.screenresolution), //dataobject with all browser settings
             ticketText: ticket.ticketText,
-            ticketTitle: helpers.cut(ticket.ticketText.replace('/(issue\s)|(the\s)|(site\s)|(website\s)|(in\s)|(on\s)|(page\s)|(to\s)/g', ''), generalData.maxLetters) + '...',
+            ticketTitle: helpers.shortText(ticket.ticketText),
             isImportant: ticket.isImportant,
             assets: ticket.assets,
             position: ticket.position
@@ -264,7 +292,7 @@ const data = (() => {
             reject(err);
           });
         }).catch(function (err) {
-            reject(err);
+          reject(err);
         });
       } catch (err) {
         console.error(`>-------------------: Error ${err.message}`, err);
@@ -351,6 +379,7 @@ const data = (() => {
   return {
     checkLogin,
     init,
+    getUrls,
     getTicketsFromPage,
     isFirstTime,
     setSite,

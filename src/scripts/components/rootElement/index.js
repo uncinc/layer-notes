@@ -3,14 +3,11 @@
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
 
-import ext from '../../utils/ext';
-import generalConfig from '../../config/general';
-
 //import helpers
 import helpers from '../../utils/helpers';
 
 // Components
-import Router from '../router/router';
+import Router from '../router';
 
 /* Component ==================================================================== */
 class Root extends Component {
@@ -21,10 +18,10 @@ class Root extends Component {
     this.state = { // the inner windowwidth
       width: window.innerWidth,
       height: helpers.pageHeight()
-    }
+    };
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     //watch on the window rezise
     window.addEventListener('resize', this._watchResizeOfPage);
   }
@@ -50,7 +47,7 @@ class Root extends Component {
       </div>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default Root;

@@ -56,6 +56,9 @@ const reseving = (() => {
       case 'takeScreenschot':
         data.takeScreenschot(request.params).then(sendback).catch(sendErr);
         break;
+      case 'getUrls':
+        data.getUrls(request.params).then(sendback).catch(sendErr);
+        break;
       default:
         //the message type is unknown
         console.warn('>--------: A unknown type resived');
@@ -72,7 +75,20 @@ const reseving = (() => {
    */
   let rezize = function (params) {
     ext.windows.getCurrent(function (wind) {
-      ext.windows.update(wind.id, params);
+
+      //only resize when the screen is not the same size. Anothers the app will glitsh
+      if (wind.width !== params.width) {
+        ext.windows.update(wind.id, {
+          width: params.width
+        });
+      }
+
+      //only resize when the screen is not the same size. Anothers the app will glitsh
+      if (wind.height !== params.height) {
+        ext.windows.update(wind.id, {
+          height: params.height
+        });
+      }
     });
   };
 

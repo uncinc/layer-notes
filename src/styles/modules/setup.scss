@@ -19,7 +19,6 @@
   .ln-setup--formelement {
     position: relative;
   }
-
   //the setup form
   .ln-setup {
     align-content: stretch;
@@ -49,24 +48,22 @@
     }
 
     .ln-button--wrapper {
+      flex-direction: row-reverse;
       // a wrapper arount the buttons to add some space
       margin: 15px 0 0;
     }
-
     //The content > this is the real form;
     .ln-setup-content {
       margin: $padding-medium $padding-big $padding-big;
       max-width: inherit;
       min-width: inherit;
       padding: 0;
-
       //the succes icon on the end of the flow
       .ln-icon-succes {
         font-size: 75px;
         margin: 25px 25px 10px;
         text-align: center;
       }
-
       //center the contend;
       .ln-center {
         display: flex;
@@ -90,7 +87,6 @@
       margin: 0;
       padding: $padding-medium;
     }
-
     //the sep indicator
     .ln-setup-aside--numbers {
       align-content: stretch;
@@ -114,7 +110,6 @@
         width: 100%;
       }
     }
-
     //the circle number
     .ln-setup-aside--number {
       background-color: $primary-color;
@@ -147,13 +142,11 @@
         z-index: 10000;
       }
     }
-
     //the form element padding
     .ln-setup--formelement {
       margin-bottom: $padding-smallest;
       margin-top: 10px;
     }
-
     //when a error uccors the a borderd field will shown
     .ln-setup-error {
       border: 2px solid $secondary-color;

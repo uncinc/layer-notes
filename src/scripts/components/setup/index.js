@@ -4,17 +4,15 @@
 import React, {Component} from 'react';
 
 //Component
-import Input from '../inputText/inputText';
-import Loader from '../loader/loader';
+import Input from '../inputText';
+import Loader from '../loader';
 
 //general funcions
-import ext from '../../utils/ext';
-import helpers, {translate} from '../../utils/helpers'
+import {translate} from '../../utils/helpers'
 import generalData from '../../config/general';
 
 //helpers
 import message from '../../utils/message';
-import routerHelper from '../router/routerHelper';
 
 /* Component ==================================================================== */
 class Setup extends Component {
@@ -60,7 +58,7 @@ class Setup extends Component {
       toolProjectId: '',
       toolUrl: '',
       toolName: ''
-    }
+    };
   }
 
   //get the saved sites and set it to the saved projects
@@ -76,6 +74,12 @@ class Setup extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+
+
+    //when it's a sleect auto unfocus;
+    if(e.target.type === 'select-one') {
+      e.target.blur();
+    }
   }
 
   //save a projct
@@ -98,8 +102,9 @@ class Setup extends Component {
 
 
   //check the credentials from the user
-  _checkCredetionals = () => {
+  _checkCredetionals = (e) => {
     let _this = this;
+    e.preventDefault();
     if (this.state.accountUserName.length < 2 && this.state.accountPassword.length < 2 && this.state.toolUrl.length < 2) {
       this._setError(translate('setupMissingFieldsError'));
       //not everu field is filed in.
@@ -299,7 +304,7 @@ class Setup extends Component {
     if (this.state.isLoading === true) {
       return (
         <Loader color={'blue'} loadingText={this.state.loadingText}></Loader>
-      )
+      );
     }
     if (this.state.page === 1) {
       return (
@@ -312,10 +317,10 @@ class Setup extends Component {
             </div>
           </div>
           <div className="ln-button--wrapper">
-            <div></div>
             <button className={'ln-btn ln-btn-primary'}>
               {translate('nextStep')}
             </button>
+            <div></div>
           </div>
         </form>
       );
@@ -330,11 +335,11 @@ class Setup extends Component {
             <Input label={'Password'} type="password" helperText={translate('setupHelperTextPassword')} name="accountPassword" placeholder="Password" value={this.state.accountPassword} onchange={this._handleStateChange}/>
           </div>
           <div className="ln-button--wrapper">
+            <button className={'ln-btn ln-btn-primary'} >
+              {translate('nextStep')}
+            </button>
             <button className={'ln-btn ln-btn-secondary'} onClick={this._prevStep}>
               {translate('previousStep')}
-            </button>
-            <button className={'ln-btn ln-btn-primary'}>
-              {translate('nextStep')}
             </button>
           </div>
         </form>
@@ -348,12 +353,13 @@ class Setup extends Component {
             {this._renderProjectSelect()}
           </div>
           <div className="ln-button--wrapper">
-            <button className={'ln-btn ln-btn-secondary'} onClick={this._prevStep}>
-              {translate('previousStep')}
-            </button>
             <button className={'ln-btn ln-btn-primary'}>
               {translate('nextStep')}
             </button>
+            <button className={'ln-btn ln-btn-secondary'} onClick={this._prevStep}>
+              {translate('previousStep')}
+            </button>
+
           </div>
         </form>
       );
@@ -368,8 +374,8 @@ class Setup extends Component {
             <span className={'ln-icon ln-icon-succes'}></span>
           </div>
           <div className="ln-button--wrapper">
-            <button className={'ln-btn ln-btn-primary'} onClick={() => this._closeSetup(true)}>{translate('setupStartTutorial')}</button>
             <button className={'ln-btn ln-btn-primary'} onClick={() => this._closeSetup(false)}>{translate('setupDone')}</button>
+            <button className={'ln-btn ln-btn-primary'} onClick={() => this._closeSetup(true)}>{translate('setupStartTutorial')}</button>
           </div>
         </div>
       );
@@ -378,16 +384,16 @@ class Setup extends Component {
   _renderSteps = () => {
     return (
       <div className={'ln-setup-aside--numbers'}>
-        <span data-count="1" title="Select bugtracker" className={`ln-setup-aside--number ${ + (this.state.page >= 1)
+        <span data-count="1" title={translate('setupHelperOne')} className={`ln-setup-aside--number ${ + (this.state.page >= 1)
           ? 'ln-active'
           : ''}`}>1</span>
-        <span data-count="2" title="Log in bugtracker" className={`ln-setup-aside--number ${ + (this.state.page >= 2)
+        <span data-count="2" title={translate('setupHelperTwo')} className={`ln-setup-aside--number ${ + (this.state.page >= 2)
           ? 'ln-active'
           : ''}`}>2</span>
-        <span data-count="3" title="Select project" className={`ln-setup-aside--number ${ + (this.state.page >= 3)
+        <span data-count="3" title={translate('setupHelperTree')} className={`ln-setup-aside--number ${ + (this.state.page >= 3)
           ? 'ln-active'
           : ''}`}>3</span>
-        <span data-count="4" title="Finish" className={`ln-setup-aside--number ${ + (this.state.page >= 4)
+        <span data-count="4" title={translate('setupHelperFour')} className={`ln-setup-aside--number ${ + (this.state.page >= 4)
           ? 'ln-active'
           : ''}`}>4</span>
       </div>
@@ -399,7 +405,7 @@ class Setup extends Component {
         <section className={'ln-setup-error'}>
           <p>{this.state.errorText}</p>
         </section>
-      )
+      );
     }
     return '';
   }
@@ -419,7 +425,7 @@ class Setup extends Component {
       </div>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default Setup;

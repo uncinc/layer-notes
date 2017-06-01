@@ -4,17 +4,16 @@
 import React, {Component} from 'react';
 
 //tools
-import ext from '../../utils/ext';
 import generalConfig from '../../config/general';
 
 //helpers
-import {select, setMinMaxWidth} from '../../utils/helpers';
+import {setMinMaxWidth} from '../../utils/helpers';
 import SelectorHelper from './selectorHelper';
 import routerHelper from '../router/routerHelper'
 
 //components
 import SelectorBackground from './SelectorBackground'
-import CommentBox from './../commentbox/commentBox';
+import CommentBox from './../commentbox';
 import helpers, {translate} from '../../utils/helpers';
 import message from '../../utils/message';
 
@@ -52,12 +51,6 @@ class Selector extends Component {
           height: 0
         }
       },
-      //this is saved in the ticket
-
-      left: 0, //TODO: this should not be used anymore
-      top: 0,
-      width: 0,
-      height: 0,
 
       //this are helpers
       startX: -1,
@@ -72,7 +65,7 @@ class Selector extends Component {
     this._takeScreenshot(translate('selectorScreenshotName'));
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     this._addMouseEvents();
   }
 
@@ -88,7 +81,7 @@ class Selector extends Component {
 
   }
 
-//remove all the events
+  //remove all the events
   _removeMouseEvents() {
     document.removeEventListener('mousedown', this._onMouseDown, false);
     document.removeEventListener('mousemove', this._onMouseMove, false);
@@ -100,7 +93,7 @@ class Selector extends Component {
   _onMouseDown = (e) => {
     e.preventDefault();
     if (this.state.isDrawing) {
-      this.setState({cursorStyle: "default", isDrawing: false})
+      this.setState({cursorStyle: 'default', isDrawing: false});
 
     } else {
       this.setState({
@@ -108,15 +101,20 @@ class Selector extends Component {
         startX: this.state.x, //x position
         startY: this.state.y, //y position
       });
+      this._onMouseMove(e);
     }
   }
+
   //listen to the esc key. Then go the home page;
   _onKeyDown = (e) => {
-    if (e.keyCode === 27) { //27 === EXC key
+    const ESC_KEY = 27;
+
+    if (e.keyCode === ESC_KEY) { //27 === EXC key
       this._removeMouseEvents();
       routerHelper.setStateApp('home');
     }
   }
+
   _takeScreenshot = (screenshotName) => {
     const _this = this;
     return new Promise(function(resolve, reject) {
@@ -145,21 +143,33 @@ class Selector extends Component {
   }
 
   //when de drawing is stoped hide the comment box and stop the events.
-  _onMouseUp = (e) => {
+  _onMouseUp = () => {
     this.props.onSelected();
     this._checkSelection();
     this.setState({isDrawing: false, cursorStyle: 'default', showCommentbox: true, positionClass: this._checkClassname()});
     this._removeMouseEvents();
+    this._checkCommentBoxIsInView();
   }
 
   //set the classname;
   //so the position of the comment box is on the left or right side;
   _checkClassname = () => {
-    return (this.state.ticket.position.x > (generalConfig.maxX(0) / 2) - 100)
+    const MARGIN = 100;
+    return (this.state.ticket.position.x > (generalConfig.maxX(0) / 2) - MARGIN)
       ? 'ln-commentbox-right'
       : 'ln-commentbox-left';
   }
-  // //for setting the new state in the ticket {object}
+
+  _checkCommentBoxIsInView = () => {
+    const positionY = this.state.ticket.position.y;
+    const pageHeight = helpers.pageHeight();
+
+    if (positionY < pageHeight) {
+      helpers.scrollTo(0, positionY);
+    }
+  }
+
+  // for setting the new state in the ticket {Object}
   _handleStateChange = (newState) => {
     //set the new state to the selected ticket;
     this.setState({ticket: newState});
@@ -167,20 +177,22 @@ class Selector extends Component {
 
   _checkSelection = () => {
     let {width, height} = this.state.ticket.position;
-    if (width < generalConfig.minWidth) {
-      let position = {
-        width: generalConfig.minWidth,
-        height: this.state.ticket.height,
-        x: this.state.ticket.x,
-        y: this.state.ticket.y
-      };
-      let newStateTicket = helpers.setNewState(this.state.ticket, 'position', position);
+    let position = {
+      height: height,
+      width: width,
+      x: this.state.ticket.position.x,
+      y: this.state.ticket.position.y
+    };
 
-      this.setState({width: generalConfig.minWidth});
+    if (width < generalConfig.minWidth) {
+      position.width = generalConfig.minWidth;
     }
+
     if (height < generalConfig.minHeight) {
-      this.setState({height: generalConfig.minHeight});
+      position.height = generalConfig.minHeight;
     }
+    let newStateTicket = helpers.setNewState(this.state.ticket, 'position', position);
+    this.setState({ticket: newStateTicket});
     return true;
   }
 
@@ -210,7 +222,7 @@ class Selector extends Component {
 
   _onCommentBoxSubmit = () => {
     let _this = this;
-    _this.setState({isLoading: true, loadingText: translate('selectorLoadingText')})
+    _this.setState({isLoading: true, loadingText: translate('selectorLoadingText')});
     //take a screenshot of the selected item
     this._takeScreenshot(translate('selectorScreenshotNameAfter')).then(function() {
       message.send('submitNewTicket', {
@@ -218,7 +230,7 @@ class Selector extends Component {
         hostname: generalConfig.hostname,
         url: generalConfig.url,
         shortlink: generalConfig.shortlink
-      }).then(function(newTicketData) {
+      }).then(function() {
         setTimeout(function() {
           _this.setState({isLoading: false, isUploaded: true});
 
@@ -229,7 +241,6 @@ class Selector extends Component {
         }, 2000);
       });
     });
-
   }
 
   _updateFramePosition = (left, top) => {
@@ -277,7 +288,7 @@ class Selector extends Component {
           left: this.state.x + 'px',
           top: this.state.y + 'px'
         }}>
-        {translate('selectorHelper')}
+          {translate('selectorHelper')}
         </span>
       );
     }
@@ -303,7 +314,7 @@ class Selector extends Component {
           height: this.state.ticket.position.height + 'px',
           width: this.state.ticket.position.width + 'px'
         }}>
-          <SelectorHelper width={this.state.ticket.position.width} left={this.state.ticket.position.x} showCommentbox={this.state.showCommentbox} updateFramePosition={this._updateFramePosition} updateFrameSize={this._updateFrameSize}></SelectorHelper>
+          <SelectorHelper width={this.state.ticket.position.width} height={this.state.ticket.position.height} left={this.state.ticket.position.x} showCommentbox={this.state.showCommentbox} updateFramePosition={this._updateFramePosition} updateFrameSize={this._updateFrameSize}></SelectorHelper>
           {this._renderCommentBox()}
         </div>
         <SelectorBackground width={this.state.ticket.position.width} height={this.state.ticket.position.height} left={this.state.ticket.position.x} top={this.state.ticket.position.y}></SelectorBackground>
@@ -329,7 +340,7 @@ class Selector extends Component {
     }
 
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default Selector;

@@ -42,7 +42,7 @@ let iconConfig = (() => {
     }
   };
 
-  function scrirptListener(tab, details) {
+  function scrirptListener(tab) {
     injectSripts(tab);
   }
 

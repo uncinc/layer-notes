@@ -203,6 +203,10 @@ SOAPClient._loadWsdl = function (url, method, parameters, async, callback) {
 SOAPClient._onLoadWsdl = function (url, method, parameters, async, callback, req) {
 
   var wsdl = req.responseXML;
+  if (wsdl === null) {
+    callback(req);
+    return;
+  }
   SOAPClient_cacheWsdl[url] = wsdl; // save a copy in cache
   return SOAPClient._sendSoapRequest(url, method, parameters, async, callback, wsdl);
 };
@@ -286,7 +290,7 @@ SOAPClient._onSendSoapRequest = function (method, async, callback, wsdl, req) {
   } else
     o = SOAPClient._soapresult2object(nd[0], wsdl);
   if (callback) {
-    if (o.return) {  //FIXME: This should not be done Its a cross browser isseu, Firefox works and Chrome/vivaldi not
+    if (o.return) { //FIXME: This should not be done Its a cross browser isseu, Firefox works and Chrome/vivaldi not
       callback(o.return, req.responseXML);
     } else {
       callback(o, req.responseXML);

@@ -2,9 +2,6 @@
 
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
-import ext from '../../utils/ext';
-import generalConfig from '../../config/general';
-import {select} from '../../utils/helpers';
 
 /* Component ==================================================================== */
 class SelectorBackground extends Component {
@@ -24,11 +21,11 @@ class SelectorBackground extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions);
+    window.addEventListener('resize', this.updateDimensions);
   }
   //remove the event when the element is gone
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
+    window.removeEventListener('resize', this.updateDimensions);
   }
 
   updateDimensions = () => {
@@ -40,7 +37,6 @@ class SelectorBackground extends Component {
    */
 
   render = () => {
-    let borderWidth = 4;
     let {width} = this.state;
     let {top, left, height} = this.props;
 
@@ -77,8 +73,7 @@ class SelectorBackground extends Component {
       </div>
     );
   }
-
-};
+}
 
 /* Export Component ==================================================================== */
 export default SelectorBackground;

@@ -11,7 +11,7 @@ import generalConfig from '../config/general';
 
 import {select} from '../utils/helpers';
 
-import Root from '../components/rootElement/rootElement.js';
+import Root from '../components/rootElement';
 
 window.ln = window.ln || {};
 

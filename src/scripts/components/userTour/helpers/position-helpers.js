@@ -3,44 +3,44 @@ const positions = {
 		return {
 			left: position.right + margin,
 			top: position.top + window.pageYOffset,
-			positioned: "right"
+			positioned: 'right'
 		};
 	},
 	left: ({position, tourElWidth, margin}) => {
 		return {
 			left: (position.left - margin) - tourElWidth,
 			top: position.top + window.pageYOffset,
-			positioned: "left"
+			positioned: 'left'
 		};
 	},
 	top: ({position, tourElHeight, arrowSize, margin}) => {
 		return {
 			left: position.left,
 			top: (position.top + window.pageYOffset),
-			positioned: "top"
+			positioned: 'top'
 		};
 	},
 	topLeft: ({position, tourElWidth, tourElHeight, arrowSize, margin}) => {
 		return {
 			left: (position.left + margin) - tourElWidth,
 			top: (position.top + window.pageYOffset) - tourElHeight - arrowSize,
-			positioned: "topLeft"
+			positioned: 'topLeft'
 		};
 	},
 	bottom: ({position, arrowSize, offsetHeight, margin}) => {
 		return {
 			left: position.left,
 			top: (position.top + window.pageYOffset) + offsetHeight + arrowSize,
-			positioned: "bottom"
+			positioned: 'bottom'
 		};
 	},
 	bottomLeft: ({position, tourElWidth, arrowSize, offsetHeight, margin}) => {
 		return {
 			left: (position.left + margin) - tourElWidth,
 			top: (position.top + window.pageYOffset) + offsetHeight + arrowSize,
-			positioned: "bottomLeft"
+			positioned: 'bottomLeft'
 		};
 	}
-}
+};
 
 export default positions;

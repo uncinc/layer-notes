@@ -4,18 +4,16 @@
 import React, {Component} from 'react';
 import Anime from 'react-anime';
 
-import ext from '../../utils/ext';
 import generalData from '../../config/general'
 
 //components
-import ToolBar from '../../components/toolbar/toolbar';
+import ToolBar from '../../components/toolbar';
 
 //Layout
-import CommentBox from '../../components/commentbox/commentBox';
+import CommentBox from '../../components/commentbox';
 
 //helpers
 import {translate} from '../../utils/helpers';
-import generalConfig from '../../config/general';
 import message from '../../utils/message';
 
 /* Component ==================================================================== */
@@ -45,7 +43,7 @@ class TicketsOnPage extends Component {
     }).then(function(tickets) {
 
       //set all tickets
-      _this.setState({savedTickets: tickets.data.filtertTickets, filtertTotal: tickets.data.filtertTicketsAmout, total: tickets.data.allTicketsFromThisWebsiteAmount})
+      _this.setState({savedTickets: tickets.data.filtertTickets, filtertTotal: tickets.data.filtertTicketsAmout, total: tickets.data.allTicketsFromThisWebsiteAmount});
     });
   }
 
@@ -62,7 +60,7 @@ class TicketsOnPage extends Component {
 
   _hideCommentBox = (e) => {
     //hide the commenbox and clean the selectedTicket
-    this.setState({showCommentbox: false, selectedTicket: {}})
+    this.setState({showCommentbox: false, selectedTicket: {}});
     //prevent submit
     e.preventDefault();
   }
@@ -77,12 +75,12 @@ class TicketsOnPage extends Component {
   //sumbit the comment box
   _onCommentBoxSubmit = () => {
     let _this = this;
-    _this.setState({isLoading: true, loadingText: translate('ticketsOnPageUpdating')})
+    _this.setState({isLoading: true, loadingText: translate('ticketsOnPageUpdating')});
 
     //send to the backend script
     message.send('updateTicket', {
       ticket: this.state.selectedTicket // the ticket
-    }).then(function(newTicketData) {
+    }).then(function() {
 
       //so the loading is vissible for the user
       setTimeout(function() {
@@ -95,7 +93,7 @@ class TicketsOnPage extends Component {
     if (this.state.showCommentbox) {
       return (
         <CommentBox ticket={this.state.selectedTicket} onCancel={this._hideCommentBox} inEditMode={true} loadingText={this.state.loadingText} isLoading={this.state.isLoading} onSubmit={this._onCommentBoxSubmit} onchange={this._handleStateChange}></CommentBox>
-      )
+      );
     } else {
       return '';
     }
@@ -141,7 +139,7 @@ class TicketsOnPage extends Component {
       </div>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default TicketsOnPage;
