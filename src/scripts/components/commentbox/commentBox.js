@@ -233,13 +233,19 @@ class CommentBox extends Component {
 
   //set the posiotn of the comment box
   _setPosition = () => {
+    const MAX_POSITON_BOTTOM = 250;
+    //-------------------------------------------------------------------------------standard height with edit bar: standard height without eddit bar ------------------------------------------- the margin;
+    const commentBoxHeight = (document.querySelector('.ln-commentbox') === null) ? ((this.props.inEditMode) ? 231 : 192) : document.querySelector('.ln-commentbox').getBoundingClientRect().height + 15;
+
     //this comment box is used 2 times in the app. When creating and edditigng isseu;
     let position = {
       style: {
+        transform: 0,
         top: null
       },
       class: 'ln-commentbox-left'
     };
+
     if (this.props.inEditMode) { // when edditing also ad the left prop;
       position.style.left = this.props.ticket.position.x;
 
@@ -252,6 +258,12 @@ class CommentBox extends Component {
     } else if (!this.props.inEditMode) { //when in eddit mode the elemt is abosultie postioned on the page. becouse the elemnt is reused for everery element
       position.class = this.props.positionClass;
       position.style.top = this.props.ticket.position.height;
+    }
+
+    if (this.props.ticket.position.y > helpers.pageHeight() - this.props.ticket.position.height - MAX_POSITON_BOTTOM) {
+      position.style.transform = - (commentBoxHeight + this.props.ticket.position.height);
+
+      position.class = position.class + ' ln-commentbox-top';
     }
     return position;
   }
@@ -335,7 +347,7 @@ class CommentBox extends Component {
 
   render = () => {
     return (
-      <Anime left={this._setPosition().style.left} top={this._setPosition().style.top} scale={this.state.scale}>
+      <Anime left={this._setPosition().style.left} top={this._setPosition().style.top} scale={this.state.scale} translateY={this._setPosition().style.transform}>
         <form className={`ln-commentbox ${this._setPosition().class}`} onSubmit={this._prepareSumbit} method="POST">
           {this._renderOverLay()}
 
