@@ -2,16 +2,16 @@
 
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
-import Tour from '../../components/userTour/index';
+import Tour from '../../components/userTour';
 
 import ext from '../../utils/ext';
 import generalConfig from '../../config/general';
 
 // Components
-import ToolBar from '../toolbar/toolbar';
-import Selector from '../selector/selector';
-import Setup from '../setup/setup'
-import TicketsOnPage from '../ticketsOnPage/ticketsOnPage';
+import ToolBar from '../toolbar';
+import Selector from '../selector';
+import Setup from '../setup'
+import TicketsOnPage from '../ticketsOnPage';
 
 //data
 import tourSteps from '../../config/tourSteps';

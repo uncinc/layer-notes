@@ -8,10 +8,10 @@ import ext from '../../utils/ext';
 import generalData from '../../config/general'
 
 //components
-import ToolBar from '../../components/toolbar/toolbar';
+import ToolBar from '../../components/toolbar';
 
 //Layout
-import CommentBox from '../../components/commentbox/commentBox';
+import CommentBox from '../../components/commentbox';
 
 //helpers
 import {translate} from '../../utils/helpers';

@@ -14,7 +14,7 @@ import routerHelper from '../router/routerHelper'
 
 //components
 import SelectorBackground from './SelectorBackground'
-import CommentBox from './../commentbox/commentBox';
+import CommentBox from './../commentbox';
 import helpers, {translate} from '../../utils/helpers';
 import message from '../../utils/message';
 

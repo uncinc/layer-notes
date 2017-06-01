@@ -9,9 +9,6 @@ import Anime from 'react-anime';
 //tools
 import ext from '../../utils/ext';
 
-//Components
-import Router from '../router/router';
-
 //helper
 import routerHelper from '../router/routerHelper';
 import {translate} from '../../utils/helpers';

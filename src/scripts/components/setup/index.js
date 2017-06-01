@@ -4,8 +4,8 @@
 import React, {Component} from 'react';
 
 //Component
-import Input from '../inputText/inputText';
-import Loader from '../loader/loader';
+import Input from '../inputText';
+import Loader from '../loader';
 
 //general funcions
 import ext from '../../utils/ext';

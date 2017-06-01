@@ -9,9 +9,9 @@ import message from '../../utils/message.js';
 
 //import components
 import Button from '../button'
-import TextareaAutosize from '../textareaAutosize/textareaAutosize';
+import TextareaAutosize from '../textareaAutosize';
 import FileItem from './fileItem'
-import Loader from '../loader/loader';
+import Loader from '../loader';
 
 //import helpers
 import helpers, {translate} from '../../utils/helpers';
@@ -330,7 +330,7 @@ class CommentBox extends Component {
         <div className={'ln-commentbox--loading'}>
           <Loader color={'white'} loadingText={this.props.loadingText}></Loader>
         </div>
-      )
+      );
     } else if (this.props.isUploaded === true) { //show a confirm that the ticket is uploaded
       return (
         <div className={'ln-commentbox--done ln-center'}>

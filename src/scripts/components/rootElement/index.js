@@ -10,7 +10,7 @@ import generalConfig from '../../config/general';
 import helpers from '../../utils/helpers';
 
 // Components
-import Router from '../router/router';
+import Router from '../router';
 
 /* Component ==================================================================== */
 class Root extends Component {
