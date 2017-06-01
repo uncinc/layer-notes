@@ -1,5 +1,5 @@
 import routerHelper from '../components/router/routerHelper';
-import {translate} from '../utils/helpers'
+import {translate} from '../utils/helpers';
 
 //the steps of the app
 const tourSteps = [{

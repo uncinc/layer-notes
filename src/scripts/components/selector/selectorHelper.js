@@ -2,11 +2,10 @@
 
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
-import ext from '../../utils/ext';
 import generalConfig from '../../config/general';
 
 //helpers
-import {select, setMinMaxWidth, pageHeight} from '../../utils/helpers';
+import {setMinMaxWidth} from '../../utils/helpers';
 import routerHelper from '../router/routerHelper';
 
 /* Component ==================================================================== */
@@ -89,7 +88,7 @@ class SelectorHelper extends Component {
      * remove all events when the mouse is up
      * @param   {e}  e
      */
-  _onMouseUp = (e) => {
+  _onMouseUp = () => {
 
     this._removeMouseEvents();
     this.setState({isDragging: false, movement: null, element: null});
@@ -101,7 +100,7 @@ class SelectorHelper extends Component {
      */
   _onMouseMove = (e) => {
     this._setMousePosition(e);
-    let _this = this;
+    // let _this = this;
 
     if (this.props.showCommentbox && this.state.isDragging) {
 
@@ -217,7 +216,7 @@ class SelectorHelper extends Component {
       <div></div>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default SelectorHelper;

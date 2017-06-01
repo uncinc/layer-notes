@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import Tour from '../../components/userTour';
 
 import ext from '../../utils/ext';
-import generalConfig from '../../config/general';
 
 // Components
 import ToolBar from '../toolbar';
@@ -19,7 +18,6 @@ import tourSteps from '../../config/tourSteps';
 //helpers
 import generalData from '../../config/general';
 import message from '../../utils/message.js';
-import helpers from '../../utils/helpers';
 import routerHelper from './routerHelper';
 
 /* Component ==================================================================== */
@@ -97,7 +95,7 @@ class Router extends Component {
   }
 
   //render the right part
-  _stateRoutingLogic = (state) => {
+  _stateRoutingLogic = () => {
     console.info(`>--------: Navigate to the ${this.state.lnState} page`);
     if (this.state.lnState === 'home') {
       return (
@@ -128,7 +126,7 @@ class Router extends Component {
       </div>
     );
   }
-};
+}
 
 //* Export Component ==================================================================== */
 export default Router;

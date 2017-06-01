@@ -22,7 +22,7 @@ class Loader extends Component {
   render = () => {
     //the animation is done with css
     return (
-      <div className={`ln-center`}>
+      <div className={'ln-center'}>
         <div className={`ln-folding-cube ln-folding-cube-${this.props.color}`}>
           <div className="sk-cube1 sk-cube"></div>
           <div className="sk-cube2 sk-cube"></div>

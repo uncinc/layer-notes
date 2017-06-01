@@ -8,13 +8,11 @@ import Input from '../inputText';
 import Loader from '../loader';
 
 //general funcions
-import ext from '../../utils/ext';
-import helpers, {translate} from '../../utils/helpers'
+import {translate} from '../../utils/helpers'
 import generalData from '../../config/general';
 
 //helpers
 import message from '../../utils/message';
-import routerHelper from '../router/routerHelper';
 
 /* Component ==================================================================== */
 class Setup extends Component {
@@ -60,7 +58,7 @@ class Setup extends Component {
       toolProjectId: '',
       toolUrl: '',
       toolName: ''
-    }
+    };
   }
 
   //get the saved sites and set it to the saved projects
@@ -306,7 +304,7 @@ class Setup extends Component {
     if (this.state.isLoading === true) {
       return (
         <Loader color={'blue'} loadingText={this.state.loadingText}></Loader>
-      )
+      );
     }
     if (this.state.page === 1) {
       return (
@@ -407,7 +405,7 @@ class Setup extends Component {
         <section className={'ln-setup-error'}>
           <p>{this.state.errorText}</p>
         </section>
-      )
+      );
     }
     return '';
   }
@@ -427,7 +425,7 @@ class Setup extends Component {
       </div>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default Setup;

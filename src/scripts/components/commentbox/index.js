@@ -4,20 +4,19 @@
 import React, {Component} from 'react';
 import Anime from 'react-anime';
 
-import ext from '../../utils/ext';
 import message from '../../utils/message.js';
 
 //import components
 import Button from '../button'
 import TextareaAutosize from '../textareaAutosize';
-import FileItem from './fileItem'
+import FileItem from './fileItem';
 import Loader from '../loader';
 
 //import helpers
 import helpers, {translate} from '../../utils/helpers';
 import generalConfig from '../../config/general';
 // import data from '../../utils/data''Turn Layernotes On'
-import routerHelper from '../router/routerHelper'
+import routerHelper from '../router/routerHelper';
 
 /* Component ==================================================================== */
 class CommentBox extends Component {
@@ -111,10 +110,10 @@ class CommentBox extends Component {
         show: true, //show it in the list or not
         size: e.target.files[0].size, //the pure size, will be conferted in the FileItem.js
         id: helpers.generateUUID() //a random genreated id
-      }
+      };
 
       //add a listner to the load
-      FR.addEventListener("load", function(event) {
+      FR.addEventListener('load', function(event) {
 
         //get the content form the file reader
         newFile.content = event.target.result.split(',')[1], //get ONLY THE  data from the base64 string
@@ -158,7 +157,7 @@ class CommentBox extends Component {
    */
   _prepareSumbit = (e) => {
     if (this.props.ticket.ticketText.length < 2) {
-      this.setState({isError: true, errorText: translate('commentBoxErrorText')})
+      this.setState({isError: true, errorText: translate('commentBoxErrorText')});
     } else {
       this.props.onSubmit();
     }
@@ -339,7 +338,7 @@ class CommentBox extends Component {
           </div>
           <p>{translate('commentBoxSucces')}</p>
         </div>
-      )
+      );
     } else { //do not render anything
       return '';
     }
@@ -369,7 +368,7 @@ class CommentBox extends Component {
       </Anime>
     );
   }
-};
+}
 
 // * Export Component ==================================================================== * /
 export default CommentBox;

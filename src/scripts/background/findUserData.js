@@ -2,7 +2,7 @@
 // config
 // import generalConfig from '../config/general';
 import browserConfig from 'bowser';
-import ext from '../utils/ext';
+// import ext from '../utils/ext';
 
 /* Component ==================================================================== */
 var data = (() => {

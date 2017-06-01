@@ -3,8 +3,7 @@
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
 
-import ext from '../../utils/ext';
-import helpers, {translate} from '../../utils/helpers'
+import helpers, {translate} from '../../utils/helpers';
 
 
 /* Component ==================================================================== */
@@ -38,7 +37,7 @@ class FileItem extends Component {
       </li>
     );
   }
-};
+}
 
 // * Export Component ==================================================================== * /
 export default FileItem;

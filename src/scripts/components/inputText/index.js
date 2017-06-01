@@ -57,7 +57,7 @@ class Input extends Component {
           <span className="ln-input-helper--popup">{this.props.helperText}</span>
         </div>
       </label>
-    )
+    );
   }
   /**
    * RENDER
@@ -79,7 +79,7 @@ class Input extends Component {
       </div>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default Input;

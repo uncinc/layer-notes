@@ -49,7 +49,7 @@ class ToolBar extends Component {
   //Open a new window to go to the settings page of the tool;
   _openSettingsPage = () => {
     console.log('Go to settings');
-    ext.tabs.create({"url": "/options.html"});
+    ext.tabs.create({'url': '/options.html'});
   }
 
   //render the buttons in the toolbar
@@ -58,7 +58,7 @@ class ToolBar extends Component {
     return this.state.buttons.map((button, index) => {
       return (
         <button key={index} onClick={() => {
-          routerHelper.setStateApp(button.funcVal), button.func()
+          routerHelper.setStateApp(button.funcVal), button.func();
         }} className="ln-toolbar-btn ln-btn" title={button.title}>
           <span className={button.iconClass}></span>
           <span className={'ln-toolbar--text'}>{button.text}</span>
@@ -82,7 +82,7 @@ class ToolBar extends Component {
       </Anime>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
-export default ToolBar
+export default ToolBar;

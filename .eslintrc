@@ -1,5 +1,7 @@
 {
+  "parser": "babel-eslint",
   "rules": {
+    "strict": 0,
     "linebreak-style": [2, "unix"],
     "eol-last": 1,
     "quotes": [1, "single", "avoid-escape"],
@@ -40,8 +42,17 @@
     "React": true,
     "moment": true
   },
+  "plugins": [
+    "react"
+  ],
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
   },
   "extends": "eslint:recommended",
   "ecmaFeatures": {

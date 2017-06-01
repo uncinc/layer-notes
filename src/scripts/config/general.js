@@ -3,7 +3,6 @@
  */
 
 import {
-  select,
   pageHeight
 } from '../utils/helpers';
 
