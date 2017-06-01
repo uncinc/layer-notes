@@ -4,20 +4,19 @@
 import React, {Component} from 'react';
 import Anime from 'react-anime';
 
-import ext from '../../utils/ext';
 import message from '../../utils/message.js';
 
 //import components
 import Button from '../button'
-import TextareaAutosize from '../textareaAutosize/textareaAutosize';
-import FileItem from './fileItem'
-import Loader from '../loader/loader';
+import TextareaAutosize from '../textareaAutosize';
+import FileItem from './fileItem';
+import Loader from '../loader';
 
 //import helpers
 import helpers, {translate} from '../../utils/helpers';
 import generalConfig from '../../config/general';
 // import data from '../../utils/data''Turn Layernotes On'
-import routerHelper from '../router/routerHelper'
+import routerHelper from '../router/routerHelper';
 
 /* Component ==================================================================== */
 class CommentBox extends Component {
@@ -45,7 +44,6 @@ class CommentBox extends Component {
         height: 0
       }
     },
-    bugtrackerUrl: 'http://localhost:8989/view.php?id=', //TODO get this from database
     positionClass: 'ln-commentbox-left', //the default class
     isLoading: false,
     loadingText: translate('loadingText'), //the loading title
@@ -69,7 +67,7 @@ class CommentBox extends Component {
   componentWillUnmount() {
     this.setState({
       scale: [1, 0.3]
-    })
+    });
   }
 
   /**
@@ -112,10 +110,10 @@ class CommentBox extends Component {
         show: true, //show it in the list or not
         size: e.target.files[0].size, //the pure size, will be conferted in the FileItem.js
         id: helpers.generateUUID() //a random genreated id
-      }
+      };
 
       //add a listner to the load
-      FR.addEventListener("load", function(event) {
+      FR.addEventListener('load', function(event) {
 
         //get the content form the file reader
         newFile.content = event.target.result.split(',')[1], //get ONLY THE  data from the base64 string
@@ -159,7 +157,7 @@ class CommentBox extends Component {
    */
   _prepareSumbit = (e) => {
     if (this.props.ticket.ticketText.length < 2) {
-      this.setState({isError: true, errorText: translate('commentBoxErrorText')})
+      this.setState({isError: true, errorText: translate('commentBoxErrorText')});
     } else {
       this.props.onSubmit();
     }
@@ -186,10 +184,20 @@ class CommentBox extends Component {
    * @param  {e}  event from onclick
    */
   _goToBugtracker = (e) => {
-    const url = this.props.bugtrackerUrl + this.props.ticket.id;
-
-    //open a new window with the bugtracker ticket
-    message.send('open', {url: url});
+    const action = e.target.getAttribute('data-action');
+    message.send('getUrls', {
+      hostname: generalConfig.hostname,
+      ticketId: this.props.ticket.id
+    }).then(function(data) {
+      let url;
+      if (action === 'eddit') {
+        url = data.data.edditTicket;
+      } else {
+        url = data.data.viewTicket;
+      }
+      //open a new window with the bugtracker ticket
+      message.send('open', {url: url});
+    });
 
     //prefent submit
     e.preventDefault();
@@ -213,7 +221,9 @@ class CommentBox extends Component {
 
       //render
       return (
-        <ul className={'ln-file--list'}> {listItems} </ul>
+        <ul className={'ln-file--list'}>
+          {listItems}
+        </ul>
       );
     } else { //there are no files so do not show theim
       return '';
@@ -222,18 +232,24 @@ class CommentBox extends Component {
 
   //set the posiotn of the comment box
   _setPosition = () => {
+    const MAX_POSITON_BOTTOM = 250;
+    //-------------------------------------------------------------------------------standard height with edit bar: standard height without eddit bar ------------------------------------------- the margin;
+    const commentBoxHeight = (document.querySelector('.ln-commentbox') === null) ? ((this.props.inEditMode) ? 231 : 192) : document.querySelector('.ln-commentbox').getBoundingClientRect().height + 15;
+
     //this comment box is used 2 times in the app. When creating and edditigng isseu;
     let position = {
       style: {
+        transform: 0,
         top: null
       },
       class: 'ln-commentbox-left'
     };
+
     if (this.props.inEditMode) { // when edditing also ad the left prop;
       position.style.left = this.props.ticket.position.x;
 
       //when the position of the box is on the right side posion the box on the right;
-      if (this.props.ticket.position.x > (generalConfig.maxX(0) /2) - 100) {
+      if (this.props.ticket.position.x > (generalConfig.maxX(0) / 2) - 100) {
         position.style.left = this.props.ticket.position.x - 480 + this.props.ticket.position.width;
         position.class = 'ln-commentbox-right';
       }
@@ -241,6 +257,12 @@ class CommentBox extends Component {
     } else if (!this.props.inEditMode) { //when in eddit mode the elemt is abosultie postioned on the page. becouse the elemnt is reused for everery element
       position.class = this.props.positionClass;
       position.style.top = this.props.ticket.position.height;
+    }
+
+    if (this.props.ticket.position.y > helpers.pageHeight() - this.props.ticket.position.height - MAX_POSITON_BOTTOM) {
+      position.style.transform = - (commentBoxHeight + this.props.ticket.position.height);
+
+      position.class = position.class + ' ln-commentbox-top';
     }
     return position;
   }
@@ -261,7 +283,7 @@ class CommentBox extends Component {
     return (
       <div className="ln-file-input">
         <input type="file" value="" name="upload" onChange={this._previewFiles.bind(this)} id="ln-field-file"/>
-        <label htmlFor="ln-field-file" className={'ln-btn ln-btn-primary ln-btn-icon'} title="Add a file">
+        <label htmlFor="ln-field-file" className={'ln-btn ln-btn-primary ln-btn-icon'} title={translate('addFile')}>
           <span className="ln-icon ln-icon-file"></span>
           <span className="ln-attachment-text"></span>
         </label>
@@ -291,8 +313,8 @@ class CommentBox extends Component {
               &nbsp;x&nbsp;{this.props.ticket.data.screenresolution.height}</button>
           </div>
           <div>
-            <button className="ln-btn-transparant" title={translate('commentBoxStatusTitle', 'New')} onClick={this._goToBugtracker.bind(this)}>New</button>
-            <button className="ln-btn-transparant" onClick={this._goToBugtracker.bind(this)} title={translate('commentBoxBugtrackerTitle')}>#{this.props.ticket.id}</button>
+            <button className="ln-btn-transparant" title={translate('commentBoxStatusTitle', 'New')} data-action={'eddit'} onClick={this._goToBugtracker.bind(this)}>New</button>
+            <button className="ln-btn-transparant" onClick={this._goToBugtracker.bind(this)} data-action={'view'} title={translate('commentBoxBugtrackerTitle')}>#{this.props.ticket.id}</button>
           </div>
         </div>
       );
@@ -307,16 +329,16 @@ class CommentBox extends Component {
         <div className={'ln-commentbox--loading'}>
           <Loader color={'white'} loadingText={this.props.loadingText}></Loader>
         </div>
-      )
+      );
     } else if (this.props.isUploaded === true) { //show a confirm that the ticket is uploaded
       return (
         <div className={'ln-commentbox--done ln-center'}>
           <div>
             <span className={'ln-icon ln-icon-succes-white'}></span>
           </div>
-          <p>{ translate('commentBoxSucces')}</p>
+          <p>{translate('commentBoxSucces')}</p>
         </div>
-      )
+      );
     } else { //do not render anything
       return '';
     }
@@ -324,7 +346,7 @@ class CommentBox extends Component {
 
   render = () => {
     return (
-      <Anime left={this._setPosition().style.left} top={this._setPosition().style.top} scale={this.state.scale}>
+      <Anime left={this._setPosition().style.left} top={this._setPosition().style.top} scale={this.state.scale} translateY={this._setPosition().style.transform}>
         <form className={`ln-commentbox ${this._setPosition().class}`} onSubmit={this._prepareSumbit} method="POST">
           {this._renderOverLay()}
 
@@ -346,7 +368,7 @@ class CommentBox extends Component {
       </Anime>
     );
   }
-};
+}
 
 // * Export Component ==================================================================== * /
 export default CommentBox;

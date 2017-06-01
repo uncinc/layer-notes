@@ -1,6 +1,6 @@
 'use strict';
 
-import ext from "./utils/ext";
+import ext from './utils/ext';
 
 
 //This if for live reloading the app. This is only included in the dev build;

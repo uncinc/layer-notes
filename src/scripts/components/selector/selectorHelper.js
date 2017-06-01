@@ -2,12 +2,11 @@
 
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
-import ext from '../../utils/ext';
 import generalConfig from '../../config/general';
 
 //helpers
-import {select, setMinMaxWidth, pageHeight} from '../../utils/helpers';
-import {setStateApp} from '../router/routerHelper';
+import {setMinMaxWidth} from '../../utils/helpers';
+import routerHelper from '../router/routerHelper';
 
 /* Component ==================================================================== */
 class SelectorHelper extends Component {
@@ -44,18 +43,20 @@ class SelectorHelper extends Component {
 
   _addMouseEvents() {
     document.addEventListener('mousemove', this._onMouseMove, false);
+    document.addEventListener('mouseup', this._onMouseUp, false);
     document.addEventListener('keypress', this._onKeyDown, false);
   }
 
   _removeMouseEvents() {
     document.removeEventListener('mousemove', this._onMouseMove, false);
+    document.removeEventListener('mouseup', this._onMouseUp, false);
     // document.removeEventListener('keypress', this._onKeyDown, false);
   }
   _onKeyDown = (e) => {
     const KEY_ESC = 27; // the esc key
     if (e.keyCode === KEY_ESC) {
       this._removeMouseEvents();
-      setStateApp('home'); //go to a page
+      routerHelper.setStateApp('home'); //go to a page
     }
   }
 
@@ -75,11 +76,10 @@ class SelectorHelper extends Component {
 
   /**
      * When the mouse is down add other mouse events
-     * @param   {e}  e
+     * @param {e}  e
      */
   _onMouseDown = (e) => {
     let checkTransform = this._checkTransform(e.target.className);
-
     this._addMouseEvents();
     this.setState({isDragging: true, movement: checkTransform.movement, element: e.target.className});
   }
@@ -88,7 +88,8 @@ class SelectorHelper extends Component {
      * remove all events when the mouse is up
      * @param   {e}  e
      */
-  _onMouseUp = (e) => {
+  _onMouseUp = () => {
+
     this._removeMouseEvents();
     this.setState({isDragging: false, movement: null, element: null});
   }
@@ -99,7 +100,7 @@ class SelectorHelper extends Component {
      */
   _onMouseMove = (e) => {
     this._setMousePosition(e);
-    let _this = this;
+    // let _this = this;
 
     if (this.props.showCommentbox && this.state.isDragging) {
 
@@ -108,7 +109,7 @@ class SelectorHelper extends Component {
 
         let proposedValue = {
           x: this.state.x - (this.props.width / 2),
-          y: this.state.y - (this.props.height / 2)
+          y: this.state.y - (this.props.height / 2) - window.scrollY
         };
 
         let newX = setMinMaxWidth(proposedValue.x, generalConfig.minX, generalConfig.maxX(this.props.width));
@@ -118,7 +119,7 @@ class SelectorHelper extends Component {
 
         //the scale of the elemtn this is work in progress
       } else if (this.state.movement === 'scale') {
-        //TODO; make this
+        //TODO: make this
         // let directions = this.state.directions;
         // let proposedValue = {
         //   top: setMinMaxWidth(this.state.y, generalConfig.minY, generalConfig.maxY),
@@ -215,7 +216,7 @@ class SelectorHelper extends Component {
       <div></div>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default SelectorHelper;

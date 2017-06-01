@@ -79,6 +79,10 @@
     "message": "Save",
     "description": "Text from the save button"
   },
+  "addFile": {
+    "message": "Add an extra file",
+    "description": "The title fo the add file button."
+  },
   "fileItemTitle": {
     "message": "Remove $1",
     "description": "The title of the delete item"
@@ -114,7 +118,7 @@
     "description": "The text that will be showed when the ticket is uploading."
   },
   "selectorHelper": {
-    "message": "  You can select your issue. (Press ESC to cancel)",
+    "message": " Draw a box to select an issue. (Press ESC to cancel)",
     "description": "The helper text."
   },
   "nextStep": {
@@ -124,6 +128,18 @@
   "previousStep": {
     "message": "Previous step",
     "description": "Previous step indicator."
+  },
+  "setupHelperOne": {
+    "message": "Select bugtracker"
+  },
+  "setupHelperTwo": {
+    "message": "Log in bugtracker"
+  },
+  "setupHelperTree": {
+    "message": "Select project"
+  },
+  "setupHelperFour": {
+    "message": "Finish"
   },
   "setupExistingProject": {
     "message": "Add to a existing project",
@@ -240,34 +256,34 @@
   },
   "userTourStepOneTitle": {
     "message": "Welcome!",
-    "description": ""
+    "description": "The h1 from the user tour."
   },
   "userTourStepOneBody": {
     "message": "This tutorial will explain how this tool works.",
-    "description": "T"
+    "description": "The body of the first step in the user tour."
   },
   "userTourStepTwoTitle": {
     "message": "The Sidebar",
-    "description": ""
+    "description": "The h1 of the second step in the user tour."
   },
   "userTourStepTwoBody": {
     "message": "This is the sidebar of the app. With the 'New Item' button you can create a new note. Press on 'Next', to create a new note.",
-    "description": ""
+    "description": "The body of the second step in the user tour."
   },
   "userTourStepTreeTitle": {
     "message": "Create new note",
-    "description": ""
+    "description": "The h1 of the thirdt step of the user tour."
   },
   "userTourStepTreeBody": {
     "message": "Now select the area of your note, and add a comment. When you submit a note, there is a screenshot automaticaly added.",
-    "description": ""
+    "description": "The body of the thirdt step of the user tour."
   },
   "userTourStepFourTitle": {
     "message": "Nice!",
-    "description": ""
+    "description": "The h1 of the last step of the user tour."
   },
   "userTourStepFourBody": {
     "message": " You have created your first note! Click on the icon to view your note. You now know how to create a note. Happy testing!",
-    "description": ""
+    "description": "The body of the last step of the user tour."
   }
 }

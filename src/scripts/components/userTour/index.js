@@ -1,6 +1,6 @@
 //Modified from https://github.com/socialtables/react-user-tour
 
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import Anime from 'react-anime';
 
 import Button from '../button';
@@ -78,7 +78,7 @@ export default class ReactUserTour extends Component {
     if (this.props.step !== this.props.steps.length) {
       return (
         <Button onclick={() => this.props.onNext(this.props.step + 1)} text={this.props.nextButtonText} class={'ln-btn-primary'}></Button>
-      )
+      );
     } else {
       return '';
     }
@@ -86,7 +86,7 @@ export default class ReactUserTour extends Component {
   _renderDoneButton = () => {
     return (this.props.step === this.props.steps.length
       ? <Button onclick={this.props.onCancel} text={this.props.doneButtonText} class={'ln-btn-primary'}></Button>
-      : "");
+      : '');
   }
   _renderBackButton = () => {
     return (this.props.step !== 1
@@ -98,7 +98,7 @@ export default class ReactUserTour extends Component {
       <button onClick={this.props.onCancel} className="ln-btn-small ln-user-tour-close">
         <span className="ln-icon ln-icon-close-dark"></span>
       </button>
-    )
+    );
   }
 
   _renderButtons = () => {
@@ -108,7 +108,7 @@ export default class ReactUserTour extends Component {
         {this._renderNextButton()}
         {this._renderDoneButton()}
       </div>
-    )
+    );
   }
 
   render() {
@@ -124,7 +124,7 @@ export default class ReactUserTour extends Component {
     //start the function that should be fired on the start of the popup;
     currentTourStep.onStart();
     return (
-      <div className={`ln-user-tour-container`}>
+      <div className={'ln-user-tour-container'}>
         <Anime translateX={position.left} translateY={position.top}>
           <div className={`ln-user-tour-box ln-user-tour--arrow ln-user-tour--arrow-${position.positioned}`}>
             {this._renderCloseButton()}
@@ -149,12 +149,12 @@ ReactUserTour.defaultProps = {
   onCancel: () => {},
   onNext: () => {},
   onBack: () => {},
-  nextButtonText: "Next",
-  backButtonText: "Back",
-  doneButtonText: "Finish",
-  closeButtonText: "Close",
+  nextButtonText: 'Next',
+  backButtonText: 'Back',
+  doneButtonText: 'Finish',
+  closeButtonText: 'Close',
   hideButtons: false,
   hideClose: false,
-  arrowColor: "#fff",
+  arrowColor: '#fff',
   arrowSize: 15
 };

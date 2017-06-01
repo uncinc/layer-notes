@@ -3,8 +3,6 @@
 /* Setup ==================================================================== */
 import React, {Component} from 'react';
 
-import ext from '../utils/ext';
-
 /* Component ==================================================================== */
 class Button extends Component {
 
@@ -33,7 +31,7 @@ class Button extends Component {
     }
   }
 
-  //rnder the page
+  //render the page
   render = () => {
     return (
       <button className={`ln-btn ${this.props.class}`} title={this.props.title} onClick={this.props.onclick}>
@@ -41,7 +39,7 @@ class Button extends Component {
       </button>
     );
   }
-};
+}
 
 /* Export Component ==================================================================== */
 export default Button;

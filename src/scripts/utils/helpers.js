@@ -1,6 +1,9 @@
 'use-strict';
 
 import ext from './ext';
+import generalData from '../config/general';
+
+import anime from "animejs";
 
 /* Component ==================================================================== */
 const helpers = (() => {
@@ -199,17 +202,33 @@ const helpers = (() => {
       return (typeof obj.then === 'function');
       // return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
     },
+    shortText = function (text) {
+      if (text.length > generalData.maxLetters) {
+        return cut(text.replace('/(issue\s)|(the\s)|(site\s)|(website\s)|(in\s)|(on\s)|(page\s)|(to\s)/g', ''), generalData.maxLetters) + '...';
+      } else {
+        return text;
+      }
+    },
     translate = function (message, value) {
       return ext.i18n.getMessage(message, value);
+    },
+    scrollTo = (left, top) => {
+      var scrollPositions = {
+        top: document.body.scrollTop,
+        left: document.body.scrollLeft
+      };
+      anime({
+        targets: scrollPositions,
+        top: top,
+        left: left,
+        duration: 500,
+        easing: 'easeInCubic',
+        round: 1,
+        update: function () {
+          window.scrollTo(scrollPositions.left, scrollPositions.top);
+        }
+      });
     };
-  /**
-   * Creates a POST XMLHttpRequest you can use it by    DP.helper.postData('path', 'params');
-   * @param   {String, String}    The url op the page you would lik to post to, and the params you want to post
-   * @returns {Object}            it will retun a error if somthing is wrong.
-   */
-  // postData = function (url, params) {
-  //   return false;
-  // };
 
   return {
     select,
@@ -228,8 +247,9 @@ const helpers = (() => {
     setNewState,
     pageHeight,
     isPrommise,
-    translate
-    // postData
+    shortText,
+    translate,
+    scrollTo
   };
 })();
 
