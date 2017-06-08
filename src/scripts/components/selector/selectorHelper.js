@@ -1,7 +1,7 @@
 'use strict';
 
 /* Setup ==================================================================== */
-import React, {Component} from 'react';
+import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 import generalConfig from '../../config/general';
 
 //helpers

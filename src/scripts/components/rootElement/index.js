@@ -1,13 +1,14 @@
 'use strict';
 
 /* Setup ==================================================================== */
-import React, {Component} from 'react';
+
+import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 
 //import helpers
 import helpers from '../../utils/helpers';
 
 // Components
-import Router from '../router';
+import Router from '../router'; // eslint-disable-line no-unused-vars
 
 /* Component ==================================================================== */
 class Root extends Component {

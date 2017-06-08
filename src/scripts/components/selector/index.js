@@ -1,19 +1,19 @@
 'use strict';
 
 /* Setup ==================================================================== */
-import React, {Component} from 'react';
+import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 
 //tools
 import generalConfig from '../../config/general';
 
 //helpers
 import {setMinMaxWidth} from '../../utils/helpers';
-import SelectorHelper from './selectorHelper';
-import routerHelper from '../router/routerHelper'
+import SelectorHelper from './selectorHelper'; // eslint-disable-line no-unused-vars
+import routerHelper from '../router/routerHelper';
 
 //components
-import SelectorBackground from './SelectorBackground'
-import CommentBox from './../commentbox';
+import SelectorBackground from './SelectorBackground'; // eslint-disable-line no-unused-vars
+import CommentBox from './../commentbox'; // eslint-disable-line no-unused-vars
 import helpers, {translate} from '../../utils/helpers';
 import message from '../../utils/message';
 
@@ -99,7 +99,7 @@ class Selector extends Component {
       this.setState({
         isDrawing: true, //set drawing state
         startX: this.state.x, //x position
-        startY: this.state.y, //y position
+        startY: this.state.y //y position
       });
       this._onMouseMove(e);
     }
@@ -127,7 +127,7 @@ class Selector extends Component {
             content: image.data,
             show: false,
             file_type: 'image/jpeg',
-            id: helpers.generateUUID(), //a random genreated id
+            id: helpers.generateUUID() //a random genreated id
           };
           oldState.push(newScreenshot);
           let newStateTicket = helpers.setNewState(_this.state.ticket, 'assets', oldState);

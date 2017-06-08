@@ -3,7 +3,7 @@
 /* Setup ==================================================================== */
 
 //imports
-import React, {Component} from 'react';
+import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 
 /* Component ==================================================================== */
 class Loader extends Component {

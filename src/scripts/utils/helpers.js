@@ -2,8 +2,7 @@
 
 import ext from './ext';
 import generalData from '../config/general';
-
-import anime from "animejs";
+import anime from 'animejs';
 
 /* Component ==================================================================== */
 const helpers = (() => {
@@ -97,12 +96,13 @@ const helpers = (() => {
      * Generate a UUID
      */
     generateUUID = function () { //egnerate a randmom UUID
+      const RANDNUMBER = 16;
       let d = new Date().getTime();
 
       let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        let r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        let r = (d + Math.random() * RANDNUMBER) % RANDNUMBER | 0;
+        d = Math.floor(d / RANDNUMBER);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(RANDNUMBER);
       });
       return uuid;
     },
@@ -209,6 +209,16 @@ const helpers = (() => {
         return text;
       }
     },
+    isURL = function (str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+
+      return pattern.test(str);
+    },
     translate = function (message, value) {
       return ext.i18n.getMessage(message, value);
     },
@@ -248,6 +258,7 @@ const helpers = (() => {
     pageHeight,
     isPrommise,
     shortText,
+    isURL,
     translate,
     scrollTo
   };
