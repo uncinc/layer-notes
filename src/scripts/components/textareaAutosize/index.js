@@ -1,3 +1,5 @@
+/*eslint-disable no-unused-vars*/
+
 //based on https://github.com/andreypopp/react-textarea-autosize/blob/master/src/TextareaAutosize.js
 /**
  * <TextareaAutosize />
@@ -83,14 +85,14 @@ export default class TextareaAutosize extends React.Component {
       maxRows: _maxRows,
       onHeightChange: _onHeightChange,
       useCacheForDOMMeasurements: _useCacheForDOMMeasurements,
-      ...props,
+      ...props
     } = this.props;
     if (typeof valueLink === 'object') {
       props.value = valueLink.value;
     }
     props.style = {
       ...props.style,
-      height: this.state.height || 0,
+      height: this.state.height || 0
     };
     let maxHeight = Math.max(
       props.style.maxHeight ? props.style.maxHeight : Infinity,

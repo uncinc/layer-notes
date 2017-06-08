@@ -1,10 +1,11 @@
 'use strict';
 
 /* Setup ==================================================================== */
+/*eslint-disable no-unused-vars*/
 import React, {Component} from 'react';
 import Anime from 'react-anime';
 
-import generalData from '../../config/general'
+import generalData from '../../config/general';
 
 //components
 import ToolBar from '../../components/toolbar';
@@ -15,6 +16,8 @@ import CommentBox from '../../components/commentbox';
 //helpers
 import {translate} from '../../utils/helpers';
 import message from '../../utils/message';
+
+/*eslint-disable no-unused-vars*/
 
 /* Component ==================================================================== */
 class TicketsOnPage extends Component {
@@ -29,7 +32,7 @@ class TicketsOnPage extends Component {
       loadingText: translate('loadingText'),
       total: 0,
       filtertTotal: 0
-    }
+    };
   }
 
   componentWillMount() {
@@ -41,7 +44,6 @@ class TicketsOnPage extends Component {
       hostname: generalData.hostname,
       shortlink: generalData.shortlink
     }).then(function(tickets) {
-
       //set all tickets
       _this.setState({savedTickets: tickets.data.filtertTickets, filtertTotal: tickets.data.filtertTicketsAmout, total: tickets.data.allTicketsFromThisWebsiteAmount});
     });
@@ -102,6 +104,8 @@ class TicketsOnPage extends Component {
   _renderIcons = () => {
     let _this = this;
     let savedTickets = this.state.savedTickets.map(function(ticket) {
+      console.log('_this.state.selectedTicket', _this.state.selectedTicket);
+      console.log('ticket.id', ticket.id);
       let buttonClass = (_this.state.selectedTicket.id === ticket.id)
         ? 'active'
         : '';

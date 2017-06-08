@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 import ext from '../utils/ext';
 
 const message = (() => {

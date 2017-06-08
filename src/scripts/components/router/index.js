@@ -1,6 +1,7 @@
 'use strict';
 
 /* Setup ==================================================================== */
+/*eslint-disable no-unused-vars*/
 import React, {Component} from 'react';
 import Tour from '../../components/userTour';
 
@@ -9,8 +10,9 @@ import ext from '../../utils/ext';
 // Components
 import ToolBar from '../toolbar';
 import Selector from '../selector';
-import Setup from '../setup'
+import Setup from '../setup';
 import TicketsOnPage from '../ticketsOnPage';
+/*eslint-disable no-unused-vars*/
 
 //data
 import tourSteps from '../../config/tourSteps';

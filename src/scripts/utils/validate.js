@@ -15,7 +15,7 @@ const validate = (() => {
     return re.test(color);
   };
 
-  var text = function (text) { //validate string for a text
+  var text = function () { //validate string for a text
     return true;
   };
   var password = function (password) { //validate string for a password
@@ -37,9 +37,9 @@ const validate = (() => {
   };
 
   return {
-    text,
     email,
     color,
+    text,
     password,
     number,
     date,

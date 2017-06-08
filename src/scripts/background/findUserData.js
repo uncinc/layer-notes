@@ -17,10 +17,40 @@ var data = (() => {
       browserVersion: browserConfig.version,
       osversion: browserConfig.osversion,
       user_agent: window.navigator.appVersion,
-      os: (browserConfig.mac) ? 'mac' : false || (browserConfig.windows) ? 'windows' : false || (browserConfig.windowsphone) ? 'windowsphone' : false || (browserConfig.linux) ? 'linux' : false || (browserConfig.chromeos) ? 'chromeos' : false || (browserConfig.android) ? 'android' : false || (browserConfig.ios) ? 'ios' : false || (browserConfig.blackberry) ? 'blackberry' : false || (browserConfig.firefoxos) ? 'firefoxos' : false || (browserConfig.webos) ? 'webos' : false || (browserConfig.bada) ? 'bada' : false || (browserConfig.tizen) ? 'tizen' : false || (browserConfig.sailfish) ? 'sailfish' : false
+      os: getOs()
     };
   };
 
+  function getOs() {
+    if (browserConfig.mac) {
+      return 'mac';
+    } else if (browserConfig.windows) {
+      return 'windows';
+    } else if (browserConfig.windowsphone) {
+      return 'windowsphone';
+    } else if (browserConfig.linux) {
+      return 'linux';
+    } else if (browserConfig.chromeos) {
+      return 'chromeos';
+    } else if (browserConfig.android) {
+      return 'android';
+    } else if (browserConfig.ios) {
+      return 'ios';
+    } else if (browserConfig.blackberry) {
+      return 'blackberry';
+    } else if (browserConfig.firefoxos) {
+      return 'firefoxos';
+    } else if (browserConfig.webos) {
+      return 'webos';
+    } else if (browserConfig.bada) {
+      return 'bada';
+    } else if (browserConfig.tizen) {
+      return 'tizen';
+    } else if (browserConfig.sailfish) {
+      return 'sailfish';
+    }
+    return false;
+  }
 
   /**
    * Get specific user data
@@ -35,7 +65,7 @@ var data = (() => {
       shortlink: shortlink,
       hostname: hostname,
       time: new Date(),
-      screenresolution: screenresolution,
+      screenresolution: screenresolution
       // history: getHistory()
     };
 

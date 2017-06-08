@@ -21,7 +21,7 @@ const tourSteps = [{
   body: translate('userTourStepTreeBody'),
   onStart: () => {
     routerHelper.setStateApp('startIssue');
-  },
+  }
 }, {
   step: 4,
   selector: '.ln-tickets-on-page--ticket', // a ticket
