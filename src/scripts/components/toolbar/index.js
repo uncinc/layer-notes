@@ -3,8 +3,8 @@
 /* Setup ==================================================================== */
 
 //imports
-import React, {Component} from 'react';
-import Anime from 'react-anime';
+import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
+import Anime from 'react-anime'; // eslint-disable-line no-unused-vars
 
 //tools
 import ext from '../../utils/ext';

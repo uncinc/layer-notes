@@ -3,7 +3,7 @@
 /* Setup ==================================================================== */
 
 //imports
-import React, {Component} from 'react';
+import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 
 import validate from '../../utils/validate';
 import {translate} from '../../utils/helpers';

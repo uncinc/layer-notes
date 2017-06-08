@@ -1,14 +1,14 @@
 'use strict';
 
 /* Setup ==================================================================== */
-import React, {Component} from 'react';
+import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
 
 //Component
-import Input from '../inputText';
-import Loader from '../loader';
+import Input from '../inputText'; // eslint-disable-line no-unused-vars
+import Loader from '../loader'; // eslint-disable-line no-unused-vars
 
 //general funcions
-import {translate} from '../../utils/helpers'
+import {translate} from '../../utils/helpers';
 import generalData from '../../config/general';
 
 //helpers
@@ -27,7 +27,7 @@ class Setup extends Component {
           value: 'mantis'
         }, {
           name: 'Github',
-          value: 'github',
+          value: 'github'
         },
         {
           name: translate('setupExistingProject'),
@@ -103,6 +103,11 @@ class Setup extends Component {
 
   //check the credentials from the user
   _checkCredetionals = (e) => {
+    const SLIDES = {
+      ONE: 1,
+      TWO: 2,
+      TREE: 3
+    };
     let _this = this;
     e.preventDefault();
     if (this.state.accountUserName.length < 2 && this.state.accountPassword.length < 2 && this.state.toolUrl.length < 2) {
@@ -127,7 +132,7 @@ class Setup extends Component {
 
           //go the the next step
           setTimeout(function() {
-            _this._nextStep(3);
+            _this._nextStep(SLIDES.TREE);
           }, 500);
 
         } else {
@@ -148,24 +153,34 @@ class Setup extends Component {
 
   //the first stpe submit
   _selectBugtracker = (e) => {
+    const SLIDES = {
+      ONE: 1,
+      TWO: 2,
+      TREE: 3
+    };
+
     e.preventDefault();
     if (this.state.toolName.length < 1) {
       this._setError(translate('setupMissingBugtracker'));
 
     } else if (this.state.toolName === 'existing') { //check if the user chooses a existing login. If this happens go to the 3th step.
-      this._nextStep(3);
+      this._nextStep(SLIDES.TREE);
     } else { //the user chooses a new tool.
-      this._nextStep(2);
+      this._nextStep(SLIDES.TWO);
     }
   }
 
   //the second step
-  _setProject = (e) =>{
+  _setProject = () =>{
+      const SLIDES = {
+        FOUR: 4
+      };
+
       let _this = this;
       this._setLoading(translate('setupSaving'));
 
       setTimeout(function() {
-        _this._nextStep(4);
+        _this._nextStep(SLIDES.FOUR);
       }, 2000);
 
       //save the ticket

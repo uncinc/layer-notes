@@ -136,10 +136,10 @@ let mantisApi = (() => {
           os_build: newTicketObject.data.browserData.osversion,
           priority: {
             id: (newTicketObject.isImportant === true) ? IMPORTANT_WEIGHT : NOMAL_WEIGHT,
-            name: (newTicketObject.isImportant === true) ? 'height' : 'normal',
+            name: (newTicketObject.isImportant === true) ? 'height' : 'normal'
           },
           steps_to_reproduce: JSON.stringify(newTicketObject.data),
-          category: 'General', //This one is requert by mantis.
+          category: 'General' //This one is requert by mantis.
           // attachments: newTicketObject.assets
         };
 

@@ -13,7 +13,7 @@ const positions = {
 			positioned: 'left'
 		};
 	},
-	top: ({position, tourElHeight, arrowSize, margin}) => {
+	top: ({position}) => {
 		return {
 			left: position.left,
 			top: (position.top + window.pageYOffset),
@@ -27,7 +27,7 @@ const positions = {
 			positioned: 'topLeft'
 		};
 	},
-	bottom: ({position, arrowSize, offsetHeight, margin}) => {
+	bottom: ({position, arrowSize, offsetHeight}) => {
 		return {
 			left: position.left,
 			top: (position.top + window.pageYOffset) + offsetHeight + arrowSize,

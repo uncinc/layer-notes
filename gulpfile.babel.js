@@ -93,6 +93,7 @@ gulp.task('watch', ['build'], () => {
     $.runSequence('icons', $.livereload.reload);
   });
   gulp.watch(['./src/scripts/**/*']).on('change', () => {
+    $.runSequence('lint.js');
     $.runSequence('js', $.livereload.reload);
   });
   gulp.watch(['./src/styles/**/*']).on('change', () => {
@@ -151,6 +152,16 @@ gulp.task('sprites', function () {
 // -----------------
 gulp.task('js', () => {
   return buildJS(target);
+});
+
+gulp.task('lint.js', () => { // generate a zip
+  return gulp.src(['./src/scripts/background/*.js', './src/scripts/components/**/*.js', './src/scripts/config/*.js', './src/scripts/utils/*.js']).pipe($.eslint())
+    // $.eslint.format() outputs the lint results to the console.
+    // Alternatively use $.eslint.formatEach() (see Docs).
+    .pipe($.eslint.format())
+  // To have the process exit with an error code (1) on
+  // lint error, return the stream and pipe to failAfterError last.
+  // .pipe($.eslint.failAfterError());
 });
 
 gulp.task('styles', () => {
@@ -213,6 +224,7 @@ gulp.task('dist', (cb) => { // generate a zip
   $.runSequence('build', 'zip', cb);
 });
 
+
 gulp.task('zip', () => {
   return pipe(`./build/${target}/**/*`, $.zip(`${target}.zip`), './dist');
 });
@@ -258,7 +270,7 @@ function buildJS(target) {
   let tasks = files.map(file => {
     return browserify({
         entries: 'src/scripts/' + file.source,
-        debug: true
+        debug: !production
       })
       .transform('babelify', {
         presets: [

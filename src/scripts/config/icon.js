@@ -50,7 +50,7 @@ let iconConfig = (() => {
     if (tab.id === opendTabNumer) {
       //insert js;
       ext.tabs.executeScript(tab.id, {
-        file: 'scripts/contentscript/index.js',
+        file: 'scripts/contentscript/index.js'
         // frameId: tab.id
         //
         //     "run_at": "document_start",
@@ -59,7 +59,7 @@ let iconConfig = (() => {
 
       //insert css;
       ext.tabs.insertCSS(tab.id, {
-        file: 'styles/index.css',
+        file: 'styles/index.css'
         // cssOrigin: 'user'
       });
     } else {

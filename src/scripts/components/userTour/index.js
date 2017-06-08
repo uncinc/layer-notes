@@ -1,5 +1,6 @@
 //Modified from https://github.com/socialtables/react-user-tour
 
+/*eslint-disable no-unused-vars*/
 import React, {Component} from 'react';
 import Anime from 'react-anime';
 
@@ -7,6 +8,7 @@ import Button from '../button';
 import positions from './helpers/position-helpers';
 import * as viewBoxHelpers from './helpers/viewbox-helpers';
 import scrollToPosition from './helpers/scroll-to-position';
+/*eslint-disable no-unused-vars*/
 
 /* Component ==================================================================== */
 export default class ReactUserTour extends Component {

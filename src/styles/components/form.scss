@@ -72,6 +72,9 @@
   }
 
   select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     padding: $padding-small 2.4em $padding-small $padding-small;
   }
 
@@ -237,7 +240,6 @@
       font-weight: 900; //fix font wight for some sites
     }
   }
-
   //chekcbox label
   .ln-checkbox {
     & + label {
@@ -279,7 +281,6 @@
   }
 
   .ln-checkbox+ label::after {
-
     display: none;
     left: 50%;
     position: absolute;

@@ -63,14 +63,14 @@ const data = (() => {
     });
   }
 
-  //clean all tickets an user acount data;
-  function cleanAll() {
-    console.log('>-------- The app is cleaned');
-    setStorage({
-      savedTickets: [],
-      savedSites: []
-    });
-  }
+  // //clean all tickets an user acount data;
+  // function cleanAll() {
+  //   console.log('>-------- The app is cleaned');
+  //   setStorage({
+  //     savedTickets: [],
+  //     savedSites: []
+  //   });
+  // }
 
   //genreal funcitons
   function getStorage(key) {
@@ -181,7 +181,7 @@ const data = (() => {
             filtertTickets: filtertTickets,
             filtertTicketsAmout: filtertTickets.length,
             allTicketsFromThisWebsite: amountTicketsOnWebsite,
-            allTicketsFromThisWebsiteAmount: amountTicketsOnWebsite.length,
+            allTicketsFromThisWebsiteAmount: amountTicketsOnWebsite.length
           });
 
         }).catch(function (err) {
@@ -216,7 +216,7 @@ const data = (() => {
             account: {
               userName: accountUserName,
               passWord: accountPassword,
-              token: accountToken,
+              token: accountToken
             },
             tool: {
               project: toolProjectId,

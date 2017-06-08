@@ -1,13 +1,14 @@
 'use strict';
 
 /* Setup ==================================================================== */
+/*eslint-disable no-unused-vars*/
 import React, {Component} from 'react';
 import Anime from 'react-anime';
 
 import message from '../../utils/message.js';
 
 //import components
-import Button from '../button'
+import Button from '../button';
 import TextareaAutosize from '../textareaAutosize';
 import FileItem from './fileItem';
 import Loader from '../loader';
@@ -17,6 +18,7 @@ import helpers, {translate} from '../../utils/helpers';
 import generalConfig from '../../config/general';
 // import data from '../../utils/data''Turn Layernotes On'
 import routerHelper from '../router/routerHelper';
+/*eslint-enable no-unused-vars*/
 
 /* Component ==================================================================== */
 class CommentBox extends Component {
@@ -60,14 +62,8 @@ class CommentBox extends Component {
     super(props);
     this.state = {
       isError: false, //it the error should be shown
-      errorText: '', // the error text
-      scale: [1] //Do not scale by default
+      errorText: '' // the error text
     };
-  }
-  componentWillUnmount() {
-    this.setState({
-      scale: [1, 0.3]
-    });
   }
 
   /**
@@ -233,8 +229,19 @@ class CommentBox extends Component {
   //set the posiotn of the comment box
   _setPosition = () => {
     const MAX_POSITON_BOTTOM = 250;
+    const HEIGHT = {
+      CONTENTMODE: 231,
+      ELSE: 192,
+      EDDITMODE: 480
+    };
+    const SPACEING = 100;
+    const PADDING = 15;
     //-------------------------------------------------------------------------------standard height with edit bar: standard height without eddit bar ------------------------------------------- the margin;
-    const commentBoxHeight = (document.querySelector('.ln-commentbox') === null) ? ((this.props.inEditMode) ? 231 : 192) : document.querySelector('.ln-commentbox').getBoundingClientRect().height + 15;
+    const commentBoxHeight = (document.querySelector('.ln-commentbox') === null)
+      ? ((this.props.inEditMode)
+        ? HEIGHT.CONTENTMODE
+        : HEIGHT.ELSE)
+      : document.querySelector('.ln-commentbox').getBoundingClientRect().height + PADDING;
 
     //this comment box is used 2 times in the app. When creating and edditigng isseu;
     let position = {
@@ -249,8 +256,8 @@ class CommentBox extends Component {
       position.style.left = this.props.ticket.position.x;
 
       //when the position of the box is on the right side posion the box on the right;
-      if (this.props.ticket.position.x > (generalConfig.maxX(0) / 2) - 100) {
-        position.style.left = this.props.ticket.position.x - 480 + this.props.ticket.position.width;
+      if (this.props.ticket.position.x > (generalConfig.maxX(0) / 2) - SPACEING) {
+        position.style.left = this.props.ticket.position.x - HEIGHT.EDDITMODE + this.props.ticket.position.width;
         position.class = 'ln-commentbox-right';
       }
       position.style.top = this.props.ticket.position.height + this.props.ticket.position.y; //only add the top prop to the style when creating;
@@ -260,7 +267,7 @@ class CommentBox extends Component {
     }
 
     if (this.props.ticket.position.y > helpers.pageHeight() - this.props.ticket.position.height - MAX_POSITON_BOTTOM) {
-      position.style.transform = - (commentBoxHeight + this.props.ticket.position.height);
+      position.style.transform = -(commentBoxHeight + this.props.ticket.position.height);
 
       position.class = position.class + ' ln-commentbox-top';
     }
@@ -346,7 +353,7 @@ class CommentBox extends Component {
 
   render = () => {
     return (
-      <Anime left={this._setPosition().style.left} top={this._setPosition().style.top} scale={this.state.scale} translateY={this._setPosition().style.transform}>
+      <Anime left={this._setPosition().style.left} top={this._setPosition().style.top} translateY={this._setPosition().style.transform}>
         <form className={`ln-commentbox ${this._setPosition().class}`} onSubmit={this._prepareSumbit} method="POST">
           {this._renderOverLay()}
 
