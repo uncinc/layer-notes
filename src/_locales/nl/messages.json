@@ -1,14 +1,282 @@
 {
   "appName": {
     "message": "Layer Notes",
-    "description": "Makelijke manier om tickets in Mantis te submitten."
+    "description": "Makkelijke manier om tickets in Mantis te submitten."
   },
   "appDescription": {
-    "message": "Makelijke manier om tickets in Mantis te submitten.",
-    "description": "Makelijke manier om tickets in Mantis te submitten."
+    "message": "Makkelijke manier om tickets in Mantis te submitten.",
+    "description": "Makkelijke manier om tickets in Mantis te submitten."
   },
   "btnTooltip": {
     "message": "Start een Ticket",
     "description": "Start een Ticket"
+  },
+  "loadingText": {
+    "message": "Laden...",
+    "description": "Laad tekst voor de app in de commentBox"
+  },
+  "commentBoxErrorText": {
+    "message": "Voeg alsjeblieft een notitie toe aan je ticket.",
+    "description": "Dit is de waarschuwing die je krijgt als een ticket verzend zonder een omschrijving."
+  },
+  "commentBoxPrioCheckboxTitle": {
+    "message": "Selecteer prioriteit.",
+    "description": "De prioriteit knop in de commentbox"
+  },
+  "commentBoxStatusTitle": {
+    "message": "De status van de ticket is '$STATUS$'",
+    "description": "Deze wordt getoond bij de hover over de status.",
+    "placeholders": {
+      "status": {
+        "content": "$1",
+        "example": "Nieuw"
+      }
+    }
+  },
+  "commentBoxBugtrackerTitle": {
+    "message": "Ga naar deze ticket in jou bug tracker $1",
+    "description": "De titel van de bug tracker"
+  },
+  "commentBoxSucces": {
+    "message": "Je ticket is geüpload",
+    "description": "De succes tekst"
+  },
+  "commentBoxAboutBrugtrackerTitle": {
+    "message": "De browser die gebruikt werd voor deze ticket is: $BROWSER$",
+    "description": "De titel van de browser icon",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Firefox"
+      }
+    }
+  },
+  "commentBoxResize": {
+    "message": "Klik om je browser te resizen naar deze scherm resolutie.",
+    "description":"De titel van de browser resolutie"
+  },
+  "commentBoxCancelTitle": {
+    "message": "Verzend de ticket niet.",
+    "description": "De titel van de cancel knop."
+  },
+  "commentBoxCancelValue": {
+    "message": "Cancel",
+    "description": "tekst van de cancel knop"
+  },
+  "commentBoxSaveTitle": {
+    "message": "Sla de ticket op",
+    "description": "Titel van de save knop"
+  },
+  "commentBoxSaveValue": {
+    "message": "Sla op",
+    "description": "tekst van de sla op knop."
+  },
+  "addFile": {
+    "message": "Voeg een extra bestand toe.",
+    "description": "De titel van de bijlage knop."
+  },
+  "fileItemTitle": {
+    "message": "Verwijder $1",
+    "description": "De titel van de verwijder knop."
+  },
+  "fileItemFallbackName": {
+    "message": "Onbekend",
+    "description": "De fallback naam van een item zonder naam."
+  },
+  "inputTextHelperText": {
+    "message": "Dit is de URL",
+    "description": "Titel fallback helper pop-up."
+  },
+  "inputTextError": {
+    "message": "De $ERROR$ is verkeerd gespeld.",
+    "description": "De error die getoond word als de input verkeerd is ingevuld.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "URL"
+      }
+    }
+  },
+  "selectorScreenshotName": {
+    "message": "Schermafbeelding-van-pagina.jpeg",
+    "description": "De naam van het screenshot die wordt opgeslagen."
+  },
+  "selectorScreenshotNameAfter": {
+    "message": "Schermafbeelding-na-selectie.jpeg",
+    "description": "De naam van het screenshot die wordt opgeslagen. (Na het selecteren)"
+  },
+  "selectorLoadingText": {
+    "message": "Slaat op in de bug tracker...",
+    "description": "Deze tekst wordt getoond als de ticket wordt geüpload."
+  },
+  "selectorHelper": {
+    "message": "Teken een rechthoek om een issue te selecteren. (Druk op ESC om te stoppen)",
+    "description": "De helper tekst."
+  },
+  "nextStep": {
+    "message": "Volgende stap",
+    "description": "Volgende step indicator."
+  },
+  "previousStep": {
+    "message": "Vorige stap",
+    "description": "vorige stap indicator."
+  },
+  "setupHelperOne": {
+    "message": "Selecteer bug tracker",
+    "description": "De titel van de setup helper."
+  },
+  "setupHelperTwo": {
+    "message": "Log in bug tracker"
+  },
+  "setupHelperTree": {
+    "message": "Selecteer je project"
+  },
+  "setupHelperFour": {
+    "message": "Finish"
+  },
+  "setupExistingProject": {
+    "message": "Voeg aan bestaand project toe.",
+    "description": "De optie die gebruikers de mogelijkheid geeft om een website toe te voegen aan een bestaand project."
+  },
+  "setupMissingFieldsError": {
+    "message": "Nog niet alle velden zijn ingevuld.",
+    "description": "Dit is een foutmelding die getoond word als de gebruiker het formulier submit zonder alle velden in te vullen."
+  },
+  "setupLogginText": {
+    "message": "Controleert je inlog gegevens, en logt in $TOOLNAME$.",
+    "description": "Dit een de laad tekst als de tool inlogt.",
+    "placeholders": {
+      "toolName": {
+        "content": "$1",
+        "example": "Mantis"
+      }
+    }
+  },
+  "setupMissingBugtracker": {
+    "message": "Selecteer een bug tracker",
+    "description": "Foutmelding die getoond wordt als er geen bug tracker geselecteerd"
+  },
+  "setupSaving": {
+    "message": "Slaat inloggegevens op.",
+    "description": "De laatste stap van het opslaan."
+  },
+  "setupChooseProject": {
+    "message": "Kies een project",
+    "description": "De drop down placeholder"
+  },
+  "setupStepOneTitle": {
+    "message": "Kies je bugtracker",
+    "description": "De titel van stap een"
+  },
+  "setupStepOneBody": {
+    "message": "Dit is de eerste keer dat je Layer Notes opstart op deze website. Kies je bugtracker om deze website toe te voegen. Of voeg deze website toe aan een bestaand project.",
+    "description": "De content van de eerste stap."
+  },
+
+  "setupStepTwoBody": {
+    "message": "Vul je bug tracker inloggegevens in, zodat we met dit account kunnen connecten.",
+    "description": "De content van de tweede stap."
+  },
+  "setupStepTwoTitle": {
+    "message": "Bugtracker instellingen",
+    "description": "De content van de derde stap."
+  },
+  "setupHelperTextUrl": {
+    "message": "Dit is de URL die je gebruikt om naar je bug tracker toe te gaan.",
+    "description": "De helper tekst van de URL."
+  },
+  "setupHelperTextUserName": {
+    "message": "Dit is de gebruikersnaam, om in de loggen in de bug tracker",
+    "description": "De helper tekst van de gebruikers name"
+  },
+  "setupHelperTextPassword": {
+    "message": "Dit is het wachtwoord die gebruikt om in te loggen in je bug tracker",
+    "description": "De helper tekst van het wachtwoord veld."
+  },
+  "setupStepTreeTitle": {
+    "message": "Kies een project",
+    "description": "De derde titel"
+  },
+  "setupStepTreeBody": {
+    "message": "Kies het project waar deze website bij hoort.",
+    "description": "De derde content tekst."
+  },
+  "setupStepDoneTitle": {
+    "message": "$URL$ is toegevoegd aan de tool.",
+    "description": "De titel van de het laatste scherm.",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "Een onbekende website"
+      }
+    }
+  },
+  "setupStepDoneBody": {
+    "message": "Als dit de eerste keer is dat je de tool start kan je de tutorial starten.",
+    "description": ""
+  },
+  "setupStartTutorial": {
+    "message": "Start tutorial",
+    "description": "De knop om de tutorial te starten."
+  },
+  "setupDone": {
+    "message": "Finish",
+    "description": "Finish de setup."
+  },
+  "ticketsOnPageUpdating": {
+    "message": "Update de ticket in de bug tracker...",
+    "description": ""
+  },
+  "toolBarNewNoteText": {
+    "message": "Nieuwe notitie",
+    "description": "De tekst van de 'nieuwe notitie' knop in de toolbar."
+  },
+  "toolBarNewNoteTitle": {
+    "message": "Maak een nieuwe notitie.",
+    "description": "De titel van de 'nieuwe notitie' knop in de toolbar."
+  },
+  "toolBarSettingsText": {
+    "message": "Instellingen",
+    "description": "De tekst van de instellingen knop in de toolbar."
+  },
+  "toolBarSettingsTitle": {
+    "message": "Ga naar de instellingen pagina.",
+    "description": "De titel van de instellingen knop in de toolbar."
+  },
+  "toolBarAmoutTicketsTitle": {
+    "message": "Aantal tickets op deze pagina, en het aantal tickets op deze site.",
+    "description": ""
+  },
+  "userTourStepOneTitle": {
+    "message": "Welkom!",
+    "description": "De h1 van de user tour."
+  },
+  "userTourStepOneBody": {
+    "message": "Deze tutorial legt uit hoe de tool werkt.",
+    "description": "De body van de eerste stap van de user tour."
+  },
+  "userTourStepTwoTitle": {
+    "message": "De Sidebar",
+    "description": "De h1 van de tweede stap in de user tour."
+  },
+  "userTourStepTwoBody": {
+    "message": "Dit is de sidebar van de tool. Met de 'Nieuwe notitie' knop kan je een nieuwe notitie aanmaken. Klik op 'Volgende' om een nieuwe notitie aan te maken.",
+    "description": "De body van de tweede stap in de user tour."
+  },
+  "userTourStepTreeTitle": {
+    "message": "Maak een nieuwe notitie",
+    "description": "De h1 van de derde stap van de user tour."
+  },
+  "userTourStepTreeBody": {
+    "message": "Selecteer nu een gebied waar de ticket zich bevindt en voeg een notitie toe. Als je een notitie op slaat wordt er automatisch een schreenschot van de pagina gemaakt en toegevoegd aan de ticket in Mantis.",
+    "description": "De body van de derde stap van de user tour."
+  },
+  "userTourStepFourTitle": {
+    "message": "Goed gedaan!",
+    "description": "De h1 van de laatste stap van de user tour."
+  },
+  "userTourStepFourBody": {
+    "message": "Je hebt je eerste notitie aangemaakt! Klik op het 'Notitie icon' om je notitie te bekijken. Je weet nu hoe je een notitie moet maken. Veel succes met het testen!",
+    "description": "de body of de last step of de user tour."
   }
 }
