@@ -8,12 +8,12 @@
     "description": "Easy submit your tickets to Mantis"
   },
   "toolOff": {
-    "message": "Turn Layernotes Off",
+    "message": "Turn Layer Notes Off",
     "description": "The title of the icon in the browser when the tool is on."
   },
   "toolOn": {
-    "message": "Turn Layernotes On",
-    "description": "THe title of the icon in the browser when the tool is off."
+    "message": "Turn Layer Notes On",
+    "description": "The title of the icon in the browser when the tool is off."
   },
   "btnTooltip": {
     "message": "Start a Ticket",
@@ -24,16 +24,16 @@
     "description": "Loading text for the app in the commentBox"
   },
   "commentBoxErrorText": {
-    "message": "Please add a comment to your issue.",
-    "description": "This is the warning when you submit a ticket without a discription."
+    "message": "Please add a comment to your ticket.",
+    "description": "This is the warning when you submit a ticket without a description."
   },
   "commentBoxPrioCheckboxTitle": {
-    "message": "Select prioroty",
-    "description": "The Prio button in the commentbox"
+    "message": "Select priority",
+    "description": "The priority button in the commentbox"
   },
   "commentBoxStatusTitle": {
     "message": "The status of the ticket is '$STATUS$'",
-    "description": "Loading text for the app in the commentBox",
+    "description": "This will be the title of the status in the commentBox",
     "placeholders": {
       "status": {
         "content": "$1",
@@ -42,16 +42,16 @@
     }
   },
   "commentBoxBugtrackerTitle": {
-    "message": "Go to this issue in your bugtracker $1",
-    "description": "The title form the to bugtracker text"
+    "message": "Go to this ticket in your bug tracker $1",
+    "description": "The title form the to bug tracker text"
   },
   "commentBoxSucces": {
     "message": "Your ticket is uploaded",
-    "description": "The succes text"
+    "description": "The success text"
   },
   "commentBoxAboutBrugtrackerTitle": {
     "message": "The browser that was used for this ticket was $BROWSER$",
-    "description": "The succes text",
+    "description": "The title from the browser icon",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -61,7 +61,7 @@
   },
   "commentBoxResize": {
     "message": "Click to resize your browser to this resolution",
-    "description": "The succes text"
+    "description": "The title from the browser resolution in the commentbox."
   },
   "commentBoxCancelTitle": {
     "message": "Cancel the ticket submit",
@@ -81,7 +81,7 @@
   },
   "addFile": {
     "message": "Add an extra file",
-    "description": "The title fo the add file button."
+    "description": "The title of the add file button."
   },
   "fileItemTitle": {
     "message": "Remove $1",
@@ -89,11 +89,11 @@
   },
   "fileItemFallbackName": {
     "message": "Unknown",
-    "description": "The falback name of a unnamed item"
+    "description": "The fall-back name of a unnamed item"
   },
   "inputTextHelperText": {
-    "message": "This is the url",
-    "description": "Title fallback helper popup."
+    "message": "This is the URL",
+    "description": "Title fall-back helper popup."
   },
   "inputTextError": {
     "message": "The $ERROR$ is spelled wrong",
@@ -111,10 +111,10 @@
   },
   "selectorScreenshotNameAfter": {
     "message": "Screenshot-after-selection.jpeg",
-    "description": "The name of the screenshot that will be saved. (afther selecting)"
+    "description": "The name of the screenshot that will be saved. (after selecting)"
   },
   "selectorLoadingText": {
-    "message": "Sumbitting to bugtracker...",
+    "message": "Submitting to bug tracker...",
     "description": "The text that will be showed when the ticket is uploading."
   },
   "selectorHelper": {
@@ -130,10 +130,10 @@
     "description": "Previous step indicator."
   },
   "setupHelperOne": {
-    "message": "Select bugtracker"
+    "message": "Select bug tracker"
   },
   "setupHelperTwo": {
-    "message": "Log in bugtracker"
+    "message": "Log in bug tracker"
   },
   "setupHelperTree": {
     "message": "Select project"
@@ -147,7 +147,7 @@
   },
   "setupMissingFieldsError": {
     "message": "Not all the fields are filled.",
-    "description": "This error will be showed if the user sumbit the form when not all fields are filed in."
+    "description": "This error will be showed if the user submit the form when not all fields are filed in."
   },
   "setupLogginText": {
     "message": "Checking you credentials, and logging in at $TOOLNAME$.",
@@ -160,8 +160,8 @@
     }
   },
   "setupMissingBugtracker": {
-    "message": "Please select a Bugtacker",
-    "description": "Shown when no bugtracker is selected"
+    "message": "Please select a bug tacker",
+    "description": "Shown when no bug tracker is selected"
   },
   "setupSaving": {
     "message": "Saving credentials.",
@@ -172,41 +172,41 @@
     "description": "The project dropdown placeholder."
   },
   "setupStepOneTitle": {
-    "message": "Choose your bugtracker",
+    "message": "Choose your bug tracker",
     "description": "The title of step one"
   },
   "setupStepOneBody": {
-    "message": "This is the first time that you open Layernotes on this webiste. Please connect this site to a bugtracker. Or add it to a existing project.",
+    "message": "This is the first time that you open Layer Notes on this website. Please connect this site to a bug tracker. Or add it to a existing project.",
     "description": "The body of the first step"
   },
 
   "setupStepTwoBody": {
-    "message": "Please fill in your bugtracker credentials, so Layernotes can connect with your account.",
+    "message": "Please fill in your bug tracker credentials, so Layer Notes can connect with your account.",
     "description": "The body of the second step."
   },
   "setupStepTwoTitle": {
-    "message": "Bugtracker settings",
+    "message": "Bug tracker settings",
     "description": "The title of the second step."
   },
   "setupHelperTextUrl": {
-    "message": "This is the url witch you use to access your bugtracker",
-    "description": "The helper text of the url."
+    "message": "This is the URL witch you use to access your bug tracker",
+    "description": "The helper text of the URL."
   },
   "setupHelperTextUserName": {
-    "message": "This is the user name you use to login in your bugtracker",
+    "message": "This is the user name you use to login in your bug tracker",
     "description": "The helper text of the user name"
   },
   "setupHelperTextPassword": {
-    "message": "This is the password you use to login in your bugtracker",
+    "message": "This is the password you use to login in your bug tracker",
     "description": "The helper text of the password"
   },
   "setupStepTreeTitle": {
     "message": "Choose project",
-    "description": "The thirdt title"
+    "description": "The third title"
   },
   "setupStepTreeBody": {
-    "message": "Choose the project that this webiste belongs to.",
-    "description": "The thirdt body tekst"
+    "message": "Choose the project that this website belongs to.",
+    "description": "The third body text"
   },
   "setupStepDoneTitle": {
     "message": "$URL$ is added to your project.",
@@ -231,7 +231,7 @@
     "description": "Finish the setup."
   },
   "ticketsOnPageUpdating": {
-    "message": "Updating your ticket in the bugtracker...",
+    "message": "Updating your ticket in the bug tracker...",
     "description": ""
   },
   "toolBarNewNoteText": {
@@ -272,11 +272,11 @@
   },
   "userTourStepTreeTitle": {
     "message": "Create new note",
-    "description": "The h1 of the thirdt step of the user tour."
+    "description": "The h1 of the third step of the user tour."
   },
   "userTourStepTreeBody": {
-    "message": "Now select the area of your note, and add a comment. When you submit a note, there is a screenshot automaticaly added.",
-    "description": "The body of the thirdt step of the user tour."
+    "message": "Now select the area of your note, and add a comment. When you submit a note, there is a screenshot automatically added.",
+    "description": "The body of the third step of the user tour."
   },
   "userTourStepFourTitle": {
     "message": "Nice!",
