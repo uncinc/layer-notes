@@ -1,5 +1,30 @@
 # Change log
 
+## Version 0.5.1
+
+Bug fix
+- fix a issue when mantis has only one project it returns a object instead of array;
+- fix overflow scroll in Chrome;
+- fix removing css in Chrome;
+- fix chrome issue when injecting in `chrome://` pages;
+
+## Version 0.5
+
+This release has several bug fixes.
+
+Improvements
+- get the urls from the background scirpt instead of a predefined var;
+- Remove scroll-to npm module;
+
+Bug fix
+Fix amount of bugs:
+- fix glitch on rezising page;
+- Create selection on click, that can be resized after click;
+- fix return key that will submit the whole page in set up;
+- position the commentbox on top when selecting a bug on the bottom of the website;
+- Fix the ESlint errors;
+
+
 ## Version 0.4
 
 Improvements:
