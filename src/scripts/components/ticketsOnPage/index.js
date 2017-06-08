@@ -44,7 +44,6 @@ class TicketsOnPage extends Component {
       hostname: generalData.hostname,
       shortlink: generalData.shortlink
     }).then(function(tickets) {
-      console.log('ickets.data.filtertTickets', tickets.data.filtertTickets[0]);
       //set all tickets
       _this.setState({savedTickets: tickets.data.filtertTickets, filtertTotal: tickets.data.filtertTicketsAmout, total: tickets.data.allTicketsFromThisWebsiteAmount});
     });
@@ -53,14 +52,11 @@ class TicketsOnPage extends Component {
   //show the comment box or not
   _showCommentBox = (e) => {
     e.preventDefault();
-    console.log('this.state.savedTickets', this.state.savedTickets);
     var ticket = this.state.savedTickets.filter(function(ticket) {
       if (ticket.id === e.target.getAttribute('data-id')) { //add the date to the comment box
         return ticket;
       }
     });
-    console.log('ticket', ticket);
-    console.log('ticket[0', ticket[0]);
     this.setState({selectedTicket: ticket[0], showCommentbox: true});
   }
 

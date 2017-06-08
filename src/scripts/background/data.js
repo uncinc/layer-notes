@@ -64,13 +64,13 @@ const data = (() => {
   }
 
   // //clean all tickets an user acount data;
-  // function cleanAll() {
-  //   console.log('>-------- The app is cleaned');
-  //   setStorage({
-  //     savedTickets: [],
-  //     savedSites: []
-  //   });
-  // }
+  function cleanAll() {
+    console.log('>-------- The app is cleaned');
+    setStorage({
+      savedTickets: [],
+      savedSites: []
+    });
+  }
 
   //genreal funcitons
   function getStorage(key) {

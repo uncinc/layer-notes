@@ -63,6 +63,10 @@
     transform: translate(-50%, -50%); //position in the center;
     width: 75px;
 
+    span {
+      pointer-events: none;
+    }
+
     &.active,
     &:hover {
       transform: translate(-50%, -50%) scale(1.2); //the ticket icon scale biggger
