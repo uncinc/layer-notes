@@ -32,7 +32,6 @@ Fix amount of bugs:
 - position the commentbox on top when selecting a bug on the bottom of the website;
 - Fix the ESlint errors;
 
-
 ## Version 0.4
 
 Improvements:
