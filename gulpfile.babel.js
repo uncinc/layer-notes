@@ -22,7 +22,7 @@ var specific = JSON.parse(fs.readFileSync(`./config/${target}.json`));
 var context = Object.assign({}, generic, specific);
 
 var manifest = {
-  //Add this to the manifest file So the livereload scritpt is also enqluded in the development
+  //Add this to the manifest file So the livereload scritpt is also included in the development
   dev: {
     'background': {
       'scripts': [
@@ -268,6 +268,7 @@ function buildJS(target) {
   ];
 
   let tasks = files.map(file => {
+
     return browserify({
         entries: 'src/scripts/' + file.source,
         debug: !production

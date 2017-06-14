@@ -10,15 +10,12 @@
   top: 0;
   width: 100%;
   z-index: 99999999999;
-
   // ::-moz-selection {
   //   background: $font-color-dark;
   //   color: $font-color;
   // }
-
   ::selection {
     background: $font-color-dark;
     color: $font-color;
   }
-
 }
