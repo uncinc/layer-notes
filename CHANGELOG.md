@@ -1,5 +1,13 @@
 # Change log
 
+## Version 0.5.2
+
+Improvements
+- The placeholder text is now more transparent
+
+Bug fix
+- fix icons that are not loading
+
 ## Version 0.5.1
 
 Bug fix
@@ -13,12 +21,12 @@ Bug fix
 This release has several bug fixes.
 
 Improvements
-- get the urls from the background scirpt instead of a predefined var;
-- Remove scroll-to npm module;
+- get the urls from the background script instead of a predefined var;
+- Remove scroll-to NPM module;
 
 Bug fix
 Fix amount of bugs:
-- fix glitch on rezising page;
+- fix glitch on resizing page;
 - Create selection on click, that can be resized after click;
 - fix return key that will submit the whole page in set up;
 - position the commentbox on top when selecting a bug on the bottom of the website;
@@ -28,7 +36,7 @@ Fix amount of bugs:
 ## Version 0.4
 
 Improvements:
-- Add abilaty to submit ticket to Mantis
+- Add ability to submit ticket to Mantis
 - Take a screenshot of the screen and submit it to Mantis
 
 Bug fixes:
