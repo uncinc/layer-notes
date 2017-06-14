@@ -345,7 +345,7 @@ class Setup extends Component {
           <div>
             <h1>{translate('setupStepTwoTitle')}</h1>
             <p>{translate('setupStepTwoBody')}</p>
-            <Input label={`${this.state.toolName} url`} helperText={translate('setupHelperTextUrl')} type="url" name="toolUrl" placeholder="https://bugtracker.uncinc.nl" value={this.state.toolUrl} onchange={this._handleStateChange}/>
+            <Input label={`${this.state.toolName} url`} helperText={translate('setupHelperTextUrl')} type="url" name="toolUrl" placeholder="https://bugs.example.com" value={this.state.toolUrl} onchange={this._handleStateChange}/>
             <Input label={'Username'} type="text" helperText={translate('setupHelperTextUserName')} name="accountUserName" placeholder="username" value={this.state.accountUserName} onchange={this._handleStateChange}/>
             <Input label={'Password'} type="password" helperText={translate('setupHelperTextPassword')} name="accountPassword" placeholder="Password" value={this.state.accountPassword} onchange={this._handleStateChange}/>
           </div>
