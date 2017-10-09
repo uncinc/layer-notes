@@ -3,7 +3,6 @@
   "version": "0.5.3",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
-  "shortName": "__MSG_appDescription__",
   "homepage_url": "https://github.com/uncinc/layer-notes",
   "default_locale": "en",
   "browser_action": {
@@ -20,20 +19,21 @@
   "background": {
     "scripts": [
       "scripts/background/index.js"
-    ],
-    "persistent": true
+    ]
   },
   "permissions": [
     "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "webRequestBlocking",
     "tabs",
+    "activeTab",
+    "unlimitedStorage",
     "webRequest",
     "webNavigation",
-    "webRequestBlocking",
     "storage",
-    "windows",
-    "history",
-    "http://*/*",
-    "https://*/*"
+    "browsingData",
+    "history"
   ],
   "icons": {
     "16": "icons/icon_black-16.png",
