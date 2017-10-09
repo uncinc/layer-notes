@@ -1,6 +1,6 @@
 ![Layernotes](./readme/banner.png)
 
-v0.5.3 (beta)
+v0.5.4 (beta)
 
 # Layer Notes
 Layer Notes is a tool that you can use to easily create Tickets for the Bugtracker Mantis.
