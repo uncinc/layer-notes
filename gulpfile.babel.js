@@ -39,6 +39,9 @@ var manifest = {
         'strict_min_version': '48.0',
       }
     }
+  },
+  chrome: {
+    'shortName': '__MSG_appDescription__'
   }
 };
 
@@ -93,7 +96,7 @@ gulp.task('watch', ['build'], () => {
     $.runSequence('icons', $.livereload.reload);
   });
   gulp.watch(['./src/scripts/**/*']).on('change', () => {
-    $.runSequence('lint.js');
+    // $.runSequence('lint.js');
     $.runSequence('js', $.livereload.reload);
   });
   gulp.watch(['./src/styles/**/*']).on('change', () => {

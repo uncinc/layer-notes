@@ -14,7 +14,7 @@ import mantisApi from './mantisApi';
 const data = (() => {
   function init() {
     setUpStorage();
-    // cleanAll();
+    cleanAll();
   }
 
   //check if the storage item exists and when not add a empty array;
@@ -110,6 +110,7 @@ const data = (() => {
         } = params;
 
         mantisApi.login(url, userName, password).then(function (userData) {
+          console.log(userData);
           if (userData === true) {
             mantisApi.getProjects(url, userName, password).then(function (projectsData) {
               resolve({
@@ -120,6 +121,7 @@ const data = (() => {
               reject(err);
             });
           } else {
+            console.log('hoih');
             reject({
               status: 500,
               message: 'Your credentials are wrong.'
