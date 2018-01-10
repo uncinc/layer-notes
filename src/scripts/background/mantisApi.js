@@ -95,7 +95,7 @@ let mantisApi = (() => {
               message: 'Your credentials are wrong'
             });
           } else {
-            //if there is only one project in mantis the api returns a object instead of a array
+            // if there is only one project in mantis the api returns a object instead of a array
             if (res.item) {
               resolve([res.item]);
             } else {

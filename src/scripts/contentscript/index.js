@@ -9,7 +9,7 @@ import ext from '../utils/ext';
 // config
 import generalConfig from '../config/general';
 
-import {select} from '../utils/helpers';
+import { select } from '../utils/helpers';
 
 import Root from '../components/rootElement';
 
@@ -17,25 +17,21 @@ window.ln = window.ln || {};
 
 window.ln.init = (() => {
   let init = function() {
-
     // Create a div where the exention will work in;
     start.init();
 
     //render the elemtn
     render();
-  }
+  };
 
   let render = function() {
-
     const mainElement = select(`#${generalConfig.idName}`);
 
     //render the first element
-    ReactDOM.render(
-      <Root/>, mainElement);
+    ReactDOM.render(<Root />, mainElement);
   };
 
-  return {init};
-
+  return { init };
 })();
 
 window.ln.init.init();

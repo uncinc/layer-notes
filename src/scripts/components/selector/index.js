@@ -1,20 +1,19 @@
 'use strict';
 
 /* Setup ==================================================================== */
-import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 
-//tools
+// tools
 import generalConfig from '../../config/general';
 
-//helpers
-import {setMinMaxWidth} from '../../utils/helpers';
+// helpers
+import helpers, { translate, setMinMaxWidth } from '../../utils/helpers';
 import SelectorHelper from './selectorHelper'; // eslint-disable-line no-unused-vars
 import routerHelper from '../router/routerHelper';
 
-//components
+// components
 import SelectorBackground from './SelectorBackground'; // eslint-disable-line no-unused-vars
 import CommentBox from './../commentbox'; // eslint-disable-line no-unused-vars
-import helpers, {translate} from '../../utils/helpers';
 import message from '../../utils/message';
 
 /* Component ==================================================================== */
@@ -52,14 +51,13 @@ class Selector extends Component {
         }
       },
 
-      //this are helpers
+      // this are helpers
       startX: -1,
       startY: -1,
       x: -1,
       y: -1,
       last_position: {}
     };
-
   }
   componentWillMount() {
     this._takeScreenshot(translate('selectorScreenshotName'));
@@ -72,93 +70,104 @@ class Selector extends Component {
   componentWillUnmount() {
     this._removeMouseEvents();
   }
-  //mouse and key listners
+  // mouse and key listners
   _addMouseEvents() {
-    document.addEventListener('mousedown', this._onMouseDown, false);
-    document.addEventListener('mousemove', this._onMouseMove, false);
-    document.addEventListener('mouseup', this._onMouseUp, false);
-    document.addEventListener('keypress', this._onKeyDown, false);
-
+    document.addEventListener('mousedown', this.onMouseDown, false);
+    document.addEventListener('mousemove', this.onMouseMove, false);
+    document.addEventListener('mouseup', this.onMouseUp, false);
+    document.addEventListener('keypress', this.onKeyDown, false);
   }
 
-  //remove all the events
+  // remove all the events
   _removeMouseEvents() {
-    document.removeEventListener('mousedown', this._onMouseDown, false);
-    document.removeEventListener('mousemove', this._onMouseMove, false);
-    document.removeEventListener('mouseup', this._onMouseUp, false);
-    document.removeEventListener('keypress', this._onKeyDown, false);
+    document.removeEventListener('mousedown', this.onMouseDown, false);
+    document.removeEventListener('mousemove', this.onMouseMove, false);
+    document.removeEventListener('mouseup', this.onMouseUp, false);
+    document.removeEventListener('keypress', this.onKeyDown, false);
   }
 
-  //set the start of the drawing of the square
-  _onMouseDown = (e) => {
+  // set the start of the drawing of the square
+  onMouseDown = (e) => {
     e.preventDefault();
     if (this.state.isDrawing) {
-      this.setState({cursorStyle: 'default', isDrawing: false});
-
+      this.setState({ cursorStyle: 'default', isDrawing: false });
     } else {
       this.setState({
-        isDrawing: true, //set drawing state
-        startX: this.state.x, //x position
-        startY: this.state.y //y position
+        isDrawing: true, // set drawing state
+        startX: this.state.x, // x position
+        startY: this.state.y // y position
       });
-      this._onMouseMove(e);
+      this.onMouseMove(e);
     }
-  }
+  };
 
-  //listen to the esc key. Then go the home page;
-  _onKeyDown = (e) => {
+  // listen to the esc key. Then go the home page;
+  onKeyDown = (e) => {
     const ESC_KEY = 27;
 
-    if (e.keyCode === ESC_KEY) { //27 === EXC key
+    if (e.keyCode === ESC_KEY) {
+      // 27 === EXC key
       this._removeMouseEvents();
       routerHelper.setStateApp('home');
     }
-  }
+  };
 
   _takeScreenshot = (screenshotName) => {
     const _this = this;
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       try {
-        message.send('takeScreenschot', {}).then(function(image) {
-          let oldState = _this.state.ticket.assets;
-          let newScreenshot = {
-            name: screenshotName, //the name of the file
-            size: image.data.length, //the pure size, will be conferted in the FileItem.js
-            content: image.data,
-            show: false,
-            file_type: 'image/jpeg',
-            id: helpers.generateUUID() //a random genreated id
-          };
-          oldState.push(newScreenshot);
-          let newStateTicket = helpers.setNewState(_this.state.ticket, 'assets', oldState);
-          _this.setState({ticket: newStateTicket, screenshotTaken: true});
-        }).then(function() {
-          resolve(true);
-        });
+        message
+          .send('takeScreenschot', {})
+          .then((image) => {
+            const oldState = _this.state.ticket.assets;
+            const newScreenshot = {
+              name: screenshotName, // the name of the file
+              size: image.data.length, // the pure size, will be conferted in the FileItem.js
+              content: image.data,
+              show: false,
+              file_type: 'image/jpeg',
+              id: helpers.generateUUID(), // a random genreated id
+            };
+            oldState.push(newScreenshot);
+            const newStateTicket = helpers.setNewState(
+              _this.state.ticket,
+              'assets',
+              oldState
+            );
+            _this.setState({ ticket: newStateTicket, screenshotTaken: true });
+          })
+          .then(() => {
+            resolve(true);
+          });
       } catch (err) {
         console.error(`>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     });
-  }
+  };
 
-  //when de drawing is stoped hide the comment box and stop the events.
-  _onMouseUp = () => {
+  // when de drawing is stoped hide the comment box and stop the events.
+  onMouseUp = () => {
     this.props.onSelected();
-    this._checkSelection();
-    this.setState({isDrawing: false, cursorStyle: 'default', showCommentbox: true, positionClass: this._checkClassname()});
+    this.checkSelection();
+    this.setState({
+      isDrawing: false,
+      cursorStyle: 'default',
+      showCommentbox: true,
+      positionClass: this._checkClassname()
+    });
     this._removeMouseEvents();
     this._checkCommentBoxIsInView();
-  }
+  };
 
-  //set the classname;
-  //so the position of the comment box is on the left or right side;
+  // set the classname;
+  // so the position of the comment box is on the left or right side;
   _checkClassname = () => {
     const MARGIN = 100;
-    return (this.state.ticket.position.x > (generalConfig.maxX(0) / 2) - MARGIN)
+    return this.state.ticket.position.x > generalConfig.maxX(0) / 2 - MARGIN
       ? 'ln-commentbox-right'
       : 'ln-commentbox-left';
-  }
+  };
 
   _checkCommentBoxIsInView = () => {
     const positionY = this.state.ticket.position.y;
@@ -167,16 +176,16 @@ class Selector extends Component {
     if (positionY < pageHeight) {
       helpers.scrollTo(0, positionY);
     }
-  }
+  };
 
-  // for setting the new state in the ticket {Object}
-  _handleStateChange = (newState) => {
-    //set the new state to the selected ticket;
-    this.setState({ticket: newState});
-  }
+  //  for setting the new state in the ticket {Object}
+  handleStateChange = (newState) => {
+    // set the new state to the selected ticket;
+    this.setState({ ticket: newState });
+  };
 
-  _checkSelection = () => {
-    let {width, height} = this.state.ticket.position;
+  checkSelection = () => {
+    let { width, height } = this.state.ticket.position;
     let position = {
       height: height,
       width: width,
@@ -191,57 +200,72 @@ class Selector extends Component {
     if (height < generalConfig.minHeight) {
       position.height = generalConfig.minHeight;
     }
-    let newStateTicket = helpers.setNewState(this.state.ticket, 'position', position);
-    this.setState({ticket: newStateTicket});
+    let newStateTicket = helpers.setNewState(
+      this.state.ticket,
+      'position',
+      position
+    );
+    this.setState({ ticket: newStateTicket });
     return true;
-  }
+  };
 
-  _onMouseMove = (e) => {
-
+  onMouseMove = e => {
     this._setMousePosition(e);
 
     if (this.state.isDrawing) {
       let position = {
         width: Math.abs(this.state.x - this.state.startX),
         height: Math.abs(this.state.y - this.state.startY),
-        x: (this.state.x - this.state.startX < 0)
-          ? this.state.x
-          : this.state.startX,
-        y: (this.state.y - this.state.startY < 0)
-          ? this.state.y
-          : this.state.startY
+        x:
+          this.state.x - this.state.startX < 0
+            ? this.state.x
+            : this.state.startX,
+        y:
+          this.state.y - this.state.startY < 0
+            ? this.state.y
+            : this.state.startY
       };
-      let newStateTicket = helpers.setNewState(this.state.ticket, 'position', position);
+      let newStateTicket = helpers.setNewState(
+        this.state.ticket,
+        'position',
+        position
+      );
 
-      this.setState({ticket: newStateTicket});
+      this.setState({ ticket: newStateTicket });
     }
 
-    //fix for the browser behavior to take a image;
+    // fix for the browser behavior to take a image;
     e.preventDefault();
-  }
+  };
 
   _onCommentBoxSubmit = () => {
     let _this = this;
-    _this.setState({isLoading: true, loadingText: translate('selectorLoadingText')});
-    //take a screenshot of the selected item
-    this._takeScreenshot(translate('selectorScreenshotNameAfter')).then(function() {
-      message.send('submitNewTicket', {
-        ticket: _this.state.ticket,
-        hostname: generalConfig.hostname,
-        url: generalConfig.url,
-        shortlink: generalConfig.shortlink
-      }).then(function() {
-        setTimeout(function() {
-          _this.setState({isLoading: false, isUploaded: true});
-
-        }, 600);
-        setTimeout(function() {
-          _this.setState({isUploaded: false});
-          routerHelper.setStateApp('home');
-        }, 2000);
-      });
+    _this.setState({
+      isLoading: true,
+      loadingText: translate('selectorLoadingText')
     });
-  }
+    // take a screenshot of the selected item
+    this._takeScreenshot(translate('selectorScreenshotNameAfter')).then(
+      function() {
+        message
+          .send('submitNewTicket', {
+            ticket: _this.state.ticket,
+            hostname: generalConfig.hostname,
+            url: generalConfig.url,
+            shortlink: generalConfig.shortlink
+          })
+          .then(function() {
+            setTimeout(function() {
+              _this.setState({ isLoading: false, isUploaded: true });
+            }, 600);
+            setTimeout(function() {
+              _this.setState({ isUploaded: false });
+              routerHelper.setStateApp('home');
+            }, 2000);
+          });
+      }
+    );
+  };
 
   _updateFramePosition = (left, top) => {
     let position = {
@@ -250,33 +274,49 @@ class Selector extends Component {
       width: this.state.ticket.position.width,
       height: this.state.ticket.position.height
     };
-    let newStateTicket = helpers.setNewState(this.state.ticket, 'position', position);
+    let newStateTicket = helpers.setNewState(
+      this.state.ticket,
+      'position',
+      position
+    );
 
-    this.setState({ticket: newStateTicket, positionClass: this._checkClassname()});
-  }
+    this.setState({
+      ticket: newStateTicket,
+      positionClass: this._checkClassname()
+    });
+  };
 
   _updateFrameSize = (prop, value) => {
-    this.setState({[prop]: value});
-  }
+    this.setState({ [prop]: value });
+  };
 
-  _setMousePosition = (e) => {
-    let ev = e || window.event; //Moz || IE
+  _setMousePosition = e => {
+    let ev = e || window.event; // Moz || IE
     let margin = 10;
     let bodyHeight = helpers.pageHeight();
 
-    if (ev.pageX) { //Moz
+    if (ev.pageX) {
+      // Moz
       this.setState({
         x: setMinMaxWidth(ev.pageX, 0, window.innerWidth - margin),
         y: setMinMaxWidth(ev.pageY, 0, bodyHeight - margin)
       });
-
-    } else if (ev.clientX) { //IE
+    } else if (ev.clientX) {
+      // IE
       this.setState({
-        x: setMinMaxWidth(ev.clientX + document.body.scrollLeft, 0, window.innerWidth - margin),
-        y: setMinMaxWidth(ev.clientY + document.body.scrollTop, 0, window.innerWidth - margin)
+        x: setMinMaxWidth(
+          ev.clientX + document.body.scrollLeft,
+          0,
+          window.innerWidth - margin
+        ),
+        y: setMinMaxWidth(
+          ev.clientY + document.body.scrollTop,
+          0,
+          window.innerWidth - margin
+        )
       });
     }
-  }
+  };
 
   /**
    * RENDER
@@ -284,62 +324,88 @@ class Selector extends Component {
   _helperElement = () => {
     if (!this.state.showCommentbox) {
       return (
-        <span className="ln-canvas--helper" style={{
-          left: this.state.x + 'px',
-          top: this.state.y + 'px'
-        }}>
+        <span
+          className="ln-canvas--helper"
+          style={{
+            left: this.state.x + 'px',
+            top: this.state.y + 'px'
+          }}
+        >
           {translate('selectorHelper')}
         </span>
       );
     }
     return '';
-  }
+  };
 
   _renderCommentBox = () => {
     if (this.state.showCommentbox) {
       return (
-        <CommentBox ticket={this.state.ticket} positionClass={this.state.positionClass} loadingText={this.state.loadingText} isUploaded={this.state.isUploaded} isLoading={this.state.isLoading} onSubmit={this._onCommentBoxSubmit} onchange={this._handleStateChange}></CommentBox>
+        <CommentBox
+          ticket={this.state.ticket}
+          positionClass={this.state.positionClass}
+          loadingText={this.state.loadingText}
+          isUploaded={this.state.isUploaded}
+          isLoading={this.state.isLoading}
+          onSubmit={this._onCommentBoxSubmit}
+          onchange={this.handleStateChange}
+        />
       );
     } else {
       return '';
     }
-  }
+  };
 
   _drawElement = () => {
     return (
       <div>
-        <div className="ln-rectangle" style={{
-          left: this.state.ticket.position.x + 'px',
-          top: this.state.ticket.position.y + 'px',
-          height: this.state.ticket.position.height + 'px',
-          width: this.state.ticket.position.width + 'px'
-        }}>
-          <SelectorHelper width={this.state.ticket.position.width} height={this.state.ticket.position.height} left={this.state.ticket.position.x} showCommentbox={this.state.showCommentbox} updateFramePosition={this._updateFramePosition} updateFrameSize={this._updateFrameSize}></SelectorHelper>
+        <div
+          className="ln-rectangle"
+          style={{
+            left: this.state.ticket.position.x + 'px',
+            top: this.state.ticket.position.y + 'px',
+            height: this.state.ticket.position.height + 'px',
+            width: this.state.ticket.position.width + 'px'
+          }}
+        >
+          <SelectorHelper
+            width={this.state.ticket.position.width}
+            height={this.state.ticket.position.height}
+            left={this.state.ticket.position.x}
+            showCommentbox={this.state.showCommentbox}
+            updateFramePosition={this._updateFramePosition}
+            updateFrameSize={this._updateFrameSize}
+          />
           {this._renderCommentBox()}
         </div>
-        <SelectorBackground width={this.state.ticket.position.width} height={this.state.ticket.position.height} left={this.state.ticket.position.x} top={this.state.ticket.position.y}></SelectorBackground>
+        <SelectorBackground
+          width={this.state.ticket.position.width}
+          height={this.state.ticket.position.height}
+          left={this.state.ticket.position.x}
+          top={this.state.ticket.position.y}
+        />
       </div>
     );
-  }
+  };
 
   render = () => {
-    //so the screenshot can be made before the background layer;
+    // so the screenshot can be made before the background layer;
     if (this.state.screenshotTaken) {
       return (
-        <div className="ln-canvas" style={{
-          cursor: this.state.cursorStyle
-        }}>
+        <div
+          className="ln-canvas"
+          style={{
+            cursor: this.state.cursorStyle
+          }}
+        >
           {this._drawElement()}
           {this._helperElement()}
         </div>
       );
     } else {
-      return (
-        <div></div>
-      );
+      return <div />;
     }
-
-  }
+  };
 }
 
 /* Export Component ==================================================================== */

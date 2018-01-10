@@ -27,8 +27,7 @@ const apis = [
 function Extension() {
   const _this = this;
 
-  apis.forEach(function (api) {
-
+  apis.forEach(function(api) {
     _this[api] = null;
 
     try {
@@ -47,9 +46,7 @@ function Extension() {
       if (browser[api]) {
         _this[api] = browser[api];
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
     try {
       _this.api = browser.extension[api];
     } catch (e) {}
