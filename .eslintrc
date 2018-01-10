@@ -54,7 +54,7 @@
       "modules": true
     }
   },
-  "extends": "eslint:recommended",
+  "extends": "airbnb",
   "ecmaFeatures": {
     "jsx": true,
     "modules": true

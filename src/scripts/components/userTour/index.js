@@ -1,7 +1,7 @@
-//Modified from https://github.com/socialtables/react-user-tour
+// Modified from https://github.com/socialtables/react-user-tour
 
 /*eslint-disable no-unused-vars*/
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Anime from 'react-anime';
 
 import Button from '../button';
@@ -12,7 +12,6 @@ import scrollToPosition from './helpers/scroll-to-position';
 
 /* Component ==================================================================== */
 export default class ReactUserTour extends Component {
-
   constructor(props) {
     super(props);
     this.prevPos = {
@@ -23,27 +22,47 @@ export default class ReactUserTour extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.step !== nextProps.step || this.props.active !== nextProps.active;
+    return (
+      this.props.step !== nextProps.step ||
+      this.props.active !== nextProps.active
+    );
   }
 
-  getStepPosition(selector, tourElWidth, tourElHeight, overridePos, margin = 15) {
+  getStepPosition(
+    selector,
+    tourElWidth,
+    tourElHeight,
+    overridePos,
+    margin = 15
+  ) {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     const el = document.querySelector(selector);
     if (el) {
-      let position = el
-        ? el.getBoundingClientRect()
-        : {};
-      const isElementBelowViewBox = viewBoxHelpers.isElementBelowViewBox(windowHeight, position.top);
-      const isElementAboveViewBox = viewBoxHelpers.isElementBelowViewBox(position.bottom);
+      let position = el ? el.getBoundingClientRect() : {};
+      const isElementBelowViewBox = viewBoxHelpers.isElementBelowViewBox(
+        windowHeight,
+        position.top
+      );
+      const isElementAboveViewBox = viewBoxHelpers.isElementBelowViewBox(
+        position.bottom
+      );
       if (isElementBelowViewBox) {
         position = scrollToPosition(el, position.bottom);
       } else if (isElementAboveViewBox) {
         position = scrollToPosition(el, window.pageYOffset + position.top);
       }
-      const shouldPositionLeft = viewBoxHelpers.shouldPositionLeft(windowWidth, position.left);
-      const shouldPositionAbove = viewBoxHelpers.shouldPositionAbove(windowHeight, position.bottom);
-      const shouldPositionBelow = viewBoxHelpers.shouldPositionBelow(position.top);
+      const shouldPositionLeft = viewBoxHelpers.shouldPositionLeft(
+        windowWidth,
+        position.left
+      );
+      const shouldPositionAbove = viewBoxHelpers.shouldPositionAbove(
+        windowHeight,
+        position.bottom
+      );
+      const shouldPositionBelow = viewBoxHelpers.shouldPositionBelow(
+        position.top
+      );
       let elPos;
       if (overridePos && positions[overridePos]) {
         elPos = positions[overridePos]({
@@ -54,19 +73,44 @@ export default class ReactUserTour extends Component {
           offsetHeight: el.offsetHeight,
           margin
         });
-      } else if (shouldPositionLeft && !shouldPositionAbove && !shouldPositionBelow) {
-        elPos = positions.left({position, tourElWidth, margin});
+      } else if (
+        shouldPositionLeft &&
+        !shouldPositionAbove &&
+        !shouldPositionBelow
+      ) {
+        elPos = positions.left({ position, tourElWidth, margin });
       } else if (shouldPositionAbove) {
-
         elPos = shouldPositionLeft
-          ? positions.topLeft({position, tourElWidth, tourElHeight, arrowSize: this.props.arrowSize, margin})
-          : positions.top({position, tourElHeight, arrowSize: this.props.arrowSize, margin});
+          ? positions.topLeft({
+              position,
+              tourElWidth,
+              tourElHeight,
+              arrowSize: this.props.arrowSize,
+              margin
+            })
+          : positions.top({
+              position,
+              tourElHeight,
+              arrowSize: this.props.arrowSize,
+              margin
+            });
       } else if (shouldPositionBelow) {
         elPos = shouldPositionLeft
-          ? positions.bottomLeft({position, tourElWidth, arrowSize: this.props.arrowSize, offsetHeight: el.offsetHeight, margin})
-          : positions.bottom({position, arrowSize: this.props.arrowSize, offsetHeight: el.offsetHeight, margin});
+          ? positions.bottomLeft({
+              position,
+              tourElWidth,
+              arrowSize: this.props.arrowSize,
+              offsetHeight: el.offsetHeight,
+              margin
+            })
+          : positions.bottom({
+              position,
+              arrowSize: this.props.arrowSize,
+              offsetHeight: el.offsetHeight,
+              margin
+            });
       } else {
-        elPos = positions.right({position, margin});
+        elPos = positions.right({ position, margin });
       }
 
       this.prevPos = elPos;
@@ -79,29 +123,47 @@ export default class ReactUserTour extends Component {
   _renderNextButton = () => {
     if (this.props.step !== this.props.steps.length) {
       return (
-        <Button onclick={() => this.props.onNext(this.props.step + 1)} text={this.props.nextButtonText} class={'ln-btn-primary'}></Button>
+        <Button
+          onclick={() => this.props.onNext(this.props.step + 1)}
+          text={this.props.nextButtonText}
+          class={'ln-btn-primary'}
+        />
       );
     } else {
       return '';
     }
-  }
+  };
   _renderDoneButton = () => {
-    return (this.props.step === this.props.steps.length
-      ? <Button onclick={this.props.onCancel} text={this.props.doneButtonText} class={'ln-btn-primary'}></Button>
-      : '');
-  }
+    return this.props.step === this.props.steps.length ? (
+      <Button
+        onclick={this.props.onCancel}
+        text={this.props.doneButtonText}
+        class={'ln-btn-primary'}
+      />
+    ) : (
+      ''
+    );
+  };
   _renderBackButton = () => {
-    return (this.props.step !== 1
-      ? <Button onclick={() => this.props.onBack(this.props.step - 1)} text={this.props.backButtonText}></Button>
-      : <div></div>);
-  }
+    return this.props.step !== 1 ? (
+      <Button
+        onclick={() => this.props.onBack(this.props.step - 1)}
+        text={this.props.backButtonText}
+      />
+    ) : (
+      <div />
+    );
+  };
   _renderCloseButton = () => {
     return (
-      <button onClick={this.props.onCancel} className="ln-btn-small ln-user-tour-close">
-        <span className="ln-icon ln-icon-close-dark"></span>
+      <button
+        onClick={this.props.onCancel}
+        className="ln-btn-small ln-user-tour-close"
+      >
+        <span className="ln-icon ln-icon-close-dark" />
       </button>
     );
-  }
+  };
 
   _renderButtons = () => {
     return (
@@ -111,24 +173,36 @@ export default class ReactUserTour extends Component {
         {this._renderDoneButton()}
       </div>
     );
-  }
+  };
 
   render() {
     //get all data from the curren step;
-    const currentTourStep = this.props.steps.filter(step => step.step === this.props.step)[0];
+    const currentTourStep = this.props.steps.filter(
+      step => step.step === this.props.step
+    )[0];
     if (!this.props.active || !currentTourStep) {
-      return <span/>;
+      return <span />;
     }
 
     //get the absolute posotion of the element and where the popup should be located;
-    const position = this.getStepPosition(currentTourStep.selector, this.props.style.width, this.props.style.height, currentTourStep.position, currentTourStep.margin);
+    const position = this.getStepPosition(
+      currentTourStep.selector,
+      this.props.style.width,
+      this.props.style.height,
+      currentTourStep.position,
+      currentTourStep.margin
+    );
 
     //start the function that should be fired on the start of the popup;
     currentTourStep.onStart();
     return (
       <div className={'ln-user-tour-container'}>
         <Anime translateX={position.left} translateY={position.top}>
-          <div className={`ln-user-tour-box ln-user-tour--arrow ln-user-tour--arrow-${position.positioned}`}>
+          <div
+            className={`ln-user-tour-box ln-user-tour--arrow ln-user-tour--arrow-${
+              position.positioned
+            }`}
+          >
             {this._renderCloseButton()}
             <div className="ln-user-tour--content">
               <h1>{currentTourStep.title}</h1>

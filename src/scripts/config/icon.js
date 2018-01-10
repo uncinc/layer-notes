@@ -4,42 +4,44 @@ import ext from '../utils/ext';
 
 // config
 import generalConfig from '../config/general';
-import helpers from '../utils/helpers';
 
-//helpers
-import {
-  translate
-} from '../utils/helpers';
+// helpers
+import helpers, { translate } from '../utils/helpers';
 
 /* Component ==================================================================== */
-let iconConfig = (() => {
+const iconConfig = (() => {
   let opendTabNumer = null;
-  let settings = {
+  const settings = {
     defaultState: 'off',
     on: {
       icon: '/icons/icon-128.png',
       // badgeText  : 'On',
       // badgeColor : 'green',
       title: translate('toolOff'),
-      action: function (tab) {
+      action: (tab) => {
         stopApp(tab);
       },
-      nextState: 'off'
+      nextState: 'off',
     },
     off: {
       icon: '/icons/icon_black-128.png',
       // badgeText  : 'Off',
       // badgeColor : 'red',
       title: translate('toolOn'),
-      action: function (tab) {
-        ///check if the tab is a http of https site when it isn't sutch site do not inject;
+      action: (tab) => {
+        // check if the tab is a http of https site
+        // When it isn't sutch site do not inject;
         if (helpers.isURL(tab.url)) {
           if (opendTabNumer === null) {
             opendTabNumer = tab.id;
           }
 
-          ext.webNavigation.onCompleted.addListener(scrirptListener.bind(this, tab));
+          ext.webNavigation.onCompleted.addListener(
+            scrirptListener.bind(this, tab)
+          );
+
           injectSripts(tab);
+
           console.log('The exention is turned on');
         }
       },
@@ -53,7 +55,7 @@ let iconConfig = (() => {
 
   function injectSripts(tab) {
     if (tab.id === opendTabNumer) {
-      //insert js;
+      // insert js;
       ext.tabs.executeScript(tab.id, {
         file: 'scripts/contentscript/index.js'
         // frameId: tab.id
@@ -62,46 +64,46 @@ let iconConfig = (() => {
         // "all_frames": true
       });
 
-      //insert css;
+      // insert css;
       ext.tabs.insertCSS(tab.id, {
-        file: 'styles/index.css'
+        file: 'styles/index.css',
         // cssOrigin: 'user'
       });
     } else {
       console.log(`>---------: The scirpt is already injected in tab ${opendTabNumer} and this is tab ${tab.id}`);
     }
+  }
 
+  // Retrun a error
+  function onError(error) {
+    console.log(`Error: ${error}`);
   }
 
   /**
    * Stops the app by injecting code inin the website
    */
   function stopApp(tab) {
-    //script to delte the element;
-    var clearMainElement = 'var lnMainElement = document.getElementById("' + generalConfig.idName + '"); (lnMainElement) ? lnMainElement.outerHTML = "" : null;';
+    // script to delte the element;
+    const clearMainElement = `var lnMainElement = document.getElementById("${generalConfig.idName}"); (lnMainElement) ? lnMainElement.outerHTML = "" : null;`;
     ext.tabs.executeScript({
-      code: clearMainElement
+      code: clearMainElement,
     });
+
     ext.webNavigation.onCompleted.removeListener(scrirptListener);
 
-    //check if ext.tabs.removeCSS is supported because Chrome does not support it.
+    // check if ext.tabs.removeCSS is supported because Chrome does not support it.
     if (ext.tabs.removeCSS) {
-
-      var removingCSS = ext.tabs.removeCSS(tab.id, {
-        file: 'styles/index.css'
+      const removingCSS = ext.tabs.removeCSS(tab.id, {
+        file: 'styles/index.css',
       });
 
-      //when the css is removeed
-      removingCSS.then(function () {
+      // when the css is removeed
+      removingCSS.then(() => {
         opendTabNumer = null;
       }, onError);
     } else {
       opendTabNumer = null;
     }
-  }
-
-  function onError(error) {
-    console.log(`Error: ${error}`);
   }
   return settings;
 })();

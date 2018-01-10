@@ -3,68 +3,94 @@ import data from './data';
 
 /* Component ==================================================================== */
 const reseving = (() => {
-  let init = function () {
-    listen();
-  };
   /**
    * Lissens to the messages send to the background script
    * @param   {String, Object} The message kind and the parrams
    * @returns {Bool} of a Error when there is something wrong
    */
-  let listen = function () {
-    ext.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-      //send the response in a data object
-      let sendback = function (data) {
+  const listen = () => {
+    ext.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
+      // send the response in a data object
+      const sendback = (data) => {
         sendResponse({
-          data: data
+          data,
         });
       };
 
-      //send the error
-      let sendErr = function (err) {
+      // send the error
+      const sendErr = (err) => {
         sendResponse(err);
       };
 
       switch (request.type) {
-      case 'rezize':
-        rezize(request.params);
-        break;
-      case 'open':
-        open(request.params);
-        break;
-      case 'checkLogin': //check the user params
-        data.checkLogin(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'getTicketsFromPage':
-        data.getTicketsFromPage(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'submitNewTicket':
-        data.submitNewTicket(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'updateTicket':
-        data.updateTicket(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'isFirstTime':
-        data.isFirstTime(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'setSite':
-        data.setSite(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'getStorage':
-        data.getStorage(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'takeScreenschot':
-        data.takeScreenschot(request.params).then(sendback).catch(sendErr);
-        break;
-      case 'getUrls':
-        data.getUrls(request.params).then(sendback).catch(sendErr);
-        break;
-      default:
-        //the message type is unknown
-        console.warn('>--------: A unknown type resived');
+        case 'rezize':
+          rezize(request.params);
+          break;
+        case 'open':
+          open(request.params);
+          break;
+        case 'checkLogin': // check the user params
+          data
+            .checkLogin(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'getTicketsFromPage':
+          data
+            .getTicketsFromPage(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'submitNewTicket':
+          data
+            .submitNewTicket(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'updateTicket':
+          data
+            .updateTicket(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'isFirstTime':
+          data
+            .isFirstTime(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'setSite':
+          data
+            .setSite(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'getStorage':
+          data
+            .getStorage(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'takeScreenschot':
+          data
+            .takeScreenschot(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        case 'getUrls':
+          data
+            .getUrls(request.params)
+            .then(sendback)
+            .catch(sendErr);
+          break;
+        default:
+          // the message type is unknown
+          console.warn('>--------: A unknown type resived');
       }
 
-      //Return true so the async function can be resoleved and the message will be resieved by the content script
+      // Return true so the async function can be resoleved and
+      // the message will be resieved by the content script
       return true;
     });
   };
@@ -73,20 +99,19 @@ const reseving = (() => {
    * Rezise the screen to the params width and height
    * @param   {Object} A object with a with and height in px
    */
-  let rezize = function (params) {
-    ext.windows.getCurrent(function (wind) {
-
-      //only resize when the screen is not the same size. Anothers the app will glitsh
+  let rezize = (params) => {
+    ext.windows.getCurrent((wind) => {
+      // only resize when the screen is not the same size. Anothers the app will glitsh
       if (wind.width !== params.width) {
         ext.windows.update(wind.id, {
-          width: params.width
+          width: params.width,
         });
       }
 
-      //only resize when the screen is not the same size. Anothers the app will glitsh
+      // only resize when the screen is not the same size. Anothers the app will glitsh
       if (wind.height !== params.height) {
         ext.windows.update(wind.id, {
-          height: params.height
+          height: params.height,
         });
       }
     });
@@ -96,16 +121,19 @@ const reseving = (() => {
    * Opens a page in a new tab
    * @param   {Object} A object with a url
    */
-  let open = function (params) {
+  let open = (params) => {
     ext.windows.create({
-      url: params.url
+      url: params.url,
     });
   };
 
-  return {
-    init
+  const init = () => {
+    listen();
   };
 
+  return {
+    init,
+  };
 })();
 
 /* Export ==================================================================== */
