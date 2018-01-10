@@ -1,6 +1,6 @@
 ![Layernotes](./readme/banner.png)
 
-v0.5.4 (beta)
+v0.5.5 (beta)
 
 
 # Layer Notes

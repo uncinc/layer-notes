@@ -1,16 +1,20 @@
 # Change log
 
 ## Version 0.5.2
+Bug fix: 
+- Let the extention work on the latest version of Firefox
 
-Improvements
+## Version 0.5.2
+
+Improvements: 
 - The placeholder text is now more transparent
 
-Bug fix
+Bug fix: 
 - fix icons that are not loading
 
 ## Version 0.5.1
 
-Bug fix
+Bug fix:
 - fix a issue when mantis has only one project it returns a object instead of array;
 - fix overflow scroll in Chrome;
 - fix removing css in Chrome;
@@ -20,12 +24,11 @@ Bug fix
 
 This release has several bug fixes.
 
-Improvements
+Improvements:
 - get the urls from the background script instead of a predefined var;
 - Remove scroll-to NPM module;
 
-Bug fix
-Fix amount of bugs:
+Bug fix:
 - fix glitch on resizing page;
 - Create selection on click, that can be resized after click;
 - fix return key that will submit the whole page in set up;
