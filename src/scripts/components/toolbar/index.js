@@ -4,7 +4,7 @@
 
 // imports
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
-import Anime from 'react-anime'; // eslint-disable-line no-unused-vars
+import Anime from 'react-anime';
 
 // tools
 import ext from '../../utils/ext';
@@ -15,11 +15,6 @@ import { translate } from '../../utils/helpers';
 
 /* Component ==================================================================== */
 class ToolBar extends Component {
-  static defaultProps = {
-    total: 0,
-    filtertTotal: 0
-  };
-
   constructor(props) {
     super(props);
 
@@ -78,14 +73,14 @@ class ToolBar extends Component {
    */
   render = () => {
     // translateY={['-50%', '-50%']} do not translateY;
+    // <Anime
+    //   delay={(e, i) => i * 10}
+    //   duration={500}
+    //   translateX={this.state.translateX}
+    //   translateY={['-50%', '-50%']}
+    //   easing={'easeOutBack'}
+    //   >
     return (
-      <Anime
-        delay={(e, i) => i * 10}
-        duration={500}
-        translateX={this.state.translateX}
-        translateY={['-50%', '-50%']}
-        easing={'easeOutBack'}
-      >
         <section className={'ln-toolbar elasticity-100'}>
           {this._renderButtons()}
           <span
@@ -95,10 +90,15 @@ class ToolBar extends Component {
             {this.props.filtertTotal}/{this.props.total}
           </span>
         </section>
-      </Anime>
     );
+  // </Anime>
   };
 }
+
+ToolBar.defaultProps = {
+  total: 0,
+  filtertTotal: 0,
+};
 
 /* Export Component ==================================================================== */
 export default ToolBar;
