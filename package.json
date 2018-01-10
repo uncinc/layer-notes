@@ -1,6 +1,6 @@
 {
   "name": "layer-notes",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Layernotes is a tool that you can use to easaly create Tickets for the Bugtracker Manits.",
   "scripts": {
     "start": "npm run firefox-watch",
