@@ -5,13 +5,14 @@
 // imports
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import Anime from 'react-anime';
+import PropTypes from 'prop-types';
 
 // tools
 import ext from '../../utils/ext';
 
 // helper
 import routerHelper from '../router/routerHelper';
-import { translate } from '../../utils/helpers';
+import { translate, log } from '../../utils/helpers';
 
 /* Component ==================================================================== */
 class ToolBar extends Component {
@@ -20,7 +21,8 @@ class ToolBar extends Component {
 
     this.state = {
       // styles: {},
-      translateX: '-7em',
+      // translateX: '-7em',
+      translateX: '0',
       buttons: [
         {
           iconClass: 'ln-icon ln-icon-layernotes-white', // THis is the class that represents the icon
@@ -44,12 +46,12 @@ class ToolBar extends Component {
 
   // Open a new window to go to the settings page of the tool;
   _openSettingsPage = () => {
-    console.log('Go to settings');
+    log('Go to settings');
     ext.tabs.create({ url: '/options.html' });
   };
 
   // render the buttons in the toolbar
-  _renderButtons = () => {
+  renderButtons = () => {
     // loop true the array and return a button with the right icon and function
     return this.state.buttons.map((button, index) => {
       return (
@@ -81,24 +83,31 @@ class ToolBar extends Component {
     //   easing={'easeOutBack'}
     //   >
     return (
-        <section className={'ln-toolbar elasticity-100'}>
-          {this._renderButtons()}
-          <span
-            className="ln-toolbar-amouttickets"
-            title={translate('toolBarAmoutTicketsTitle')}
-          >
-            {this.props.filtertTotal}/{this.props.total}
-          </span>
-        </section>
+      <section className="ln-toolbar elasticity-100">
+        {this.renderButtons()}
+        <span
+          className="ln-toolbar-amouttickets"
+          title={translate('toolBarAmoutTicketsTitle')}
+        >
+          {this.props.filtertTotal}/{this.props.total}
+        </span>
+      </section>
     );
   // </Anime>
   };
 }
 
+ToolBar.propTypes = {
+  total: PropTypes.number,
+  filtertTotal: PropTypes.number,
+};
+
 ToolBar.defaultProps = {
   total: 0,
   filtertTotal: 0,
 };
+
+
 
 /* Export Component ==================================================================== */
 export default ToolBar;

@@ -13,7 +13,7 @@ import generalData from '../../config/general';
 
 // helpers
 import message from '../../utils/message';
-
+import ext from '../../utils/ext';
 /* Component ==================================================================== */
 class Setup extends Component {
   constructor(props) {
@@ -53,11 +53,11 @@ class Setup extends Component {
 
       // TODO: change this vars;
       // tool states
-      accountUserName: '',
+      accountUserName: 'Matthias Dolstra',
       accountPassword: '',
       accountToken: '',
       toolProjectId: '',
-      toolUrl: '',
+      toolUrl: 'https://bugtacker.uncinc.nl',
       toolName: ''
     };
   }

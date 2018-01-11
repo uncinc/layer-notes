@@ -1,5 +1,6 @@
 import ext from '../utils/ext';
 import data from './data';
+import { log } from '../utils/helpers';
 
 /* Component ==================================================================== */
 const reseving = (() => {
@@ -86,7 +87,7 @@ const reseving = (() => {
           break;
         default:
           // the message type is unknown
-          console.warn('>--------: A unknown type resived');
+          log('info', '>--------: A unknown type resived');
       }
 
       // Return true so the async function can be resoleved and

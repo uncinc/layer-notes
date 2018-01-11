@@ -22,6 +22,7 @@ const context = Object.assign({}, generic, specific);
 const manifest = {
   // Add this to the manifest file So the livereload scritpt is also included in the development
   dev: {
+    env: 'dev',
     background: {
       scripts: ['scripts/livereload.js', 'scripts/background/index.js'],
     },
