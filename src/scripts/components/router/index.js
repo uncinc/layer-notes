@@ -1,8 +1,8 @@
 'use strict';
 
 /* Setup ==================================================================== */
-/*eslint-disable no-unused-vars*/
-import React, {Component} from 'react';
+/* eslint-disable no-unused-vars */
+import React, { Component } from 'react';
 import Tour from '../../components/userTour';
 
 import ext from '../../utils/ext';
@@ -12,15 +12,16 @@ import ToolBar from '../toolbar';
 import Selector from '../selector';
 import Setup from '../setup';
 import TicketsOnPage from '../ticketsOnPage';
-/*eslint-disable no-unused-vars*/
+/* eslint-disable no-unused-vars */
 
 // data
 import tourSteps from '../../config/tourSteps';
 
 // helpers
 import generalData from '../../config/general';
-import message from '../../utils/message.js';
+import message from '../../utils/message';
 import routerHelper from './routerHelper';
+import { log } from '../../utils/helpers';
 
 /* Component ==================================================================== */
 class Router extends Component {
@@ -42,26 +43,33 @@ class Router extends Component {
     let _this = this;
 
     // watch the state of the app
-    this._watchStateApp();
+    this.watchStateApp();
 
-    // send a messate to the background scritpt to check if this is the first ticket on this site or not
-    message.send('isFirstTime', {hostname: generalData.hostname}).then((isFirstTime) => {
-      //i f its the rist time
-      if (!isFirstTime.data) { // this is becouse the some funciton always returns true when something is found
-        console.log('>--------: This is the first time the app starts on this page');
+    // send a messate to the background scritpt to check if
+    // this is the first ticket on this site or not
+    message.send('isFirstTime', { hostname: generalData.hostname }).then((isFirstTime) => {
+
+      // if its the rist time
+      if (!isFirstTime.data) {
+        // this is becouse the some funciton always returns true when something is found
+        log('info', '>--------: This is the first time the app starts on this page');
 
         routerHelper.setStateApp('setup');
-        _this.setState({lnState: 'setup'}); // It could be on Webkit browsers that the _watchStateApp is not fired before this function. So always set the state from the app;
+        // It could be on Webkit browsers that the watchStateApp is not
+        // fired before this function. So always set the state from the app;
+        _this.setState({lnState: 'setup'});
 
       } else {
-        console.log('>--------: The app is already started on this page before');
+        log('info', '>--------: The app is already started on this page before');
         routerHelper.setStateApp('home');
-        _this.setState({lnState: 'home'}); // It could be on Webkit browsers that the _watchStateApp is not fired before this function. So always set the state from the app;
+        // It could be on Webkit browsers that the watchStateApp is not fired before this function.
+        // So always set the state from the app;
+        _this.setState({lnState: 'home'});
       }
     });
   }
 
-  _watchStateApp = () => {
+  watchStateApp = () => {
     let _this = this;
 
     // add a listner to the change of the localstorge
@@ -98,7 +106,7 @@ class Router extends Component {
 
   // render the right part
   stateRoutingLogic = () => {
-    console.info(`>--------: Navigate to the ${this.state.lnState} page`);
+    log('info', `>--------: Navigate to the ${this.state.lnState} page`);
     if (this.state.lnState === 'home') {
       return (
         <div>

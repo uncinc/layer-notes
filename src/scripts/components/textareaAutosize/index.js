@@ -225,7 +225,7 @@ TextareaAutosize.defaultProps = {
   rows: 1,
   minRows: 1,
   maxRows: 1,
-  inputRef: 1,
+  inputRef: () => {},
   onChange: emptyFunction,
   onHeightChange: emptyFunction,
   useCacheForDOMMeasurements: false,

@@ -1,7 +1,7 @@
 'use-strict';
 
 // import helpers
-import helpers from '../utils/helpers';
+import helpers, { log } from '../utils/helpers';
 import storage from '../utils/storage';
 import ext from '../utils/ext';
 
@@ -51,7 +51,7 @@ const data = (() => {
             resolve(urls);
           });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error',`>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -59,7 +59,7 @@ const data = (() => {
 
   // clean all tickets an user acount data;
   function cleanAll() {
-    console.log('>-------- The app is cleaned');
+    log('info', '>-------- The app is cleaned');
     setStorage({
       savedTickets: [],
       savedSites: [],
@@ -74,7 +74,7 @@ const data = (() => {
           resolve(sites);
         });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -87,7 +87,7 @@ const data = (() => {
           resolve(sites);
         });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -102,7 +102,6 @@ const data = (() => {
         mantisApi
           .login(url, userName, password)
           .then((userData) => {
-            console.log(userData);
             if (userData === true) {
               mantisApi
                 .getProjects(url, userName, password)
@@ -116,7 +115,6 @@ const data = (() => {
                   reject(err);
                 });
             } else {
-              console.log('hoih');
               reject({
                 status: 500,
                 message: 'Your credentials are wrong.',
@@ -127,7 +125,7 @@ const data = (() => {
             reject(err);
           });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(false);
       }
     }));
@@ -149,7 +147,7 @@ const data = (() => {
           }
         });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(false);
       }
     }));
@@ -187,10 +185,10 @@ const data = (() => {
           })
           .catch((err) => {
             reject(err);
-            console.error(`>-------------------: Error ${err.message}`, err);
+            log('error', `>-------------------: Error ${err.message}`, err);
           });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -234,7 +232,7 @@ const data = (() => {
           resolve(siteObject);
         });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -313,7 +311,7 @@ const data = (() => {
             reject(err);
           });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(false);
       }
     }));
@@ -337,10 +335,10 @@ const data = (() => {
             resolve(dataobject);
           })
           .catch((err) => {
-            console.error(`>-------------------: Error ${err.message}`, err);
+            log('error', `>-------------------: Error ${err.message}`, err);
           });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -375,10 +373,10 @@ const data = (() => {
             resolve(dataobject);
           })
           .catch((err) => {
-            console.error(`>-------------------: Error ${err.message}`, err);
+            log('error', `>-------------------: Error ${err.message}`, err);
           });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -401,7 +399,7 @@ const data = (() => {
           );
         });
       } catch (err) {
-        console.error(`>-------------------: Error ${err.message}`, err);
+        log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     }));
@@ -409,7 +407,7 @@ const data = (() => {
 
   function init() {
     setUpStorage();
-    cleanAll();
+    // cleanAll();
   }
 
   return {

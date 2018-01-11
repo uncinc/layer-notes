@@ -2,6 +2,7 @@
 
 import iconConfig from '../config/icon';
 import ext from '../utils/ext';
+import { log } from '../utils/helpers';
 
 // this code is modified from http://stackoverflow.com/questions/40603655/in-a-firefox-webextension-how-i-can-make-a-button-that-looks-and-acts-like-a-to#40604386
 
@@ -76,13 +77,13 @@ const toggleIcon = (() => {
     ext.browserAction.onClicked.addListener((tab) => {
       ext.browserAction.getTitle(
         {
-          tabId: tab.id
+          tabId: tab.id,
         },
         (title) => {
           // After checking for errors, the title is used to determine
           // if this is going to turn On, or Off.
           if (ext.runtime.lastError) {
-            console.log(`browserAction:getTitle: Encountered an error: ${ext.runtime.lastError}`);
+            log('info', `browserAction:getTitle: Encountered an error: ${ext.runtime.lastError}`);
             return;
           }
           // Check to see if the current button title matches a button state

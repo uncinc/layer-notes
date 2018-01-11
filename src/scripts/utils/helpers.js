@@ -27,6 +27,18 @@ const helpers = (() => {
     return document.getElementById(selector);
   };
 
+  const log = (prio, message, message2) => {
+    const { env } = ext.runtime.getManifest();
+
+    if (env === 'dev') {
+      if (prio === 'info') {
+        console.info(message, message2);
+      } else if (prio === 'error') {
+        console.error(message, message2);
+      }
+    }
+  };
+
   /**
    * Selects  the  all the elements. with the class and
    * if querySelectorAll is not defined it will return false.
@@ -72,7 +84,7 @@ const helpers = (() => {
    * Delete a specific element based on the IDname
    * @param   {String} The id of the element;
    */
-  const deleteElement = (idName) => {
+  const deleteElement = idName => {
     const element = document.getElementById(idName);
     element.outerHTML = '';
   };
@@ -101,9 +113,7 @@ const helpers = (() => {
     const RANDNUMBER = 16;
     let d = new Date().getTime();
 
-    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (
-      c
-    ) => {
+    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
       const r = ((d + Math.random() * RANDNUMBER) % RANDNUMBER) | 0;
       d = Math.floor(d / RANDNUMBER);
       return (c == 'x' ? r : (r & 0x3) | 0x8).toString(RANDNUMBER);
@@ -116,10 +126,12 @@ const helpers = (() => {
    * @param   {Number}    The bytes
    * @returns {String}    The conferted bytes
    */
-  const prettyBytes = (num) => {
+  const prettyBytes = num => {
     const UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     if (!Number.isFinite(num)) {
-      throw new TypeError(`Expected a finite number, got ${typeof num}: ${num}`);
+      throw new TypeError(
+        `Expected a finite number, got ${typeof num}: ${num}`
+      );
     }
 
     const neg = num < 0;
@@ -148,7 +160,7 @@ const helpers = (() => {
    * @param   {String, String}    The url form the page you would like to get
    * @returns {Object}    The page content you would lik to get.
    */
-  const getData = (url) => {
+  const getData = url => {
     if (
       typeof Promise !== 'undefined' &&
       Promise.toString().indexOf('[native code]') !== -1
@@ -190,7 +202,7 @@ const helpers = (() => {
     return short;
   };
 
-  const clone = (object) => {
+  const clone = object => {
     return JSON.parse(JSON.stringify(object));
   };
 
@@ -210,16 +222,16 @@ const helpers = (() => {
       body.offsetHeight,
       html.clientHeight,
       html.scrollHeight,
-      html.offsetHeight,
+      html.offsetHeight
     );
   };
 
-  const isPrommise = (obj) => {
+  const isPrommise = obj => {
     return typeof obj.then === 'function';
     // return !!obj && (typeof obj === 'object' || typeof obj === 'function')
     //  && typeof obj.then === 'function';
   };
-  const shortText = (text) => {
+  const shortText = text => {
     if (text.length > generalData.maxLetters) {
       return (
         cut(
@@ -235,7 +247,7 @@ const helpers = (() => {
     return text;
   };
 
-  const isURL = (str) => {
+  const isURL = str => {
     const pattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
@@ -243,7 +255,7 @@ const helpers = (() => {
       '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
       '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
         '(\\#[-a-z\\d_]*)?$',
-      'i',
+      'i'
     ); // fragment locator
 
     return pattern.test(str);
@@ -256,7 +268,7 @@ const helpers = (() => {
   const scrollTo = (left, top) => {
     const scrollPositions = {
       top: document.body.scrollTop,
-      left: document.body.scrollLeft,
+      left: document.body.scrollLeft
     };
 
     anime({
@@ -268,7 +280,7 @@ const helpers = (() => {
       round: 1,
       update: () => {
         window.scrollTo(scrollPositions.left, scrollPositions.top);
-      },
+      }
     });
   };
 
@@ -276,6 +288,7 @@ const helpers = (() => {
     select,
     selectId,
     selectAll,
+    log,
     setAtribute,
     addClass,
     removeClass,
@@ -292,12 +305,12 @@ const helpers = (() => {
     shortText,
     isURL,
     translate,
-    scrollTo,
+    scrollTo
   };
 })();
 
 /* Export ==================================================================== */
 module.exports = helpers;
 module.exports.details = {
-  title: 'helpers',
+  title: 'helpers'
 };
