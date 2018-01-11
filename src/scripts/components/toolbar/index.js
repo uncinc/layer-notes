@@ -21,8 +21,7 @@ class ToolBar extends Component {
 
     this.state = {
       // styles: {},
-      // translateX: '-7em',
-      translateX: '0',
+      translateX: '-7em',
       buttons: [
         {
           iconClass: 'ln-icon ln-icon-layernotes-white', // THis is the class that represents the icon
@@ -75,14 +74,14 @@ class ToolBar extends Component {
    */
   render = () => {
     // translateY={['-50%', '-50%']} do not translateY;
-    // <Anime
-    //   delay={(e, i) => i * 10}
-    //   duration={500}
-    //   translateX={this.state.translateX}
-    //   translateY={['-50%', '-50%']}
-    //   easing={'easeOutBack'}
-    //   >
     return (
+    <Anime
+      delay={(e, i) => i * 10}
+      duration={500}
+      translateX={this.state.translateX}
+      translateY={['-50%', '-50%']}
+      easing={'easeOutBack'}
+    >
       <section className="ln-toolbar elasticity-100">
         {this.renderButtons()}
         <span
@@ -92,8 +91,8 @@ class ToolBar extends Component {
           {this.props.filtertTotal}/{this.props.total}
         </span>
       </section>
+    </Anime>
     );
-  // </Anime>
   };
 }
 
