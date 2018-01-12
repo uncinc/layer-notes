@@ -37,17 +37,11 @@ const mantisApi = (() => {
    * @param   {String, String, String}  This are the paramse
    * @returns {Bool} of a Error when there is something wrong
    */
-  const  login = (url, userName, password) => {
+  const login = (url, userName, password) => {
     return new Promise((resolve, reject) => {
       try {
-        var pl = new SOAPClientParameters();
-        pl.add('username', userName);
-        pl.add('password', password);
-
-        const apiUrl = urls.soapApi(url);
-        SOAPClient.invoke(apiUrl, 'mc_login', pl, true, callBack);
-
-         const callBack = (res) => {
+        const pl = new SOAPClientParameters();
+        const callBack = (res) => {
           if (
             res.status === INTERNAL_SERVER_ERR ||
             res.status === NODATA_ERR ||
@@ -55,18 +49,25 @@ const mantisApi = (() => {
           ) {
             reject({
               status: INTERNAL_SERVER_ERR,
-              message: 'Your credentials are wrong'
+              message: 'Your credentials are wrong',
             });
           } else {
             resolve(true);
           }
-        }
+        };
+        pl.add('username', userName);
+        pl.add('password', password);
+
+        const apiUrl = urls.soapApi(url);
+        SOAPClient.invoke(apiUrl, 'mc_login', pl, true, callBack);
+
+
       } catch (err) {
         log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     });
-  }
+  };
 
   /**
    * Gets the projects that are listed in Manits
@@ -81,19 +82,11 @@ const mantisApi = (() => {
   const getProjects = (url, userName, password) => {
     return new Promise((resolve, reject) => {
       try {
-        var pl = new SOAPClientParameters();
+        const pl = new SOAPClientParameters();
         pl.add('username', userName);
         pl.add('password', password);
 
         const apiUrl = urls.soapApi(url);
-        SOAPClient.invoke(
-          apiUrl,
-          'mc_projects_get_user_accessible',
-          pl,
-          true,
-          callBack
-        );
-
         const callBack = (res) => {
           if (res.status === INTERNAL_SERVER_ERR) {
             reject({
@@ -109,12 +102,20 @@ const mantisApi = (() => {
             resolve(res);
           }
         };
+
+        SOAPClient.invoke(
+          apiUrl,
+          'mc_projects_get_user_accessible',
+          pl,
+          true,
+          callBack,
+        );
       } catch (err) {
         log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
       }
     });
-  }
+  };
   /**
    * Submits a new issue to mantis
    * @param   {String, String, String, String, object}  userName, password, apiUrl, issueId, assets
@@ -217,7 +218,7 @@ const mantisApi = (() => {
                 : NOMAL_WEIGHT,
             name: newTicketObject.isImportant === true ? 'height' : 'normal',
           },
-          steps_to_reproduce: '',
+          steps_to_reproduce: generateReadableContentFromObject(newTicketObject.data),
           category: 'General', // This one is requert by mantis.
           // attachments: newTicketObject.assets
         };
