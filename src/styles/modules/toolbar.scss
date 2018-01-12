@@ -6,7 +6,7 @@
     overflow: hidden;
     pointer-events: all;
     position: fixed;
-    // right: -7em; //position outside the window, so it can be animated by JS.
+    right: -7em; //position outside the window, so it can be animated by JS.
     // position the left edge of the element at the middle of the parent
     top: 50%;
     transform: translateX(0) translateY(-50%);

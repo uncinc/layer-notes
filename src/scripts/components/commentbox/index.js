@@ -71,7 +71,7 @@ class CommentBox extends Component {
    * Adds for normal inputs
    * @param   {e} the event of the input
    */
-  _handleStateChange = (e) => {
+  handleStateChange = (e) => {
     // get the new state from the old state
     let newState = helpers.setNewState(
       this.props.ticket,
@@ -470,7 +470,7 @@ class CommentBox extends Component {
           {this.renderExtraInfo()}
           <TextareaAutosize
             minRows={3}
-            onChange={this._handleStateChange.bind(this)}
+            onChange={this.handleStateChange.bind(this)}
             name="ticketText"
             className="ln-commentbox--textarea"
             useCacheForDOMMeasurements

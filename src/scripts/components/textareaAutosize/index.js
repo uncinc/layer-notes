@@ -1,5 +1,3 @@
-/*eslint-disable no-unused-vars*/
-
 // based on https://github.com/andreypopp/react-textarea-autosize/blob/master/src/TextareaAutosize.js
 /**
  * <TextareaAutosize />
@@ -8,8 +6,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import calculateNodeHeight from './calculateNodeHeight';
-
-const emptyFunction = function() {};
 
 export default class TextareaAutosize extends React.Component {
   constructor(props) {
@@ -226,8 +222,8 @@ TextareaAutosize.defaultProps = {
   minRows: 1,
   maxRows: 1,
   inputRef: () => {},
-  onChange: emptyFunction,
-  onHeightChange: emptyFunction,
+  onChange: () => {},
+  onHeightChange: () => {},
   useCacheForDOMMeasurements: false,
 };
 

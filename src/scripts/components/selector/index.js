@@ -54,8 +54,8 @@ class Selector extends Component {
       startX: -1,
       startY: -1,
       x: -1,
-      y: -1,
-      last_position: {}
+      y: -1
+      // last_position: {}
     };
   }
   componentWillMount() {
@@ -86,7 +86,7 @@ class Selector extends Component {
   }
 
   // set the start of the drawing of the square
-  onMouseDown = (e) => {
+  onMouseDown = e => {
     e.preventDefault();
     if (this.state.isDrawing) {
       this.setState({ cursorStyle: 'default', isDrawing: false });
@@ -101,7 +101,7 @@ class Selector extends Component {
   };
 
   // listen to the esc key. Then go the home page;
-  onKeyDown = (e) => {
+  onKeyDown = e => {
     const ESC_KEY = 27;
 
     if (e.keyCode === ESC_KEY) {
@@ -111,13 +111,13 @@ class Selector extends Component {
     }
   };
 
-  _takeScreenshot = (screenshotName) => {
+  _takeScreenshot = screenshotName => {
     const _this = this;
     return new Promise((resolve, reject) => {
       try {
         message
           .send('takeScreenschot', {})
-          .then((image) => {
+          .then(image => {
             const oldState = _this.state.ticket.assets;
             const newScreenshot = {
               name: screenshotName, // the name of the file
@@ -125,7 +125,7 @@ class Selector extends Component {
               content: image.data,
               show: false,
               file_type: 'image/jpeg',
-              id: helpers.generateUUID(), // a random genreated id
+              id: helpers.generateUUID() // a random genreated id
             };
             oldState.push(newScreenshot);
             const newStateTicket = helpers.setNewState(
@@ -172,13 +172,13 @@ class Selector extends Component {
     const positionY = this.state.ticket.position.y;
     const pageHeight = helpers.pageHeight();
 
-    if (positionY < pageHeight) {
+    if (positionY < pageHeight && positionY > 10) {
       helpers.scrollTo(0, positionY);
     }
   };
 
   //  for setting the new state in the ticket {Object}
-  handleStateChange = (newState) => {
+  handleStateChange = newState => {
     // set the new state to the selected ticket;
     this.setState({ ticket: newState });
   };
@@ -245,7 +245,7 @@ class Selector extends Component {
     });
     // take a screenshot of the selected item
     this._takeScreenshot(translate('selectorScreenshotNameAfter')).then(
-      function() {
+      () => {
         message
           .send('submitNewTicket', {
             ticket: _this.state.ticket,
@@ -253,11 +253,11 @@ class Selector extends Component {
             url: generalConfig.url,
             shortlink: generalConfig.shortlink
           })
-          .then(function() {
-            setTimeout(function() {
+          .then(() => {
+            setTimeout(() => {
               _this.setState({ isLoading: false, isUploaded: true });
             }, 600);
-            setTimeout(function() {
+            setTimeout(() => {
               _this.setState({ isUploaded: false });
               routerHelper.setStateApp('home');
             }, 2000);
@@ -266,27 +266,17 @@ class Selector extends Component {
     );
   };
 
-  _updateFramePosition = (left, top) => {
-    let position = {
-      x: left,
-      y: top,
-      width: this.state.ticket.position.width,
-      height: this.state.ticket.position.height
-    };
-    let newStateTicket = helpers.setNewState(
-      this.state.ticket,
-      'position',
-      position
-    );
-
+  updateFrame = (position) => {
     this.setState({
-      ticket: newStateTicket,
-      positionClass: this._checkClassname()
+      ...this.state,
+      ticket: {
+        ...this.state.ticket,
+        position: {
+          ...this.state.ticket.position,
+          ...position,
+        },
+      },
     });
-  };
-
-  _updateFrameSize = (prop, value) => {
-    this.setState({ [prop]: value });
   };
 
   _setMousePosition = e => {
@@ -320,7 +310,7 @@ class Selector extends Component {
   /**
    * RENDER
    */
-  _helperElement = () => {
+  helperElement = () => {
     if (!this.state.showCommentbox) {
       return (
         <span
@@ -337,7 +327,7 @@ class Selector extends Component {
     return '';
   };
 
-  _renderCommentBox = () => {
+  renderCommentBox = () => {
     if (this.state.showCommentbox) {
       return (
         <CommentBox
@@ -350,12 +340,11 @@ class Selector extends Component {
           onchange={this.handleStateChange}
         />
       );
-    } else {
-      return '';
     }
+    return '';
   };
 
-  _drawElement = () => {
+  drawElement = () => {
     return (
       <div>
         <div
@@ -371,11 +360,11 @@ class Selector extends Component {
             width={this.state.ticket.position.width}
             height={this.state.ticket.position.height}
             left={this.state.ticket.position.x}
+            top={this.state.ticket.position.y}
             showCommentbox={this.state.showCommentbox}
-            updateFramePosition={this._updateFramePosition}
-            updateFrameSize={this._updateFrameSize}
+            updateFrame={this.updateFrame}
           />
-          {this._renderCommentBox()}
+          {this.renderCommentBox()}
         </div>
         <SelectorBackground
           width={this.state.ticket.position.width}
@@ -397,13 +386,12 @@ class Selector extends Component {
             cursor: this.state.cursorStyle
           }}
         >
-          {this._drawElement()}
-          {this._helperElement()}
+          {this.drawElement()}
+          {this.helperElement()}
         </div>
       );
-    } else {
-      return <div />;
     }
+    return <div />;
   };
 }
 

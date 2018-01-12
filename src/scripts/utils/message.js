@@ -1,3 +1,14 @@
+/**
+ * @Author: matthias
+ * @Date:   10-01-182018
+ * @Filename: message.js
+ * @Last modified by:   matthias
+ * @Last modified time: 12-01-182018
+ * @License: GPL-3.0
+ * @Copyright: By Matthias
+ */
+
+
 'use strict';
 
 import ext from '../utils/ext';

@@ -17,7 +17,7 @@ import CommentBox from '../../components/commentbox';
 import { translate } from '../../utils/helpers';
 import message from '../../utils/message';
 
-/*eslint-disable no-unused-vars*/
+/* eslint-disable no-unused-vars */
 
 /* Component ==================================================================== */
 class TicketsOnPage extends Component {
@@ -31,7 +31,7 @@ class TicketsOnPage extends Component {
       isLoading: false,
       loadingText: translate('loadingText'),
       total: 0,
-      filtertTotal: 0
+      filtertTotal: 0,
     };
   }
 
@@ -45,7 +45,7 @@ class TicketsOnPage extends Component {
         hostname: generalData.hostname,
         shortlink: generalData.shortlink
       })
-      .then(function(tickets) {
+      .then((tickets) => {
         // set all tickets
         _this.setState({
           savedTickets: tickets.data.filtertTickets,
@@ -56,9 +56,9 @@ class TicketsOnPage extends Component {
   }
 
   // show the comment box or not
-  _showCommentBox = e => {
+  _showCommentBox = (e) => {
     e.preventDefault();
-    var ticket = this.state.savedTickets.filter(function(ticket) {
+    const ticket = this.state.savedTickets.filter((ticket) => {
       if (ticket.id === e.target.getAttribute('data-id')) {
         // add the date to the comment box
         return ticket;
@@ -67,7 +67,7 @@ class TicketsOnPage extends Component {
     this.setState({ selectedTicket: ticket[0], showCommentbox: true });
   };
 
-  _hideCommentBox = e => {
+  _hideCommentBox = (e) => {
     // hide the commenbox and clean the selectedTicket
     this.setState({ showCommentbox: false, selectedTicket: {} });
     // prevent submit
@@ -75,7 +75,7 @@ class TicketsOnPage extends Component {
   };
 
   // set the new state. this is a funciton form the comment box
-  _handleStateChange = newState => {
+  _handleStateChange = (newState) => {
     // set the new state to the selected ticket;
     this.setState({ selectedTicket: newState });
   };
@@ -83,7 +83,7 @@ class TicketsOnPage extends Component {
   // sumbit the comment box
   _onCommentBoxSubmit = () => {
     let _this = this;
-    _this.setState({
+    this.setState({
       isLoading: true,
       loadingText: translate('ticketsOnPageUpdating')
     });
@@ -91,11 +91,11 @@ class TicketsOnPage extends Component {
     // send to the backend script
     message
       .send('updateTicket', {
-        ticket: this.state.selectedTicket //  the ticket
+        ticket: this.state.selectedTicket, // the ticket
       })
-      .then(function() {
+      .then(() => {
         // so the loading is vissible for the user
-        setTimeout(function() {
+        setTimeout(() => {
           _this.setState({
             isLoading: false,
             showCommentbox: false,
@@ -118,18 +118,14 @@ class TicketsOnPage extends Component {
           onchange={this._handleStateChange}
         />
       );
-    } else {
-      return '';
     }
+    return '';
   };
 
   _renderIcons = () => {
-    let _this = this;
-    let savedTickets = this.state.savedTickets.map(function(ticket) {
-      console.log('_this.state.selectedTicket', _this.state.selectedTicket);
-      console.log('ticket.id', ticket.id);
-      let buttonClass =
-        _this.state.selectedTicket.id === ticket.id ? 'active' : '';
+    const savedTickets = this.state.savedTickets.map(ticket => {
+      const buttonClass =
+        this.state.selectedTicket.id === ticket.id ? 'active' : '';
       return (
         <div
           className="ln-tickets-on-page--ticket"
@@ -146,7 +142,7 @@ class TicketsOnPage extends Component {
               buttonClass
             }`}
             data-id={ticket.id}
-            onClick={_this._showCommentBox}
+            onClick={this._showCommentBox}
             title={`Ticket ${ticket.id}`}
           >
             <span className="ln-icon ln-icon-layernotes" />

@@ -209,7 +209,7 @@ class Setup extends Component {
         locationOrigin
       })
       .then(function(data) {
-        console.log(data);
+        // console.log(data);
       });
   };
 
