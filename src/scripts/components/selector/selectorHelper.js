@@ -134,6 +134,8 @@ class SelectorHelper extends Component {
 
         if (this.state.element === 'ln-rectangle-left-bottom') {
           proposedValue.width = this.props.width + inverse(this.state.differenceX);
+          // console.log('this.props.height', this.props.height);
+          // console.log('inverse(this.state.differenceY)', this.state.differenceY);
           // proposedValue.height = this.props.height + inverse(this.state.differenceY);
           proposedValue.x = proposedValue.x - inverse(this.state.differenceX);
           // console.log('proposedValue', proposedValue);
@@ -150,21 +152,26 @@ class SelectorHelper extends Component {
     var ev = e || window.event; // Moz || IE
     if (ev.pageX) {
       // Moz
-      // console.log(ev.pageX + window.pageXOffset - this.state.x);
+      console.log('window.pageYOffset', window.pageYOffset);
+      // console.log('(ev.pageY + window.pageYOffset)', (ev.pageY));
+      // console.log('this.props.top', this.props.top);
+      // console.log('(ev.pageY) - this.props.top', (ev.pageY) - this.props.top);
       this.setState({
         differenceX: (ev.pageX + window.pageXOffset) - this.props.left,
-        differenceY: ev.pageY + window.pageYOffset,
+        differenceY: (ev.pageY) - this.props.top,
         x: ev.pageX + window.pageXOffset,
         y: ev.pageY + window.pageYOffset
       });
     } else if (ev.clientX) {
+
       // this is a fix for IE
       this.setState({
-        differenceX: ev.clientX + document.body.scrollLeft - this.props.left,
-        differenceY: ev.clientY + document.body.scrollTop - this.props.top,
+        differenceX: (ev.clientX + document.body.scrollLeft) - this.props.left,
+        differenceY: (ev.clientY + document.body.scrollTop) - this.props.top,
         x: ev.clientX + document.body.scrollLeft,
         y: ev.clientY + document.body.scrollTop
       });
+
     }
   };
 

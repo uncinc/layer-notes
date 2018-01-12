@@ -172,7 +172,7 @@ class Selector extends Component {
     const positionY = this.state.ticket.position.y;
     const pageHeight = helpers.pageHeight();
 
-    if (positionY < pageHeight) {
+    if (positionY < pageHeight && positionY > 10) {
       helpers.scrollTo(0, positionY);
     }
   };

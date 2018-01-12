@@ -1,6 +1,7 @@
 'use-strict';
 
 import ext from './ext';
+import scrollIt from './scrollit';
 import generalData from '../config/general';
 import anime from 'animejs';
 
@@ -265,7 +266,7 @@ const helpers = (() => {
     return ext.i18n.getMessage(message, value);
   };
 
-  const scrollTo = (left, top) => {
+  function scrollTo(left, top) {
     const scrollPositions = {
       top: document.body.scrollTop,
       left: document.body.scrollLeft
@@ -279,8 +280,8 @@ const helpers = (() => {
       easing: 'easeInCubic',
       round: 1,
       update: () => {
-        window.scrollTo(scrollPositions.left, scrollPositions.top);
-      }
+        scrollIt(top);
+      },
     });
   };
 
