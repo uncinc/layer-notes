@@ -133,26 +133,75 @@ class SelectorHelper extends Component {
         };
 
         if (this.state.element === 'ln-rectangle-left-bottom') {
-          proposedValue.width = this.props.width + inverse(this.state.differenceX);
-          // console.log('this.props.height', this.props.height);
-          // console.log('inverse(this.state.differenceY)', this.state.differenceY);
-          // proposedValue.height = this.props.height + inverse(this.state.differenceY);
-          proposedValue.x = proposedValue.x - inverse(this.state.differenceX);
-          // console.log('proposedValue', proposedValue);
-          // console.log('inverse(this.state.differenceX)', inverse(this.state.differenceX));
-          this.props.updateFrame(proposedValue);
-
+          // TODO: fix the max and min width and height;
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.props.width + inverse(this.state.differenceX),
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + (this.state.differenceY - this.props.height),
+          );
+          proposedValue.x = Math.max(
+            generalConfig.minX,
+            proposedValue.x - inverse(this.state.differenceX),
+          );
+        } else if (this.state.element === 'ln-rectangle-right-bottom') {
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.state.differenceX,
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + (this.state.differenceY - this.props.height),
+          );
+        } else if (this.state.element === 'ln-rectangle-left-top') {
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.props.width + inverse(this.state.differenceX),
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + inverse(this.state.differenceY),
+          );
+          // check if the height and with is not to small
+          if (
+            proposedValue.height > generalConfig.minHeight &&
+            proposedValue.width > generalConfig.minWidth
+          ) {
+            proposedValue.x = Math.max(
+              generalConfig.minX,
+              proposedValue.x - inverse(this.state.differenceX),
+            );
+            proposedValue.y -= inverse(this.state.differenceY);
+          }
+        } else if (this.state.element === 'ln-rectangle-right-top') {
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.state.differenceX,
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + inverse(this.state.differenceY),
+          );
+          if (
+            proposedValue.height > generalConfig.minHeight &&
+            proposedValue.width > generalConfig.minWidth
+          ) {
+            proposedValue.y -= inverse(this.state.differenceY);
+          }
         }
+        this.props.updateFrame(proposedValue);
       }
     }
   };
-
 
   setMousePosition = (e) => {
     var ev = e || window.event; // Moz || IE
     if (ev.pageX) {
       // Moz
-      console.log('window.pageYOffset', window.pageYOffset);
+      // console.log('window.pageYOffset', window.pageYOffset);
+      // console.log((ev.pageY) - this.props.top);
       // console.log('(ev.pageY + window.pageYOffset)', (ev.pageY));
       // console.log('this.props.top', this.props.top);
       // console.log('(ev.pageY) - this.props.top', (ev.pageY) - this.props.top);
@@ -171,7 +220,6 @@ class SelectorHelper extends Component {
         x: ev.clientX + document.body.scrollLeft,
         y: ev.clientY + document.body.scrollTop
       });
-
     }
   };
 

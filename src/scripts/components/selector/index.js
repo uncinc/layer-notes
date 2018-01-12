@@ -267,7 +267,6 @@ class Selector extends Component {
   };
 
   updateFrame = (position) => {
-    // console.log(position);
     this.setState({
       ...this.state,
       ticket: {
