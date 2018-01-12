@@ -1,6 +1,6 @@
 import { SOAPClient, SOAPClientParameters } from '../vendor/soapclient';
 
-import { log } from '../utils/helpers';
+import { log, generateReadableContentFromObject } from '../utils/helpers';
 
 /* Component ==================================================================== */
 const mantisApi = (() => {
@@ -115,83 +115,6 @@ const mantisApi = (() => {
       }
     });
   }
-
-  /**
-   * Submits a new issue to mantis
-   * @param   {String, String, String, String, object}  url, userName,
-   *                                                    password, projecId, newTicketObject
-   * @returns {Number} It returns the ticket id
-   *
-   */
-
-  function submitIssue(url, userName, password, projecId, newTicketObject) {
-    return new Promise((resolve, reject) => {
-      try {
-        var pl = new SOAPClientParameters();
-
-        // account data
-        pl.add('username', userName);
-        pl.add('password', password);
-
-        const IMPORTANT_WEIGHT = 40;
-        const NOMAL_WEIGHT = 30;
-
-        const ticket = {
-          project: {
-            id: projecId,
-          },
-          summary: newTicketObject.ticketTitle,
-          description: newTicketObject.ticketText,
-          platform: `${newTicketObject.data.browserData.browserName} ${
-            newTicketObject.data.browserData.browserVersion
-          }`,
-          os: newTicketObject.data.browserData.os,
-          os_build: newTicketObject.data.browserData.osversion,
-          priority: {
-            id:
-              newTicketObject.isImportant === true
-                ? IMPORTANT_WEIGHT
-                : NOMAL_WEIGHT,
-            name: newTicketObject.isImportant === true ? 'height' : 'normal'
-          },
-          steps_to_reproduce: JSON.stringify(newTicketObject.data),
-          category: 'General' // This one is requert by mantis.
-          // attachments: newTicketObject.assets
-        };
-
-        // Ticket data
-        pl.add('issue', ticket);
-
-        const apiUrl = urls.soapApi(url);
-        SOAPClient.invoke(apiUrl, 'mc_issue_add', pl, true, callBack);
-
-        const callBack = (ticketId) => {
-          if (ticketId.status === INTERNAL_SERVER_ERR) {
-            reject({
-              status: INTERNAL_SERVER_ERR,
-              message: 'Your credentials are wrong',
-            });
-          } else {
-            uploadAssets(
-              userName,
-              password,
-              apiUrl,
-              ticketId,
-              newTicketObject.assets,
-            ).then(() => {
-              resolve(ticketId);
-            }).catch((err) => {
-              log('error', err);
-            });
-          }
-        };
-      } catch (err) {
-        log('error', `>-------------------: Error ${err.message}`, err);
-        reject(err);
-      }
-    });
-  }
-
   /**
    * Submits a new issue to mantis
    * @param   {String, String, String, String, object}  userName, password, apiUrl, issueId, assets
@@ -228,6 +151,82 @@ const mantisApi = (() => {
         });
 
         resolve(true);
+      } catch (err) {
+        log('error', `>-------------------: Error ${err.message}`, err);
+        reject(err);
+      }
+    });
+  }
+
+
+  /**
+   * Submits a new issue to mantis
+   * @param   {String, String, String, String, object}  url, userName,
+   *                                                    password, projecId, newTicketObject
+   * @returns {Number} It returns the ticket id
+   *
+   */
+
+  function submitIssue(url, userName, password, projecId, newTicketObject) {
+    return new Promise((resolve, reject) => {
+      try {
+        const pl = new SOAPClientParameters();
+        const apiUrl = urls.soapApi(url);
+        const callBack = (ticketId) => {
+          if (ticketId.status === INTERNAL_SERVER_ERR) {
+            reject({
+              status: INTERNAL_SERVER_ERR,
+              message: 'Your credentials are wrong',
+            });
+          } else {
+            uploadAssets(
+              userName,
+              password,
+              apiUrl,
+              ticketId,
+              newTicketObject.assets,
+            ).then(() => {
+              resolve(ticketId);
+            }).catch((err) => {
+              log('error', err);
+            });
+          }
+        };
+        // account data
+        pl.add('username', userName);
+        pl.add('password', password);
+
+        const IMPORTANT_WEIGHT = 40;
+        const NOMAL_WEIGHT = 30;
+
+        const ticket = {
+          project: {
+            id: projecId,
+          },
+          summary: newTicketObject.ticketTitle,
+          description: newTicketObject.ticketText,
+          platform: `${newTicketObject.data.browserData.browserName} ${
+            newTicketObject.data.browserData.browserVersion
+          }`,
+          os: newTicketObject.data.browserData.os,
+          os_build: newTicketObject.data.browserData.osversion,
+          priority: {
+            id:
+              newTicketObject.isImportant === true
+                ? IMPORTANT_WEIGHT
+                : NOMAL_WEIGHT,
+            name: newTicketObject.isImportant === true ? 'height' : 'normal',
+          },
+          steps_to_reproduce: '',
+          category: 'General', // This one is requert by mantis.
+          // attachments: newTicketObject.assets
+        };
+
+        // Ticket data
+        pl.add('issue', ticket);
+
+
+        SOAPClient.invoke(apiUrl, 'mc_issue_add', pl, true, callBack);
       } catch (err) {
         log('error', `>-------------------: Error ${err.message}`, err);
         reject(err);
