@@ -53,11 +53,11 @@ class Setup extends Component {
 
       // TODO: change this vars;
       // tool states
-      accountUserName: 'Matthias Dolstra',
+      accountUserName: '',
       accountPassword: '',
       accountToken: '',
       toolProjectId: '',
-      toolUrl: 'https://bugtacker.uncinc.nl',
+      toolUrl: '',
       toolName: ''
     };
   }

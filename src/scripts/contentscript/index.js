@@ -19,7 +19,6 @@ window.ln = window.ln || {};
 window.ln.init = (() => {
   const render = () => {
     const mainElement = select(`#${generalConfig.idName}`);
-
     // render the first element
     ReactDOM.render(<Root />, mainElement);
   };

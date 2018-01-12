@@ -248,7 +248,21 @@ const helpers = (() => {
     return text;
   };
 
-  const isURL = str => {
+  function generateReadableContentFromObject(object = {}) {
+    let readableString = '';
+
+    Object.keys(object).map((key) => {
+      let value = object[key];
+      if (typeof value === 'object') {
+        value = JSON.stringify(object[key]);
+      }
+      readableString += `${key}: ${value} \n`;
+    });
+
+    return readableString;
+  }
+
+  const isURL = (str) => {
     const pattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
@@ -256,7 +270,7 @@ const helpers = (() => {
       '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
       '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
         '(\\#[-a-z\\d_]*)?$',
-      'i'
+      'i',
     ); // fragment locator
 
     return pattern.test(str);
@@ -308,6 +322,7 @@ const helpers = (() => {
     pageHeight,
     isPrommise,
     shortText,
+    generateReadableContentFromObject,
     isURL,
     translate,
     scrollTo,
