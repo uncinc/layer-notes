@@ -284,6 +284,10 @@ const helpers = (() => {
     });
   };
 
+  function inverse(num) {
+    return num - (num * 2);
+  }
+
   return {
     select,
     selectId,
@@ -305,7 +309,8 @@ const helpers = (() => {
     shortText,
     isURL,
     translate,
-    scrollTo
+    scrollTo,
+    inverse,
   };
 })();
 
