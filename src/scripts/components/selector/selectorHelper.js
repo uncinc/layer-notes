@@ -1,24 +1,16 @@
 'use strict';
 
 /* Setup ==================================================================== */
-import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import generalConfig from '../../config/general';
+import propTypes from 'prop-types';
 
-//helpers
-import {setMinMaxWidth} from '../../utils/helpers';
+// helpers
+import { setMinMaxWidth, inverse } from '../../utils/helpers';
 import routerHelper from '../router/routerHelper';
 
 /* Component ==================================================================== */
 class SelectorHelper extends Component {
-  static defaultProps = {
-    left: 0,
-    width: 0,
-    height: 0,
-    showCommentbox: false,
-    updateFramePosition: () => {},
-    updateFrameSize: () => {}
-  };
-
   constructor(props) {
     super(props);
 
@@ -32,171 +24,204 @@ class SelectorHelper extends Component {
       width: this.props.width,
       height: this.props.height,
       differenceX: 0,
-      differenceY: 0
+      differenceY: 0,
     };
   }
 
-  //remove the events when the elemnt is gone
+  // remove the events when the elemnt is gone
   componentWillUnmount() {
-    this._removeMouseEvents();
+    this.removeMouseEvents();
   }
 
-  _addMouseEvents() {
+  addMouseEvents() {
     document.addEventListener('mousemove', this._onMouseMove, false);
-    document.addEventListener('mouseup', this._onMouseUp, false);
-    document.addEventListener('keypress', this._onKeyDown, false);
+    document.addEventListener('mouseup', this.onMouseUp, false);
+    document.addEventListener('keypress', this.onKeyDown, false);
   }
 
-  _removeMouseEvents() {
+  removeMouseEvents() {
     document.removeEventListener('mousemove', this._onMouseMove, false);
-    document.removeEventListener('mouseup', this._onMouseUp, false);
-    // document.removeEventListener('keypress', this._onKeyDown, false);
+    document.removeEventListener('mouseup', this.onMouseUp, false);
+    // document.removeEventListener('keypress', this.onKeyDown, false);
   }
-  _onKeyDown = (e) => {
+  onKeyDown = (e) => {
     const KEY_ESC = 27; // the esc key
     if (e.keyCode === KEY_ESC) {
-      this._removeMouseEvents();
-      routerHelper.setStateApp('home'); //go to a page
+      this.removeMouseEvents();
+      routerHelper.setStateApp('home'); // go to the home
     }
-  }
+  };
 
   /**
-     * check wat for movement is going on based on the elemnt class
-     * @param   {String}  A classname
-     * @returns {Object} a object with the movement and the elemnt
-     */
-  _checkTransform = (className) => {
+   * check wat for movement is going on based on the elemnt class
+   * @param   {String}  A classname
+   * @returns {Object} a object with the movement and the elemnt
+   */
+  checkTransform = (className) => {
     if (className === 'ln-rectangle--draggingarea') {
-      return {movement: 'move', element: null};
-    } else if (className === 'ln-rectangle-left-bottom' || className === 'ln-rectangle-left-top' || className === 'ln-rectangle-right-bottom' || className === 'ln-rectangle-right-top') {
-      return {movement: 'scale'};
+      return { movement: 'move', element: null };
+    } else if (
+      className === 'ln-rectangle-left-bottom' ||
+      className === 'ln-rectangle-left-top' ||
+      className === 'ln-rectangle-right-bottom' ||
+      className === 'ln-rectangle-right-top'
+    ) {
+      return { movement: 'scale' };
     }
     return null;
-  }
+  };
 
   /**
-     * When the mouse is down add other mouse events
-     * @param {e}  e
-     */
-  _onMouseDown = (e) => {
-    let checkTransform = this._checkTransform(e.target.className);
-    this._addMouseEvents();
-    this.setState({isDragging: true, movement: checkTransform.movement, element: e.target.className});
-  }
+   * When the mouse is down add other mouse events
+   * @param {e}  e
+   */
+  onMouseDown = (e) => {
+    let checkTransform = this.checkTransform(e.target.className);
+    this.addMouseEvents();
+    this.setState({
+      isDragging: true,
+      movement: checkTransform.movement,
+      element: e.target.className,
+    });
+  };
 
   /**
-     * remove all events when the mouse is up
-     * @param   {e}  e
-     */
-  _onMouseUp = () => {
-
-    this._removeMouseEvents();
-    this.setState({isDragging: false, movement: null, element: null});
-  }
+   * remove all events when the mouse is up
+   * @param   {e}  e
+   */
+  onMouseUp = () => {
+    this.removeMouseEvents();
+    this.setState({ isDragging: false, movement: null, element: null });
+  };
 
   /**
-     * Check the mouse mouve now only works with move, noet with dragging the corners
-     * @param   {e}  e
-     */
+   * Check the mouse mouve now only works with move, noet with dragging the corners
+   * @param   {e}  e
+   */
   _onMouseMove = (e) => {
-    this._setMousePosition(e);
+    this.setMousePosition(e);
     // let _this = this;
 
     if (this.props.showCommentbox && this.state.isDragging) {
-
       //the move movement
       if (this.state.movement === 'move') {
-
-        let proposedValue = {
+        const proposedValue = {
           x: this.state.x - (this.props.width / 2),
-          y: this.state.y - (this.props.height / 2) - window.scrollY
+          y: this.state.y - (this.props.height / 2) - window.scrollY,
         };
 
-        let newX = setMinMaxWidth(proposedValue.x, generalConfig.minX, generalConfig.maxX(this.props.width));
-        let newY = setMinMaxWidth(proposedValue.y, generalConfig.minY, generalConfig.maxY(this.props.height));
+        const newPosition = {
+          x: setMinMaxWidth(
+            proposedValue.x,
+            generalConfig.minX,
+            generalConfig.maxX(this.props.width),
+          ),
+          y: setMinMaxWidth(
+            proposedValue.y,
+            generalConfig.minY,
+            generalConfig.maxY(this.props.height),
+          ),
+        };
+        this.props.updateFrame(newPosition);
 
-        this.props.updateFramePosition(newX, newY);
-
-        //the scale of the elemtn this is work in progress
+        // the scale of the element this is work in progress
       } else if (this.state.movement === 'scale') {
-        //TODO: make this
-        // let directions = this.state.directions;
-        // let proposedValue = {
-        //   top: setMinMaxWidth(this.state.y, generalConfig.minY, generalConfig.maxY),
-        //   left: setMinMaxWidth(this.state.x, generalConfig.minX, generalConfig.maxX),
-        //   // width: this.state.width + this.state.,
-        //   // height: this.state.height
-        // };
-        //
-        // if (this.state.element === "ln-rectangle-left-top") {
-        //   // console.log(proposedValue.left);
-        //   proposedValue.width = this.props.width;
-        //   _this.props.updateFrameSize('left', proposedValue.left);
-        //   _this.props.updateFrameSize('width', proposedValue.width);
-        //
-        //   // console.log('this.state.width + this.state.differenceX', this.state.width + this.state.differenceX);
-        //
-        // }
+        const { directions } = this.state;
+        const proposedValue = {
+          y: this.props.top,
+          x: this.props.left,
+        };
 
-        // console.log(proposedValue.top);
-
-        // let newX = setMinMaxWidth(proposedValue.x, generalConfig.minX, generalConfig.maxX);
-        // let newY = setMinMaxWidth(proposedValue.y, generalConfig.minY, generalConfig.maxY);
-        // console.log(newX, newY);
-
-        // directions.forEach(function(direction) {
-        // console.log('direction', direction);
-        // console.log('this.state.differenceX', _this.state.differenceX);
-        // console.log('this.state.x', _this.state.x);
-
-        // ln-rectangle-left-bottom"></div>
-        // ln-rectangle-right-top"></div>
-        // ln-rectangle-right-bottom"></div>
-
-        // if (direction === 'left') {
-        // console.log(_this.state.differenceX);
-        // console.log(_this.props.height + _this.state.differenceX);
-
-        // _this.props.updateFrameSize('height', _this.state.height + _this.state.differenceX);
-
-        // }
-        // else if (direction === 'left') {
-        //   _this.props.updateFrameSize(direction, newX);
-        //
-        // } else if (direction === 'top') {
-        //   _this.props.updateFrameSize(direction, newY);
-        //
-        // } else if (direction === 'width') {
-        //   _this.props.updateFrameSize(direction, newX);
-        // }
-
-        // console.log(direction);
-        // });
-
+        if (this.state.element === 'ln-rectangle-left-bottom') {
+          // TODO: fix the max and min width and height;
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.props.width + inverse(this.state.differenceX),
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + (this.state.differenceY - this.props.height),
+          );
+          proposedValue.x = Math.max(
+            generalConfig.minX,
+            proposedValue.x - inverse(this.state.differenceX),
+          );
+        } else if (this.state.element === 'ln-rectangle-right-bottom') {
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.state.differenceX,
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + (this.state.differenceY - this.props.height),
+          );
+        } else if (this.state.element === 'ln-rectangle-left-top') {
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.props.width + inverse(this.state.differenceX),
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + inverse(this.state.differenceY),
+          );
+          // check if the height and with is not to small
+          if (
+            proposedValue.height > generalConfig.minHeight &&
+            proposedValue.width > generalConfig.minWidth
+          ) {
+            proposedValue.x = Math.max(
+              generalConfig.minX,
+              proposedValue.x - inverse(this.state.differenceX),
+            );
+            proposedValue.y -= inverse(this.state.differenceY);
+          }
+        } else if (this.state.element === 'ln-rectangle-right-top') {
+          proposedValue.width = Math.max(
+            generalConfig.minWidth,
+            this.state.differenceX,
+          );
+          proposedValue.height = Math.max(
+            generalConfig.minHeight,
+            this.props.height + inverse(this.state.differenceY),
+          );
+          if (
+            proposedValue.height > generalConfig.minHeight &&
+            proposedValue.width > generalConfig.minWidth
+          ) {
+            proposedValue.y -= inverse(this.state.differenceY);
+          }
+        }
+        this.props.updateFrame(proposedValue);
       }
     }
-  }
+  };
 
-  _setMousePosition = (e) => {
-    var ev = e || window.event; //Moz || IE
-    if (ev.pageX) { //Moz
-      // console.log(ev.pageX + window.pageXOffset - this.state.x);
+  setMousePosition = (e) => {
+    var ev = e || window.event; // Moz || IE
+    if (ev.pageX) {
+      // Moz
+      // console.log('window.pageYOffset', window.pageYOffset);
+      // console.log((ev.pageY) - this.props.top);
+      // console.log('(ev.pageY + window.pageYOffset)', (ev.pageY));
+      // console.log('this.props.top', this.props.top);
+      // console.log('(ev.pageY) - this.props.top', (ev.pageY) - this.props.top);
       this.setState({
         differenceX: (ev.pageX + window.pageXOffset) - this.props.left,
-        differenceY: (ev.pageY + window.pageYOffset),
+        differenceY: (ev.pageY) - this.props.top,
         x: ev.pageX + window.pageXOffset,
         y: ev.pageY + window.pageYOffset
       });
+    } else if (ev.clientX) {
 
-    } else if (ev.clientX) { //this is a fix for IE
+      // this is a fix for IE
       this.setState({
-        differenceX: ev.clientX + document.body.scrollLeft - this.props.left,
-        differenceY: ev.clientY + document.body.scrollTop - this.props.top,
+        differenceX: (ev.clientX + document.body.scrollLeft) - this.props.left,
+        differenceY: (ev.clientY + document.body.scrollTop) - this.props.top,
         x: ev.clientX + document.body.scrollLeft,
         y: ev.clientY + document.body.scrollTop
       });
     }
-  }
+  };
 
   /**
    * RENDER
@@ -204,19 +229,39 @@ class SelectorHelper extends Component {
   render = () => {
     if (this.props.showCommentbox) {
       return (
-        <div onMouseDown={this._onMouseDown} onMouseUp={this._onMouseUp} className="ln-rectangle--draggingarea">
-          <div className="ln-rectangle-left-top"></div>
-          <div className="ln-rectangle-left-bottom"></div>
-          <div className="ln-rectangle-right-top"></div>
-          <div className="ln-rectangle-right-bottom"></div>
+        <div
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.onMouseUp}
+          className="ln-rectangle--draggingarea"
+        >
+          <div className="ln-rectangle-left-top" />
+          <div className="ln-rectangle-left-bottom" />
+          <div className="ln-rectangle-right-top" />
+          <div className="ln-rectangle-right-bottom" />
         </div>
       );
     }
-    return (
-      <div></div>
-    );
-  }
+    return <div />;
+  };
 }
+
+SelectorHelper.defaultProps = {
+  left: 0,
+  top: 0,
+  width: 0,
+  height: 0,
+  showCommentbox: false,
+  updateFrame: () => {},
+};
+
+SelectorHelper.propTypes = {
+  left: propTypes.number,
+  top: propTypes.number,
+  width: propTypes.number,
+  height: propTypes.number,
+  showCommentbox: propTypes.bool,
+  updateFrame: propTypes.func,
+};
 
 /* Export Component ==================================================================== */
 export default SelectorHelper;

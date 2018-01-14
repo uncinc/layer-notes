@@ -1,69 +1,13 @@
-/*eslint-disable no-unused-vars*/
-
-//based on https://github.com/andreypopp/react-textarea-autosize/blob/master/src/TextareaAutosize.js
+// based on https://github.com/andreypopp/react-textarea-autosize/blob/master/src/TextareaAutosize.js
 /**
  * <TextareaAutosize />
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import calculateNodeHeight from './calculateNodeHeight';
 
-const emptyFunction = function() {};
-
 export default class TextareaAutosize extends React.Component {
-
-  static propTypes = {
-    /**
-     * Current textarea value.
-     */
-    value: React.PropTypes.string,
-
-    /**
-     * Callback on value change.
-     */
-    onChange: React.PropTypes.func,
-
-    /**
-     * Callback on height changes.
-     */
-    onHeightChange: React.PropTypes.func,
-
-    /**
-     * Try to cache DOM measurements performed by component so that we don't
-     * touch DOM when it's not needed.
-     *
-     * This optimization doesn't work if we dynamically style <textarea />
-     * component.
-     */
-    useCacheForDOMMeasurements: React.PropTypes.bool,
-
-    /**
-     * Minimal numbder of rows to show.
-     */
-    rows: React.PropTypes.number,
-
-    /**
-     * Alias for `rows`.
-     */
-    minRows: React.PropTypes.number,
-
-    /**
-     * Maximum number of rows to show.
-     */
-    maxRows: React.PropTypes.number,
-
-    /**
-     * Allows an owner to retrieve the DOM node.
-     */
-    inputRef: React.PropTypes.func
-  }
-
-  static defaultProps = {
-    onChange: emptyFunction,
-    onHeightChange: emptyFunction,
-    useCacheForDOMMeasurements: false
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -96,7 +40,8 @@ export default class TextareaAutosize extends React.Component {
     };
     let maxHeight = Math.max(
       props.style.maxHeight ? props.style.maxHeight : Infinity,
-      this.state.maxHeight);
+      this.state.maxHeight
+    );
     if (maxHeight < this.state.height) {
       props.style.overflow = 'hidden';
     }
@@ -106,7 +51,7 @@ export default class TextareaAutosize extends React.Component {
         autoFocus
         onChange={this._onChange}
         ref={this._onRootDOMNode}
-        />
+      />
     );
   }
 
@@ -148,7 +93,7 @@ export default class TextareaAutosize extends React.Component {
 
   _onChange(e) {
     this._resizeComponent();
-    let {valueLink, onChange} = this.props;
+    let { valueLink, onChange } = this.props;
     if (valueLink) {
       valueLink.requestChange(e.target.value);
     } else {
@@ -157,12 +102,15 @@ export default class TextareaAutosize extends React.Component {
   }
 
   _resizeComponent() {
-    let {useCacheForDOMMeasurements} = this.props;
-    this.setState(calculateNodeHeight(
-      this._rootDOMNode,
-      useCacheForDOMMeasurements,
-      this.props.rows || this.props.minRows,
-      this.props.maxRows));
+    let { useCacheForDOMMeasurements } = this.props;
+    this.setState(
+      calculateNodeHeight(
+        this._rootDOMNode,
+        useCacheForDOMMeasurements,
+        this.props.rows || this.props.minRows,
+        this.props.maxRows
+      )
+    );
   }
 
   /**
@@ -220,8 +168,64 @@ export default class TextareaAutosize extends React.Component {
   blur() {
     this._rootDOMNode.blur();
   }
-
 }
+
+TextareaAutosize.propTypes = {
+  /**
+   * Current textarea value.
+   */
+  value: PropTypes.string,
+
+  /**
+   * Callback on value change.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Callback on height changes.
+   */
+  onHeightChange: PropTypes.func,
+
+  /**
+   * Try to cache DOM measurements performed by component so that we don't
+   * touch DOM when it's not needed.
+   *
+   * This optimization doesn't work if we dynamically style <textarea />
+   * component.
+   */
+  useCacheForDOMMeasurements: PropTypes.bool,
+
+  /**
+   * Minimal numbder of rows to show.
+   */
+  rows: PropTypes.number,
+
+  /**
+   * Alias for `rows`.
+   */
+  minRows: PropTypes.number,
+
+  /**
+   * Maximum number of rows to show.
+   */
+  maxRows: PropTypes.number,
+
+  /**
+   * Allows an owner to retrieve the DOM node.
+   */
+  inputRef: PropTypes.func,
+};
+
+TextareaAutosize.defaultProps = {
+  value: 1,
+  rows: 1,
+  minRows: 1,
+  maxRows: 1,
+  inputRef: () => {},
+  onChange: () => {},
+  onHeightChange: () => {},
+  useCacheForDOMMeasurements: false,
+};
 
 function onNextFrame(cb) {
   if (window.requestAnimationFrame) {

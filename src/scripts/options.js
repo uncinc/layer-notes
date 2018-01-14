@@ -2,15 +2,16 @@
 
 import storage from './utils/storage';
 
-var colorSelectors = document.querySelectorAll('.js-radio');
+const colorSelectors = document.querySelectorAll('.js-radio');
 
-var setColor = (color) => {
+const setColor = (color) => {
   document.body.style.backgroundColor = color;
 };
 
-storage.get('color', function (resp) {
-  var color = resp.color;
-  var option;
+storage.get('color', (resp) => {
+  const { color } = resp;
+
+  let option;
   if (color) {
     option = document.querySelector(`.js-radio.${color}`);
     setColor(color);
@@ -21,17 +22,20 @@ storage.get('color', function (resp) {
   option.setAttribute('checked', 'checked');
 });
 
-colorSelectors.forEach(function (el) {
-  el.addEventListener('click', function () {
-    var value = this.value;
-    storage.set({
-      color: value
-    }, function () {
-      setColor(value);
-    });
+colorSelectors.forEach((el) => {
+  el.addEventListener('click', () => {
+    const { value } = this;
+
+    storage.set(
+      {
+        color: value,
+      },
+      () => {
+        setColor(value);
+      },
+    );
   });
 });
-
 
 //
 // var optionsLink = document.querySelector('.js-options');

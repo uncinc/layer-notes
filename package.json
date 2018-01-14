@@ -1,8 +1,9 @@
 {
   "name": "layer-notes",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Layernotes is a tool that you can use to easaly create Tickets for the Bugtracker Manits.",
   "scripts": {
+    "start": "npm run firefox-watch",
     "chrome-build": "TARGET=chrome gulp",
     "opera-build": "TARGET=opera gulp",
     "firefox-build": "TARGET=firefox gulp",
@@ -65,6 +66,7 @@
   },
   "dependencies": {
     "bowser": "^1.6.0",
+    "prop-types": "^15.6.0",
     "react": "^15.5.4",
     "react-anime": "^0.3.4",
     "react-dom": "^15.5.4"

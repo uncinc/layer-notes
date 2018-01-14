@@ -29,10 +29,10 @@ const SIZING_STYLE = [
   'padding-left',
   'padding-right',
   'border-width',
-  'box-sizing'
+  'box-sizing',
 ];
 
-let computedStyleCache = {};
+const computedStyleCache = {};
 let hiddenTextarea;
 
 export default function calculateNodeHeight(uiTextNode,

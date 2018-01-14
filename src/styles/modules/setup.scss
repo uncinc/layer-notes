@@ -19,6 +19,7 @@
   .ln-setup--formelement {
     position: relative;
   }
+
   //the setup form
   .ln-setup {
     align-content: stretch;
@@ -36,6 +37,7 @@
     pointer-events: all;
     position: fixed;
     width: 60vw;
+    // @media
 
     p {
       line-height: 1.5em;
@@ -51,6 +53,7 @@
       // a wrapper arount the buttons to add some space
       margin: 15px 0 0;
     }
+
     //The content > this is the real form;
     .ln-setup-content {
       margin: $padding-medium $padding-big $padding-big;
@@ -124,7 +127,7 @@
         &::before {
           background: $font-color;
           color: $primary-color;
-          transition: all .5s ease-in;
+          transition: all 0.5s ease-in;
         }
       }
 

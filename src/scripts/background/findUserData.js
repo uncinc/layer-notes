@@ -1,27 +1,13 @@
 'use strict';
+
 // config
 // import generalConfig from '../config/general';
 import browserConfig from 'bowser';
 // import ext from '../utils/ext';
 
 /* Component ==================================================================== */
-var data = (() => {
-
-  /**
-   * Get user data from the browser for adding it to mantis;
-   * @returns {Object} of of the browser data
-   */
-  let browserData = () => {
-    return { //find all the borser data
-      browserName: browserConfig.name.toLowerCase(),
-      browserVersion: browserConfig.version,
-      osversion: browserConfig.osversion,
-      user_agent: window.navigator.appVersion,
-      os: getOs()
-    };
-  };
-
-  function getOs() {
+const data = (() => {
+  const getOs = () => {
     if (browserConfig.mac) {
       return 'mac';
     } else if (browserConfig.windows) {
@@ -52,20 +38,34 @@ var data = (() => {
     return false;
   }
 
+
+  /**
+   * Get user data from the browser for adding it to mantis;
+   * @returns {Object} of of the browser data
+   */
+  const browserData = () => ({
+    // find all the borser data
+    browserName: browserConfig.name.toLowerCase(),
+    browserVersion: browserConfig.version,
+    osversion: browserConfig.osversion,
+    user_agent: window.navigator.appVersion,
+    os: getOs(),
+  });
+
   /**
    * Get specific user data
    * @returns {Object} of of the browser data
    */
-  let specificUserData = (hostname, url, shortlink, screenresolution) => {
-    let userData = {
+  const specificUserData = (hostname, url, shortlink, screenresolution) => {
+    const userData = {
       browserData: browserData(),
       language: window.navigator.language,
       // savedCookies: document.cookie,
-      url: url,
-      shortlink: shortlink,
-      hostname: hostname,
+      url,
+      shortlink,
+      hostname,
       time: new Date(),
-      screenresolution: screenresolution
+      screenresolution,
       // history: getHistory()
     };
 
@@ -98,7 +98,6 @@ var data = (() => {
     //   console.log('hiohiohi',err);
     // });
 
-
     // function gotVisits(visits) {
     //   console.log("Visit count: " + visits.length);
     //   for (visit of visits) {
@@ -125,7 +124,6 @@ var data = (() => {
     // console.log(searching);
     // searching.then(listVisits);
 
-
     // Zoom level
     // Screenschot
     // console errors (als mogelijk)
@@ -134,7 +132,6 @@ var data = (() => {
     // Cookies/Local storage
     // Browser plugins (add blocker) (als mogelijk)
     // Laatste 4 urls
-
 
     // console.log(ext.tabs);
     return userData;
@@ -145,9 +142,8 @@ var data = (() => {
   // };
 
   return {
-    specificUserData
+    specificUserData,
   };
-
 })();
 
 export default data;
