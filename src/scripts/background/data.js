@@ -12,7 +12,7 @@ import mantisApi from './mantisApi';
 
 /* Component ==================================================================== */
 const data = (() => {
-  // check if the storage item exists and when not add a empty array;
+  //check if the storage item exists and when not add a empty array;
   function setUpStorage() {
     getStorage('savedTickets').then((data) => {
       if (data.savedTickets === undefined || data.savedTickets.length === 0) {
@@ -98,7 +98,6 @@ const data = (() => {
     return new Promise(((resolve, reject) => {
       try {
         const { url, userName, password } = params;
-
         mantisApi
           .login(url, userName, password)
           .then((userData) => {
