@@ -35,8 +35,7 @@
     "webRequest",
     "webNavigation",
     "storage",
-    "browsingData",
-    "history"
+    "browsingData"
   ],
   "icons": {
     "16": "icons/icon_black-16.png",

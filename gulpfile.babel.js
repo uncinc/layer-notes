@@ -45,36 +45,42 @@ const manifest = {
 const pluginIconConfig = [
   {
     width: 16,
+    height: 16,
     rename: {
       suffix: '-16',
     },
   },
   {
     width: 19,
+    height: 19,
     rename: {
       suffix: '-19',
     },
   },
   {
     width: 38,
+    height: 38,
     rename: {
       suffix: '-38',
     },
   },
   {
     width: 48,
+    height: 48,
     rename: {
       suffix: '-48',
     },
   },
   {
     width: 96,
+    height: 96,
     rename: {
       suffix: '-96',
     },
   },
   {
     width: 128,
+    height: 128,
     rename: {
       suffix: '-128',
     },
@@ -311,12 +317,12 @@ function buildJS(target) {
     },
     {
       source: 'options.js',
-      export: 'options.js'
+      export: 'options.js',
     },
     {
       source: 'livereload.js',
-      export: 'livereload.js'
-    }
+      export: 'livereload.js',
+    },
   ];
 
   let tasks = files.map((file) => {
