@@ -28,7 +28,7 @@
     color: $font-color-dark;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     font-size: 14px;
     justify-content: flex-start;
     max-height: 100vh;
