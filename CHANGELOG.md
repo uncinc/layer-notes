@@ -1,5 +1,12 @@
 # Change log
 
+## Version 0.5.6
+Bug fix:
+- Flex: Nowrap.
+
+Textual:
+- Change typo
+
 ## Version 0.5.2
 Bug fix: 
 - Let the extention work on the latest version of Firefox
