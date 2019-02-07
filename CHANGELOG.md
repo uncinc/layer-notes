@@ -2,10 +2,28 @@
 
 ## Version 0.5.6
 Bug fix:
-- Flex: Nowrap.
+- Fix startup screen (#25)
 
 Textual:
-- Change typo
+- Change typo (#25)
+
+## Version 0.5.5
+Improvements:
+- It's now possible to resize the selecting area; (#21)
+- The mantis bug report is now not JSON but nice formatted; (#21)
+
+Bug fix:
+- The window does not scroll to top when adding a note;
+- Some connecting error fixes;
+- Works on Chrome 63 again; (#15)
+
+Code Clean up:
+- Lint files with ES lint;
+- Only console log when in Dev mode; (#20)
+
+## Version 0.5.4
+Bug fix:
+- Let the exention work on the latest version of firefox
 
 ## Version 0.5.2
 Bug fix: 
