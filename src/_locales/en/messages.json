@@ -150,7 +150,7 @@
     "description": "This error will be showed if the user submit the form when not all fields are filed in."
   },
   "setupLogginText": {
-    "message": "Checking you credentials, and logging in at $TOOLNAME$.",
+    "message": "Checking your credentials, and logging in at $TOOLNAME$.",
     "description": "This is the loading text when logging in.",
     "placeholders": {
       "toolName": {
